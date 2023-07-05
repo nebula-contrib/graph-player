@@ -12,8 +12,8 @@ export class UIManager extends Component {
 
     public RefreshCanvas(event:Event){
         console.log("refresh!",this.refreshBtn);
-        Manager.Instance().vertexManager.destroyAllChildren();
-        Manager.Instance().vertexManager.initiateOriginalVertex();
+        Manager.Instance().canvasManager.resetCanvas();
+
         
     }
 

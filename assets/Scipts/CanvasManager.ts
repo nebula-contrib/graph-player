@@ -33,16 +33,22 @@ export class CanvasManager extends Component {
 
     // mouse movement
 
-    private isMouseDragging = false;
+    // private isMouseDragging = false;
+    private cameraMove = false;
+    private cameraRorateAroundVertex = false;
     private previousMousePosition: Vec2 = null;
-    private dragRotationSpeed = 0.05;
+    private dragMoveSpeed = 0.05;
+    private dragRotateSpeed = 0.05;
     private dragRotationQuat: Quat = new Quat();
 
     onLoad() {
         
-        //this.cameraController = Manager.Instance().cameraController.getComponent(CameraController);
+        //Manager.Instance().cameraController = Manager.Instance().cameraController.getComponent(CameraController);
         //this.vertexManager = this.vertexManager.getComponent(VertexManager);
         //this.vertexManager.createVertexAround(this.node); 
+        this.cameraController = Manager.Instance().cameraController;
+        
+
 
         input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
         input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this);
@@ -50,34 +56,68 @@ export class CanvasManager extends Component {
         input.on(Input.EventType.MOUSE_WHEEL, this.onMouseWheel, this);
     }
 
+    protected start(): void {
+                // reset the canvas
+        this.resetCanvas();
+    }
+
     onMouseMove(event:EventMouse){
-        if(this.isMouseDragging){
+        if(this.cameraMove){
             
             const currentPosition = event.getLocation();
             const dx = event.getDeltaX();
             const dy = event.getDeltaY();
-            let quat = this.cameraController.camera.node.rotation.clone();
+            let quat = Manager.Instance().cameraController.camera.node.rotation.clone();
 
-            // 创建垂直旋转（x轴）和水平旋转（y轴）的四元数
-            let quatX = Quat.fromEuler(new Quat(), dy * this.dragRotationSpeed, 0, 0);
-            let quatY = Quat.fromEuler(new Quat(), 0, dx * this.dragRotationSpeed, 0);
             
-            // 组合两个旋转
+            let quatX = Quat.fromEuler(new Quat(), dy * this.dragMoveSpeed, 0, 0);
+            let quatY = Quat.fromEuler(new Quat(), 0, dx * this.dragMoveSpeed, 0);
+            
+          
             Quat.multiply(quat, quat, quatX);
             Quat.multiply(quat, quat, quatY);
             
-            // 设置摄像机节点的旋转
-            this.cameraController.camera.node.rotation = quat;
-            // this.cameraController.camera. = this.dragRotationQuat;
+            
+            Manager.Instance().cameraController.camera.node.rotation = quat;
+            // Manager.Instance().cameraController.camera. = this.dragRotationQuat;
             
 
             
         }
+
+        else if(this.cameraRorateAroundVertex){
+
+            console.log("try to rotate around")
+            let currentMousePosition = event.getLocation();
+            let dx = (currentMousePosition.x - this.previousMousePosition.x) * this.dragRotateSpeed;
+            let dy = (currentMousePosition.y - this.previousMousePosition.y) * this.dragRotateSpeed;
+            
+            console.log("central node:",Manager.Instance().vertexManager)
+            let cameraQuaternion =  Manager.Instance().vertexManager.node.rotation.clone();
+            let rotateQuat = new Quat();
+            Quat.fromEuler(rotateQuat, dy, dx, 0);
+            Quat.multiply(rotateQuat, cameraQuaternion, rotateQuat);
+
+            Manager.Instance().vertexManager.node.setRotation(rotateQuat);
+            //console.log("rotation focus node:", this.centralVertex.getComponent(Vertex).getVertexID()," position:",this.centralVertex.position)
+            console.log(" rorate around:",Manager.Instance().vertexManager.node.position)
+            
+            this.previousMousePosition = currentMousePosition;
+        }
     }
     
     onMouseDown(event: EventMouse){
-        if(event.getButton() === EventMouse.BUTTON_LEFT){
-            this.isMouseDragging = true;
+        if(event.getButton() === EventMouse.BUTTON_MIDDLE){
+            
+            this.cameraMove = true;
+            this.previousMousePosition = event.getLocation();
+            
+            
+            
+        }
+
+        else if(event.getButton() === EventMouse.BUTTON_LEFT){
+            this.cameraRorateAroundVertex = true;
             this.previousMousePosition = event.getLocation();
             
             
@@ -88,23 +128,15 @@ export class CanvasManager extends Component {
         if (event.getButton() === EventMouse.BUTTON_RIGHT) {
             
             this.createVertexAtMouse(event);
-        } else if (event.getButton() === EventMouse.BUTTON_LEFT) {
-            this.isMouseDragging = false;
-            this.chooseVertexAtMouse(event)
-;            // const now = performance.now();
-            // if (now - this.lastClickTime < this.doubleClickDelay * 1000) {
-            //     this.leftClickCount++;
-            //     console.log("left click times add");
-            // } else {
-            //     console.log("left click one time");
-            //     this.leftClickCount = 1;
-            // }
-            // this.lastClickTime = now;
-            // if (this.leftClickCount === 2) {
-            //     console.log("left click two times");
-            //     this.focusCameraAtMouse(event);
-            //}
+        } 
+        else if (event.getButton() === EventMouse.BUTTON_MIDDLE) {
+           
+            this.cameraMove = false;
             
+        }
+        else if(event.getButton() === EventMouse.BUTTON_LEFT){
+            this.cameraRorateAroundVertex = false;
+            this.chooseVertexAtMouse(event);
         }
     }
 
@@ -116,8 +148,8 @@ export class CanvasManager extends Component {
         // calculate and update new position of camera
         let newCameraPos = new Vec3();
         
-        math.Vec3.scaleAndAdd(newCameraPos, this.cameraController.camera.node.position, this.cameraController.camera.node.forward, this._zoomSpeed * scrollY);
-        this.cameraController.camera.node.position = newCameraPos;
+        math.Vec3.scaleAndAdd(newCameraPos, Manager.Instance().cameraController.camera.node.position, Manager.Instance().cameraController.camera.node.forward, this._zoomSpeed * scrollY);
+        Manager.Instance().cameraController.camera.node.position = newCameraPos;
     }
 
 
@@ -133,7 +165,7 @@ export class CanvasManager extends Component {
      * @param event 
      */
     createVertexAtMouse(event: EventMouse) {
-        const ray = this.cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
+        const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
        
         const r = new geometry.Ray();
         Vec3.copy(r.o, ray.o);
@@ -144,15 +176,15 @@ export class CanvasManager extends Component {
            
             if (result.collider.node.getComponent(Vertex)) {
                 
-                let childVertex = this.vertexManager.createVertexAround(result.collider.node);
-                this.edgeManager.createOneEdge(result.collider.node, childVertex);
+                let childVertex = Manager.Instance().vertexManager.createVertexAround(result.collider.node);
+                Manager.Instance().edgeManager.createOneEdge(result.collider.node, childVertex);
                 
             }
         }
     }
 
     chooseVertexAtMouse(event:EventMouse){
-        const ray = this.cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
+        const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
         const r = new geometry.Ray();
         Vec3.copy(r.o, ray.o);
         Vec3.copy(r.d, ray.d);
@@ -163,7 +195,11 @@ export class CanvasManager extends Component {
             if (result.collider.node.getComponent(Vertex)) {
                 
                 this.centralVertex = result.collider.node;
-                this.cameraController.focusOn(result.collider.node);
+
+                // transfer the vertexManager position same as the centralVertex, in order to rotate on the centralVertex
+                
+                // Manager.Instance().vertexManager.node.position = this.centralVertex.position;
+                Manager.Instance().cameraController.focusOn(result.collider.node);
                 
                 
             }
@@ -172,15 +208,23 @@ export class CanvasManager extends Component {
 
     focusCameraAtMouse(event: EventMouse) {
         console.log("start focus on new node!");
-        const ray = this.cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
+        const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
         const r = new geometry.Ray();
         Vec3.copy(r.o, ray.o);
         Vec3.copy(r.d, ray.d);
         if (PhysicsSystem.instance.raycastClosest(r)) {
             const result = PhysicsSystem.instance.raycastClosestResult;
             if (result.collider.node.getComponent(Vertex)) {
-                this.cameraController.focusOn(result.collider.node);
+                Manager.Instance().cameraController.focusOn(result.collider.node);
             }
         }
+    }
+
+
+    resetCanvas(){
+        Manager.Instance().vertexManager.destroyAllChildren();
+        Manager.Instance().vertexManager.initiateOriginalVertex();
+        Manager.Instance().cameraController.resetPosition();
+        
     }
 }

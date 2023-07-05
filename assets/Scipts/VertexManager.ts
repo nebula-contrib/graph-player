@@ -1,4 +1,4 @@
-import { _decorator, Component, Prefab, instantiate, Node, Vec3 } from 'cc';
+import { _decorator, Component, Prefab, instantiate, Node, Vec3,Quat } from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 const { ccclass, property } = _decorator;
@@ -12,6 +12,9 @@ export class VertexManager extends Component {
 
     isTransformView:boolean = false;
 
+    @property(Node)
+    centralNode:Node;
+
 
     @property({ type: Prefab })
     public vertexPrefab: Prefab = null;
@@ -21,6 +24,10 @@ export class VertexManager extends Component {
 
 
     public vertexIdDic : {[key:string]:any[]} = {}
+
+    protected onLoad(): void {
+        this.centralNode =  this.node.getChildByName("Vertex");
+    }
 
     protected start(): void {
         this.vertexRadius = 5;
@@ -63,9 +70,12 @@ export class VertexManager extends Component {
      */
     public initiateOriginalVertex(){
         const vertex = instantiate(this.vertexPrefab);
+        this.node.position = new Vec3(0, 0, 0);
+        this.node.rotation =  Quat.identity(new Quat());
         vertex.getComponent(Vertex).setVertexId();
-        vertex.position = new Vec3(0,0,0);
+        vertex.worldPosition = new Vec3(0,0,0);
         vertex.setParent(this.node);
+        this.centralNode = vertex;
     }
 
 
