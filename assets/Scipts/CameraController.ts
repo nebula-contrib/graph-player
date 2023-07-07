@@ -22,7 +22,7 @@ export class CameraController extends Component {
         // this.mainCamera = find("Main Camera").getComponent<Camera>;
         this.camera = find("Main Camera").getComponent(Camera);
         this.offset = new Vec3(0,0,2);
-        // this.camera.near = 1;
+        this.camera.near = 0.01;
         //this.mainCamera.node.position = (this.centralNode.position.add(this.offset));
 
     }
