@@ -179,12 +179,14 @@ export class CanvasManager extends Component {
      * @param event 
      */
     createVertexAtMouse(event: EventMouse) {
-        const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
+        // const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
        
-        const r = new geometry.Ray();
-        Vec3.copy(r.o, ray.o);
-        Vec3.copy(r.d, ray.d);
-        if (PhysicsSystem.instance.raycastClosest(r)) {
+        // const r = new geometry.Ray();
+        // Vec3.copy(r.o, ray.o);
+        // Vec3.copy(r.d, ray.d);
+        let ray = new geometry.Ray();
+        Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
+        if (PhysicsSystem.instance.raycastClosest(ray)) {
             
             const result = PhysicsSystem.instance.raycastClosestResult;
            
@@ -201,12 +203,15 @@ export class CanvasManager extends Component {
      * @param event left click(0, 1, 2 times)
      */
     chooseVertexAtMouse(event:EventMouse){
-        const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
-        const r = new geometry.Ray();
-        Vec3.copy(r.o, ray.o);
-        Vec3.copy(r.d, ray.d);
-        console.log("PhysicsSystem.instance.raycastClosest(r):",PhysicsSystem.instance.raycastClosest(r))
-        if (PhysicsSystem.instance.raycastClosest(r)) {
+        // const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
+        // const r = new geometry.Ray();
+        // Vec3.copy(r.o, ray.o);
+        // Vec3.copy(r.d, ray.d);
+        
+        let ray = new geometry.Ray();
+        Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
+        console.log("PhysicsSystem.instance.raycastClosest(r):",PhysicsSystem.instance.raycastClosest(ray))
+        if (PhysicsSystem.instance.raycastClosest(ray)) {
             console.log("!choose a physical!")
             const result = PhysicsSystem.instance.raycastClosestResult;
             
