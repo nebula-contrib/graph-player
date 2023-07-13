@@ -24,17 +24,31 @@ export class EdgeManager extends Component {
      * @param startNode 
      * @param endNode 
      */
-    createOneEdge(startNode: Node, endNode: Node) {
+    createOneEdge(startNode: Node, endNode: Node):Node {
         const edgeNode = instantiate(this.edgePrefab);
-        edgeNode.parent = startNode;
+        //edgeNode.parent = startNode;
+        edgeNode.setParent(Manager.Instance().edgeManager.node);
         let edge = edgeNode.getComponent(Edge);
 
         edge.createEdge(startNode,endNode);
-        if(!Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vertexId+""]) Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vertexId+""] = [];
-        Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vertexId+""].push(edge.getEdgeId());
-        this.edgeIdDic[edge.getEdgeId()+''] = [edge.startVertexID, edge.endVertexID];
+        if(!Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""]) 
+        {
+            Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""] = [];
+        }
+        Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""].push(edge.getEdgeName());
+        this.edgeIdDic[edge.getEdgeName()+''] = [edge.srcID, edge.dstID];
         // console.log("vertex dic:", Manager.Instance().vertexManager.vertexIdDic);
+        return edgeNode;
        
+        
+    }
+
+    /**
+     * destroy all edge by remove the etities and node in list
+     */
+    destroyAllEdges() {
+        this.node.destroyAllChildren();
+        this.node.removeAllChildren();
         
     }
 

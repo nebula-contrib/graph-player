@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3,math, HingeConstraint } from 'cc';
+import { _decorator, Component, Node, Vec3,math, HingeConstraint, CCString, CCInteger } from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 
@@ -10,22 +10,24 @@ export class Edge extends Component {
 
     @property(Vec3)
     public startPosition:Vec3;
-
-    @property(Number)
-    public edgeId:number = -1;
-
     @property(Vec3)
     public endPosition:Vec3;
-    
-    @property(Number)
-    public startVertexID:number = 0;
 
-    @property(Number)
-    public endVertexID:number = 0;
+    @property(CCString)
+    public edgeName:String = "";
+    @property(CCString)
+    public srcID:String = "";
+    @property(CCString)
+    public dstID:String = "";
+    @property(Object)
+    public properties: Object = new Object();
+    @property(CCInteger)
+    public rank: number = 0;
+    @property(CCString)
+    public type: String = "edge";
 
     @property(HingeConstraint)
     public startJoint = new HingeConstraint();
-
     @property(HingeConstraint)
     public endJoint = new HingeConstraint();
 
@@ -36,17 +38,17 @@ export class Edge extends Component {
      */
 
     public createEdge(startVertex: Node,endVertex: Node){
-        let start = startVertex.position, end = endVertex.position;
+        let start = startVertex.worldPosition, end = endVertex.worldPosition;
         this.startPosition = start;
-        start = new Vec3(0,0,0);
+        //start = new Vec3(0,0,0);
         this.endPosition = end;
         const center = (start.clone()).add(end).multiplyScalar(0.5);
-        this.node.setPosition(center);
+        this.node.setWorldPosition(center);
 
 
         // set distance
         const length = Vec3.distance(start,end);
-        this.node.setScale(0.01, 0.01, length); 
+        this.node.setScale(0.002, 0.002, length); 
 
         const dir = Vec3.subtract(new Vec3(), end, start).normalize();
         const up = new Vec3(0, 0, 1);
@@ -55,9 +57,9 @@ export class Edge extends Component {
         this.node.setRotation(quat);
         
         // set ID
-        this.startVertexID = startVertex.getComponent(Vertex).getVertexID();
-        this.endVertexID = endVertex.getComponent(Vertex).getVertexID();
-        this.edgeId = Manager.Instance().relationManager.setEdgeID();
+        this.srcID = startVertex.getComponent(Vertex).getVertexID();
+        this.dstID = endVertex.getComponent(Vertex).getVertexID();
+        //this.edgeName = Manager.Instance().relationManager.setEdgeName();
 
                 
         //set joint
@@ -81,10 +83,20 @@ export class Edge extends Component {
 
     /**
      * get the edge ID
-     * @returns 
+     * @returns:String 
      */
-    public getEdgeId(){
-        return this.edgeId;
+    public getEdgeName(){
+        return this.edgeName;
+    }
+
+    public setAttribute(attribute: any) {
+        for (let key in attribute) {
+            if (this.hasOwnProperty(key)) {
+                this[key] = attribute[key];
+            }
+        }
+        this.edgeName = this.srcID +" "+this.edgeName+" "+this.dstID;
+        Manager.Instance().relationManager.setEdgeName(this.edgeName);
     }
 
 }

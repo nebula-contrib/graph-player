@@ -13,10 +13,10 @@ export class VertexManager extends Component {
     isTransformView:boolean = false;
 
     @property(Node)
-    centralNode:Node;
+    rootNode:Node;
 
     @property(Node)
-    private tmpCentralNode:Node;
+    public currentCentralNode:Node;
 
     @property(Node)
     chosenVertex:Node = null;
@@ -34,19 +34,50 @@ export class VertexManager extends Component {
     private vertexMaterialCount = 5;
 
     protected onLoad(): void {
-        this.centralNode =  this.node.getChildByName("CentralVertexOfCamera");
+        this.rootNode =  this.node.getChildByName("CentralVertexOfCamera");
+        
     }
 
     protected start(): void {
-        this.vertexRadius = 15;
+        this.vertexRadius = 25;
+        
     }
 
     /**
-     * create one child node around parent node
+     * 
+     * @returns Node, the vertex is vertex.getCompoent(Vertex)
+     */
+    public createStartNode():Node{
+        const vertex = instantiate(this.vertexPrefab); // initial the prefab
+
+        vertex.getComponent(Vertex).setVertexId();
+        this.vertexIdDic[vertex.getComponent(Vertex).getVertexID+""] = []; // set id
+
+        let initialMaterialCode =  Math.floor(Math.random() * (this.vertexMaterialCount)) + 2; // get the random material code
+        
+        vertex.getComponent(Vertex).setInitialMaterialCode(initialMaterialCode);
+        let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
+        vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
+
+        const randomDirection = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+        const randomOffset = randomDirection.clone().multiplyScalar(this.vertexRadius);
+        
+        // 
+        const position = randomOffset.add(Manager.Instance().vertexManager.currentCentralNode.worldPosition); // set the currentCentralNode as center
+        vertex.worldPosition = position;
+        // vertex.setParent(node);
+        vertex.setParent(Manager.Instance().vertexManager.rootNode);
+
+        return vertex;
+    }
+
+
+    /**
+     * create end node around parent node when click the start node
      * @param node the parent node
      * @returns 
      */
-    public createVertexAround(node: Node ) {
+    public createNodeAround(node: Node) {
         const vertex = instantiate(this.vertexPrefab); // initial the prefab
 
         vertex.getComponent(Vertex).setVertexId();
@@ -66,8 +97,10 @@ export class VertexManager extends Component {
         // 
         const position = randomOffset.add(node.worldPosition);
         vertex.worldPosition = position;
-        vertex.setParent(node);
-        
+        // vertex.setParent(node);
+        vertex.setParent(Manager.Instance().vertexManager.rootNode);
+
+
         // vertex.getComponent(Vertex).setVertexId();
         // vertex.setParent(this.node);
         return vertex;
@@ -80,12 +113,13 @@ export class VertexManager extends Component {
      */
     public chooseOneNormalVertexToFocus(chosenNode:Node){
         this.chosenVertex = chosenNode;
+        // this.currentCentralNode = chosenNode;
         let focusMaterial = this.chosenVertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(1);
         this.chosenVertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(focusMaterial, 0);
     }
 
     public returnFocusToNormalVertex(){
-        console.log("chosenVertex:", this.chosenVertex);
+        
         if(!this.chosenVertex) return;
         this.chosenVertex.getComponent(Vertex).returnToInitialMaterial();
         this.chosenVertex = null;
@@ -94,18 +128,34 @@ export class VertexManager extends Component {
     }
 
     /**
+     * get the Node of vertex by name
+     * @param vertexID 
+     * @returns Node
+     */
+    public getVertexNodeByVID(vertexID:String):Node{
+        for(let child of this.rootNode.children){
+            if(child.getComponent(Vertex).vid == vertexID) return child;
+        }
+        return null;
+    }
+
+    /**
      * delete all the children of veretxManager
      */
     public destroyAllChildren(){
-        this.centralNode.children.forEach((child) => {
+        this.rootNode.children.forEach((child) => {
             child.destroy();
         });
-        this.centralNode.removeAllChildren();
+        this.rootNode.removeAllChildren();
         // this.node.children.forEach((child) => {
         //     child.destroy();
         // });
         // this.node.removeAllChildren();
         Manager.Instance().relationManager.resetVertexAndEdgeBox();
+        this.rootNode.position = new Vec3(0, 0, 0);
+        this.rootNode.rotation =  Quat.identity(new Quat());
+        this.currentCentralNode = this.rootNode;
+        this.returnFocusToNormalVertex();
     }
 
     /**
@@ -114,11 +164,14 @@ export class VertexManager extends Component {
     public initiateOriginalVertex(){
         const vertex = instantiate(this.vertexPrefab);
 
-        this.centralNode.position = new Vec3(0, 0, 0);
-        this.centralNode.rotation =  Quat.identity(new Quat());
+        // this.centralNode.position = new Vec3(0, 0, 0);
+        // this.centralNode.rotation =  Quat.identity(new Quat());
         vertex.getComponent(Vertex).setVertexId();
         vertex.worldPosition = new Vec3(0,0,0);
-        vertex.setParent(this.centralNode);
+        vertex.setParent(this.rootNode);
+        
+        this.currentCentralNode =  vertex;
+    
         // this.node.position = new Vec3(0, 0, 0);
         // this.node.rotation =  Quat.identity(new Quat());
         // vertex.getComponent(Vertex).setVertexId();
@@ -126,6 +179,7 @@ export class VertexManager extends Component {
         // vertex.setParent(this.node);
         // this.centralNode = vertex;
     }
+
 
 
 

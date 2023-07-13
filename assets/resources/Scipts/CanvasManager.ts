@@ -37,9 +37,11 @@ export class CanvasManager extends Component {
     private cameraMove = false;
     private cameraRorateAroundVertex = false;
     private previousMousePosition: Vec2 = null;
-    private dragMoveSpeed = 0.001;
-    private dragRotateSpeed = 0.05;
+    private previousMousePositionVec3: Vec3 = new Vec3();
+    private dragMoveSpeed = 0.01;
+    private dragRotateSpeed = 0.2;
     private dragRotationQuat: Quat = new Quat();
+    private dragRotateEuler: Vec3 = new Vec3(); 
 
     onLoad() {
         
@@ -100,22 +102,47 @@ export class CanvasManager extends Component {
 
         else if(this.cameraRorateAroundVertex){
 
-            console.log("try to rotate around")
+            
+            //---- start rorate nodes and its children --------
+            // let currentMousePosition = event.getLocation();
+            // let dx = (currentMousePosition.x - this.previousMousePosition.x) * this.dragRotateSpeed;
+            // let dy = (currentMousePosition.y - this.previousMousePosition.y) * this.dragRotateSpeed;
+            
+            // console.log("central node:",Manager.Instance().vertexManager)
+            // let cameraQuaternion =  Manager.Instance().vertexManager.centralNode.rotation.clone();
+            // let rotateQuat = new Quat();
+            // Quat.fromEuler(rotateQuat, dy, dx, 0);
+            // Quat.multiply(rotateQuat, cameraQuaternion, rotateQuat);
+
+            // Manager.Instance().vertexManager.centralNode.setRotation(rotateQuat);
+            // //console.log("rotation focus node:", this.centralVertex.getComponent(Vertex).getVertexID()," position:",this.centralVertex.position)
+            
+            // this.previousMousePosition = currentMousePosition;
+            //---- end rorate nodes and its children --------
+
+            //---- start rorate camera ------------
+          
             let currentMousePosition = event.getLocation();
             let dx = (currentMousePosition.x - this.previousMousePosition.x) * this.dragRotateSpeed;
             let dy = (currentMousePosition.y - this.previousMousePosition.y) * this.dragRotateSpeed;
-            
-            console.log("central node:",Manager.Instance().vertexManager)
-            let cameraQuaternion =  Manager.Instance().vertexManager.centralNode.rotation.clone();
-            let rotateQuat = new Quat();
-            Quat.fromEuler(rotateQuat, dy, dx, 0);
-            Quat.multiply(rotateQuat, cameraQuaternion, rotateQuat);
+            const angleX = (dx / 100) * 80;
+            const angleY = (dy / 100) * 80;
+            const cameraPos = Manager.Instance().cameraController.camera.node.worldPosition.clone();
+            const targetPos = Manager.Instance().vertexManager.currentCentralNode.worldPosition.clone();
 
-            Manager.Instance().vertexManager.centralNode.setRotation(rotateQuat);
-            //console.log("rotation focus node:", this.centralVertex.getComponent(Vertex).getVertexID()," position:",this.centralVertex.position)
-            // console.log(" rorate around:",Manager.Instance().vertexManager.node.position)
-            
+            // calculate the position after rotation
+            const rotatedPosX = Manager.Instance().cameraController.rotateOnVertex(cameraPos, targetPos, angleX, Vec3.UP);
+            const rotatedPosY = Manager.Instance().cameraController.rotateOnVertex(rotatedPosX, targetPos, angleY, Vec3.RIGHT);
+
+            // set the camera
+            Manager.Instance().cameraController.camera.node.worldPosition = rotatedPosY;
+            Manager.Instance().cameraController.camera.node.lookAt(targetPos);
+
+            // uodate the mouse position
             this.previousMousePosition = currentMousePosition;
+
+            
+           
         }
     }
     
@@ -127,10 +154,13 @@ export class CanvasManager extends Component {
             
             
             
+            
         }
 
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
             this.cameraRorateAroundVertex = true;
+            this.previousMousePositionVec3.set(event.getLocationX(), event.getLocationY(), 0);
+            
             this.previousMousePosition = event.getLocation();
             
             
@@ -191,7 +221,7 @@ export class CanvasManager extends Component {
             const result = PhysicsSystem.instance.raycastClosestResult;
            
             if (result.collider.node.getComponent(Vertex)) {
-                let childVertex = Manager.Instance().vertexManager.createVertexAround(result.collider.node);
+                let childVertex = Manager.Instance().vertexManager.createNodeAround(result.collider.node);
                 Manager.Instance().edgeManager.createOneEdge(result.collider.node, childVertex);
                 
             }
@@ -210,46 +240,76 @@ export class CanvasManager extends Component {
         
         let ray = new geometry.Ray();
         Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
-        console.log("PhysicsSystem.instance.raycastClosest(r):",PhysicsSystem.instance.raycastClosest(ray))
         if (PhysicsSystem.instance.raycastClosest(ray)) {
-            console.log("!choose a physical!")
+            
             const result = PhysicsSystem.instance.raycastClosestResult;
             
             if (result.collider.node.getComponent(Vertex)) {
-                console.log("!choose a node!")
                 
                 if(this.leftClickCount == 0){
                     this.leftClickCount ++;
                     this.centralVertex = result.collider.node;
-                    Manager.Instance().vertexManager.chosenVertex == result.collider.node;
+                    
                 
                     // Manager.Instance().vertexManager.node.position = this.centralVertex.position;
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
-                    Manager.Instance().vertexManager.chooseOneNormalVertexToFocus(result.collider.node);
-
+                    Manager.Instance().vertexManager.chosenVertex = result.collider.node;
+                    Manager.Instance().vertexManager.chooseOneNormalVertexToFocus(result.collider.node); // change the chosen vertex
                 }  
                 else if(this.leftClickCount == 1 && Manager.Instance().vertexManager.chosenVertex == result.collider.node) {
                     
                     Manager.Instance().cameraController.focusOn(result.collider.node);
+
+                    Manager.Instance().vertexManager.currentCentralNode.getComponent(Vertex).showVertexDetails();
+
                     this.leftClickCount = 0;
                 }
+                else if(this.leftClickCount == 1 && Manager.Instance().vertexManager.chosenVertex != result.collider.node){
+                    this.centralVertex = result.collider.node;
+                    Manager.Instance().vertexManager.returnFocusToNormalVertex();
+                    Manager.Instance().vertexManager.chosenVertex = result.collider.node;
+                    Manager.Instance().vertexManager.chooseOneNormalVertexToFocus(result.collider.node);
+                }  
                 else{
                     this.leftClickCount = 0;
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
-                }  
+                }
             }
         }
         else{
             this.leftClickCount = 0;
-            Manager.Instance().vertexManager.returnFocusToNormalVertex();
+            // Manager.Instance().vertexManager.returnFocusToNormalVertex();
         } 
     }
 
+    cleanCanvas(){
+        
+        Manager.Instance().vertexManager.destroyAllChildren();
+        Manager.Instance().edgeManager.destroyAllEdges();
+        Manager.Instance().cameraController.resetPosition();
+        // reset UI
+        Manager.Instance().UIManager.isNodeInfoEnable = false;
+        Manager.Instance().UIManager.nodeInfoBar.active = false;
+    }
 
+
+    /**
+     * clean the canvas and new a central node in Vec3(0,0,0)
+     */
     resetCanvas(){
+        // reset vertices
         Manager.Instance().vertexManager.destroyAllChildren();
         Manager.Instance().vertexManager.initiateOriginalVertex();
+        // reset edges
+        Manager.Instance().edgeManager.destroyAllEdges();
+        // reset camera
         Manager.Instance().cameraController.resetPosition();
+        // reset UI
+        Manager.Instance().UIManager.isNodeInfoEnable = false;
+        Manager.Instance().UIManager.nodeInfoBar.active = false;
+        
         
     }
+
+    
 }
