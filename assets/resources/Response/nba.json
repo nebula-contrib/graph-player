@@ -1,0 +1,4522 @@
+{
+  "code": 0,
+  "data": [
+    {
+      "code": 0,
+      "data": {
+        "headers": [
+          "n",
+          "r",
+          "m"
+        ],
+        "tables": [
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team220",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2015,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player111",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "David West"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player111"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pacers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team220"
+              }
+            ],
+            "m": "(\"team220\" :team{name: \"Pacers\"})",
+            "n": "(\"player111\" :player{age: 38, name: \"David West\"})",
+            "r": "[:serve \"player111\"-\u003e\"team220\" @0 {end_year: 2015, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team220",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player110",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 27,
+                    "name": "Cory Joseph"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player110"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pacers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team220"
+              }
+            ],
+            "m": "(\"team220\" :team{name: \"Pacers\"})",
+            "n": "(\"player110\" :player{age: 27, name: \"Cory Joseph\"})",
+            "r": "[:serve \"player110\"-\u003e\"team220\" @0 {end_year: 2019, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team220",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2010
+                },
+                "rank": 0,
+                "srcID": "player131",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 28,
+                    "name": "Paul George"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player131"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pacers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team220"
+              }
+            ],
+            "m": "(\"team220\" :team{name: \"Pacers\"})",
+            "n": "(\"player131\" :player{age: 28, name: \"Paul George\"})",
+            "r": "[:serve \"player131\"-\u003e\"team220\" @0 {end_year: 2017, start_year: 2010}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team206",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player108",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Boris Diaw"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player108"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Jazz"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team206"
+              }
+            ],
+            "m": "(\"team206\" :team{name: \"Jazz\"})",
+            "n": "(\"player108\" :player{age: 36, name: \"Boris Diaw\"})",
+            "r": "[:serve \"player108\"-\u003e\"team206\" @0 {end_year: 2017, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team206",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player123",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 28,
+                    "name": "Ricky Rubio"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player123"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Jazz"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team206"
+              }
+            ],
+            "m": "(\"team206\" :team{name: \"Jazz\"})",
+            "n": "(\"player123\" :player{age: 28, name: \"Ricky Rubio\"})",
+            "r": "[:serve \"player123\"-\u003e\"team206\" @0 {end_year: 2019, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team224",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2000,
+                  "start_year": 1994
+                },
+                "rank": 0,
+                "srcID": "player140",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 46,
+                    "name": "Grant Hill"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player140"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pistons"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team224"
+              }
+            ],
+            "m": "(\"team224\" :team{name: \"Pistons\"})",
+            "n": "(\"player140\" :player{age: 46, name: \"Grant Hill\"})",
+            "r": "[:serve \"player140\"-\u003e\"team224\" @0 {end_year: 2000, start_year: 1994}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team224",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player134",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "Blake Griffin"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player134"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pistons"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team224"
+              }
+            ],
+            "m": "(\"team224\" :team{name: \"Pistons\"})",
+            "n": "(\"player134\" :player{age: 30, name: \"Blake Griffin\"})",
+            "r": "[:serve \"player134\"-\u003e\"team224\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team224",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player107",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Aron Baynes"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player107"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Pistons"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team224"
+              }
+            ],
+            "m": "(\"team224\" :team{name: \"Pistons\"})",
+            "n": "(\"player107\" :player{age: 32, name: \"Aron Baynes\"})",
+            "r": "[:serve \"player107\"-\u003e\"team224\" @0 {end_year: 2017, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team221",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player124",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Rajon Rondo"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player124"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Bulls"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team221"
+              }
+            ],
+            "m": "(\"team221\" :team{name: \"Bulls\"})",
+            "n": "(\"player124\" :player{age: 33, name: \"Rajon Rondo\"})",
+            "r": "[:serve \"player124\"-\u003e\"team221\" @0 {end_year: 2017, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team221",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player129",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 37,
+                    "name": "Dwyane Wade"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player129"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Bulls"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team221"
+              }
+            ],
+            "m": "(\"team221\" :team{name: \"Bulls\"})",
+            "n": "(\"player129\" :player{age: 37, name: \"Dwyane Wade\"})",
+            "r": "[:serve \"player129\"-\u003e\"team221\" @0 {end_year: 2017, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team221",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2014
+                },
+                "rank": 0,
+                "srcID": "player138",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "Paul Gasol"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player138"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Bulls"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team221"
+              }
+            ],
+            "m": "(\"team221\" :team{name: \"Bulls\"})",
+            "n": "(\"player138\" :player{age: 38, name: \"Paul Gasol\"})",
+            "r": "[:serve \"player138\"-\u003e\"team221\" @0 {end_year: 2016, start_year: 2014}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team221",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2013,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Bulls"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team221"
+              }
+            ],
+            "m": "(\"team221\" :team{name: \"Bulls\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team221\" @0 {end_year: 2013, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team223",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2015,
+                  "start_year": 2010
+                },
+                "rank": 0,
+                "srcID": "player147",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Amar'e Stoudemire"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player147"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Knicks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team223"
+              }
+            ],
+            "m": "(\"team223\" :team{name: \"Knicks\"})",
+            "n": "(\"player147\" :player{age: 36, name: \"Amar'e Stoudemire\"})",
+            "r": "[:serve \"player147\"-\u003e\"team223\" @0 {end_year: 2015, start_year: 2010}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team223",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2013,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player148",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Jason Kidd"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player148"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Knicks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team223"
+              }
+            ],
+            "m": "(\"team223\" :team{name: \"Knicks\"})",
+            "n": "(\"player148\" :player{age: 45, name: \"Jason Kidd\"})",
+            "r": "[:serve \"player148\"-\u003e\"team223\" @0 {end_year: 2013, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team223",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player128",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "Carmelo Anthony"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player128"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Knicks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team223"
+              }
+            ],
+            "m": "(\"team223\" :team{name: \"Knicks\"})",
+            "n": "(\"player128\" :player{age: 34, name: \"Carmelo Anthony\"})",
+            "r": "[:serve \"player128\"-\u003e\"team223\" @0 {end_year: 2017, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team223",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2019
+                },
+                "rank": 0,
+                "srcID": "player122",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "DeAndre Jordan"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player122"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Knicks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team223"
+              }
+            ],
+            "m": "(\"team223\" :team{name: \"Knicks\"})",
+            "n": "(\"player122\" :player{age: 30, name: \"DeAndre Jordan\"})",
+            "r": "[:serve \"player122\"-\u003e\"team223\" @0 {end_year: 2019, start_year: 2019}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team223",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player143",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 23,
+                    "name": "Kristaps Porzingis"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player143"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Knicks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team223"
+              }
+            ],
+            "m": "(\"team223\" :team{name: \"Knicks\"})",
+            "n": "(\"player143\" :player{age: 23, name: \"Kristaps Porzingis\"})",
+            "r": "[:serve \"player143\"-\u003e\"team223\" @0 {end_year: 2019, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team215\" @0 {end_year: 2018, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2011,
+                  "start_year": 2005
+                },
+                "rank": 0,
+                "srcID": "player121",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Chris Paul"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player121"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player121\" :player{age: 33, name: \"Chris Paul\"})",
+            "r": "[:serve \"player121\"-\u003e\"team215\" @0 {end_year: 2011, start_year: 2005}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2008
+                },
+                "rank": 0,
+                "srcID": "player108",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Boris Diaw"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player108"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player108\" :player{age: 36, name: \"Boris Diaw\"})",
+            "r": "[:serve \"player108\"-\u003e\"team215\" @0 {end_year: 2012, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2011,
+                  "start_year": 2003
+                },
+                "rank": 0,
+                "srcID": "player111",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "David West"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player111"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player111\" :player{age: 38, name: \"David West\"})",
+            "r": "[:serve \"player111\"-\u003e\"team215\" @0 {end_year: 2011, start_year: 2003}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player101",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Tony Parker"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player101"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player101\" :player{age: 36, name: \"Tony Parker\"})",
+            "r": "[:serve \"player101\"-\u003e\"team215\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2010
+                },
+                "rank": 20102012,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team215\" @20102012 {end_year: 2012, start_year: 2010}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team215",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2016
+                },
+                "rank": 20162017,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hornets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team215"
+              }
+            ],
+            "m": "(\"team215\" :team{name: \"Hornets\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team215\" @20162017 {end_year: 2017, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player142",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 29,
+                    "name": "Klay Thompson"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player142"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player142\" :player{age: 29, name: \"Klay Thompson\"})",
+            "r": "[:serve \"player142\"-\u003e\"team200\" @0 {end_year: 2019, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player145",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "JaVale McGee"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player145"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player145\" :player{age: 31, name: \"JaVale McGee\"})",
+            "r": "[:serve \"player145\"-\u003e\"team200\" @0 {end_year: 2018, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player111",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "David West"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player111"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player111\" :player{age: 38, name: \"David West\"})",
+            "r": "[:serve \"player111\"-\u003e\"team200\" @0 {end_year: 2018, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2009
+                },
+                "rank": 0,
+                "srcID": "player117",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "Stephen Curry"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player117"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player117\" :player{age: 31, name: \"Stephen Curry\"})",
+            "r": "[:serve \"player117\"-\u003e\"team200\" @0 {end_year: 2019, start_year: 2009}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player119",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "Kevin Durant"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player119"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player119\" :player{age: 30, name: \"Kevin Durant\"})",
+            "r": "[:serve \"player119\"-\u003e\"team200\" @0 {end_year: 2019, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team200",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2009,
+                  "start_year": 2007
+                },
+                "rank": 0,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Warriors"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team200"
+              }
+            ],
+            "m": "(\"team200\" :team{name: \"Warriors\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team200\" @0 {end_year: 2009, start_year: 2007}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2013
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team202\" @0 {end_year: 2016, start_year: 2013}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2021,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player121",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Chris Paul"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player121"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player121\" :player{age: 33, name: \"Chris Paul\"})",
+            "r": "[:serve \"player121\"-\u003e\"team202\" @0 {end_year: 2021, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player128",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "Carmelo Anthony"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player128"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player128\" :player{age: 34, name: \"Carmelo Anthony\"})",
+            "r": "[:serve \"player128\"-\u003e\"team202\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2011,
+                  "start_year": 2002
+                },
+                "rank": 0,
+                "srcID": "player133",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "Yao Ming"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player133"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player133\" :player{age: 38, name: \"Yao Ming\"})",
+            "r": "[:serve \"player133\"-\u003e\"team202\" @0 {end_year: 2011, start_year: 2002}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2010,
+                  "start_year": 2004
+                },
+                "rank": 0,
+                "srcID": "player114",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 39,
+                    "name": "Tracy McGrady"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player114"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player114\" :player{age: 39, name: \"Tracy McGrady\"})",
+            "r": "[:serve \"player114\"-\u003e\"team202\" @0 {end_year: 2010, start_year: 2004}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team202",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player120",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 29,
+                    "name": "James Harden"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player120"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Rockets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team202"
+              }
+            ],
+            "m": "(\"team202\" :team{name: \"Rockets\"})",
+            "n": "(\"player120\" :player{age: 29, name: \"James Harden\"})",
+            "r": "[:serve \"player120\"-\u003e\"team202\" @0 {end_year: 2019, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2014,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team213\" @0 {end_year: 2014, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 1996,
+                  "start_year": 1994
+                },
+                "rank": 19941996,
+                "srcID": "player148",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Jason Kidd"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player148"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player148\" :player{age: 45, name: \"Jason Kidd\"})",
+            "r": "[:serve \"player148\"-\u003e\"team213\" @19941996 {end_year: 1996, start_year: 1994}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2008
+                },
+                "rank": 20082012,
+                "srcID": "player148",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Jason Kidd"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player148"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player148\" :player{age: 45, name: \"Jason Kidd\"})",
+            "r": "[:serve \"player148\"-\u003e\"team213\" @20082012 {end_year: 2012, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2004,
+                  "start_year": 1998
+                },
+                "rank": 0,
+                "srcID": "player136",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Steve Nash"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player136"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player136\" :player{age: 45, name: \"Steve Nash\"})",
+            "r": "[:serve \"player136\"-\u003e\"team213\" @0 {end_year: 2004, start_year: 1998}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2015,
+                  "start_year": 2014
+                },
+                "rank": 0,
+                "srcID": "player124",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Rajon Rondo"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player124"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player124\" :player{age: 33, name: \"Rajon Rondo\"})",
+            "r": "[:serve \"player124\"-\u003e\"team213\" @0 {end_year: 2015, start_year: 2014}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player122",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "DeAndre Jordan"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player122"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player122\" :player{age: 30, name: \"DeAndre Jordan\"})",
+            "r": "[:serve \"player122\"-\u003e\"team213\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player145",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "JaVale McGee"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player145"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player145\" :player{age: 31, name: \"JaVale McGee\"})",
+            "r": "[:serve \"player145\"-\u003e\"team213\" @0 {end_year: 2016, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2020,
+                  "start_year": 2019
+                },
+                "rank": 0,
+                "srcID": "player143",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 23,
+                    "name": "Kristaps Porzingis"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player143"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player143\" :player{age: 23, name: \"Kristaps Porzingis\"})",
+            "r": "[:serve \"player143\"-\u003e\"team213\" @0 {end_year: 2020, start_year: 2019}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player150",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 20,
+                    "name": "Luka Doncic"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player150"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player150\" :player{age: 20, name: \"Luka Doncic\"})",
+            "r": "[:serve \"player150\"-\u003e\"team213\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team213",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 1998
+                },
+                "rank": 0,
+                "srcID": "player137",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 40,
+                    "name": "Dirk Nowitzki"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player137"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Mavericks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team213"
+              }
+            ],
+            "m": "(\"team213\" :team{name: \"Mavericks\"})",
+            "n": "(\"player137\" :player{age: 40, name: \"Dirk Nowitzki\"})",
+            "r": "[:serve \"player137\"-\u003e\"team213\" @0 {end_year: 2019, start_year: 1998}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2013,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team210\" @0 {end_year: 2013, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2015,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player136",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Steve Nash"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player136"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player136\" :player{age: 45, name: \"Steve Nash\"})",
+            "r": "[:serve \"player136\"-\u003e\"team210\" @0 {end_year: 2015, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player124",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Rajon Rondo"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player124"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player124\" :player{age: 33, name: \"Rajon Rondo\"})",
+            "r": "[:serve \"player124\"-\u003e\"team210\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player145",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "JaVale McGee"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player145"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player145\" :player{age: 31, name: \"JaVale McGee\"})",
+            "r": "[:serve \"player145\"-\u003e\"team210\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2004,
+                  "start_year": 1996
+                },
+                "rank": 0,
+                "srcID": "player144",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 47,
+                    "name": "Shaquille O'Neal"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player144"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player144\" :player{age: 47, name: \"Shaquille O'Neal\"})",
+            "r": "[:serve \"player144\"-\u003e\"team210\" @0 {end_year: 2004, start_year: 1996}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 1996
+                },
+                "rank": 0,
+                "srcID": "player115",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 40,
+                    "name": "Kobe Bryant"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player115"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player115\" :player{age: 40, name: \"Kobe Bryant\"})",
+            "r": "[:serve \"player115\"-\u003e\"team210\" @0 {end_year: 2016, start_year: 1996}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2014,
+                  "start_year": 2008
+                },
+                "rank": 0,
+                "srcID": "player138",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "Paul Gasol"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player138"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player138\" :player{age: 38, name: \"Paul Gasol\"})",
+            "r": "[:serve \"player138\"-\u003e\"team210\" @0 {end_year: 2014, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team210",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player116",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "LeBron James"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player116"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Lakers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team210"
+              }
+            ],
+            "m": "(\"team210\" :team{name: \"Lakers\"})",
+            "n": "(\"player116\" :player{age: 34, name: \"LeBron James\"})",
+            "r": "[:serve \"player116\"-\u003e\"team210\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2010,
+                  "start_year": 2009
+                },
+                "rank": 0,
+                "srcID": "player105",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "Danny Green"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player105"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player105\" :player{age: 31, name: \"Danny Green\"})",
+            "r": "[:serve \"player105\"-\u003e\"team216\" @0 {end_year: 2010, start_year: 2009}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player126",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 26,
+                    "name": "Kyrie Irving"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player126"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player126\" :player{age: 26, name: \"Kyrie Irving\"})",
+            "r": "[:serve \"player126\"-\u003e\"team216\" @0 {end_year: 2017, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2010,
+                  "start_year": 2009
+                },
+                "rank": 0,
+                "srcID": "player144",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 47,
+                    "name": "Shaquille O'Neal"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player144"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player144\" :player{age: 47, name: \"Shaquille O'Neal\"})",
+            "r": "[:serve \"player144\"-\u003e\"team216\" @0 {end_year: 2010, start_year: 2009}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player129",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 37,
+                    "name": "Dwyane Wade"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player129"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player129\" :player{age: 37, name: \"Dwyane Wade\"})",
+            "r": "[:serve \"player129\"-\u003e\"team216\" @0 {end_year: 2018, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2010,
+                  "start_year": 2003
+                },
+                "rank": 20032010,
+                "srcID": "player116",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "LeBron James"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player116"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player116\" :player{age: 34, name: \"LeBron James\"})",
+            "r": "[:serve \"player116\"-\u003e\"team216\" @20032010 {end_year: 2010, start_year: 2003}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team216",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2014
+                },
+                "rank": 20142018,
+                "srcID": "player116",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "LeBron James"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player116"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Cavaliers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team216"
+              }
+            ],
+            "m": "(\"team216\" :team{name: \"Cavaliers\"})",
+            "n": "(\"player116\" :player{age: 34, name: \"LeBron James\"})",
+            "r": "[:serve \"player116\"-\u003e\"team216\" @20142018 {end_year: 2018, start_year: 2014}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team212",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2014
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Grizzlies"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team212"
+              }
+            ],
+            "m": "(\"team212\" :team{name: \"Grizzlies\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team212\" @0 {end_year: 2017, start_year: 2014}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team212",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2013,
+                  "start_year": 2006
+                },
+                "rank": 0,
+                "srcID": "player103",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Rudy Gay"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player103"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Grizzlies"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team212"
+              }
+            ],
+            "m": "(\"team212\" :team{name: \"Grizzlies\"})",
+            "n": "(\"player103\" :player{age: 32, name: \"Rudy Gay\"})",
+            "r": "[:serve \"player103\"-\u003e\"team212\" @0 {end_year: 2013, start_year: 2006}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team212",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2008
+                },
+                "rank": 0,
+                "srcID": "player139",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "Marc Gasol"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player139"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Grizzlies"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team212"
+              }
+            ],
+            "m": "(\"team212\" :team{name: \"Grizzlies\"})",
+            "n": "(\"player139\" :player{age: 34, name: \"Marc Gasol\"})",
+            "r": "[:serve \"player139\"-\u003e\"team212\" @0 {end_year: 2019, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team212",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player106",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 25,
+                    "name": "Kyle Anderson"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player106"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Grizzlies"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team212"
+              }
+            ],
+            "m": "(\"team212\" :team{name: \"Grizzlies\"})",
+            "n": "(\"player106\" :player{age: 25, name: \"Kyle Anderson\"})",
+            "r": "[:serve \"player106\"-\u003e\"team212\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team212",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2008,
+                  "start_year": 2001
+                },
+                "rank": 0,
+                "srcID": "player138",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 38,
+                    "name": "Paul Gasol"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player138"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Grizzlies"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team212"
+              }
+            ],
+            "m": "(\"team212\" :team{name: \"Grizzlies\"})",
+            "n": "(\"player138\" :player{age: 38, name: \"Paul Gasol\"})",
+            "r": "[:serve \"player138\"-\u003e\"team212\" @0 {end_year: 2008, start_year: 2001}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team228",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Wizards"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team228"
+              }
+            ],
+            "m": "(\"team228\" :team{name: \"Wizards\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team228\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team228",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2008
+                },
+                "rank": 0,
+                "srcID": "player145",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 31,
+                    "name": "JaVale McGee"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player145"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Wizards"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team228"
+              }
+            ],
+            "m": "(\"team228\" :team{name: \"Wizards\"})",
+            "n": "(\"player145\" :player{age: 31, name: \"JaVale McGee\"})",
+            "r": "[:serve \"player145\"-\u003e\"team228\" @0 {end_year: 2012, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team207",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2011
+                },
+                "rank": 0,
+                "srcID": "player121",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Chris Paul"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player121"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Clippers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team207"
+              }
+            ],
+            "m": "(\"team207\" :team{name: \"Clippers\"})",
+            "n": "(\"player121\" :player{age: 33, name: \"Chris Paul\"})",
+            "r": "[:serve \"player121\"-\u003e\"team207\" @0 {end_year: 2017, start_year: 2011}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team207",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2008
+                },
+                "rank": 0,
+                "srcID": "player122",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "DeAndre Jordan"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player122"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Clippers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team207"
+              }
+            ],
+            "m": "(\"team207\" :team{name: \"Clippers\"})",
+            "n": "(\"player122\" :player{age: 30, name: \"DeAndre Jordan\"})",
+            "r": "[:serve \"player122\"-\u003e\"team207\" @0 {end_year: 2018, start_year: 2008}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team207",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2013,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player140",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 46,
+                    "name": "Grant Hill"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player140"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Clippers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team207"
+              }
+            ],
+            "m": "(\"team207\" :team{name: \"Clippers\"})",
+            "n": "(\"player140\" :player{age: 46, name: \"Grant Hill\"})",
+            "r": "[:serve \"player140\"-\u003e\"team207\" @0 {end_year: 2013, start_year: 2012}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team207",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2009
+                },
+                "rank": 0,
+                "srcID": "player134",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 30,
+                    "name": "Blake Griffin"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player134"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Clippers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team207"
+              }
+            ],
+            "m": "(\"team207\" :team{name: \"Clippers\"})",
+            "n": "(\"player134\" :player{age: 30, name: \"Blake Griffin\"})",
+            "r": "[:serve \"player134\"-\u003e\"team207\" @0 {end_year: 2018, start_year: 2009}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team219",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2014
+                },
+                "rank": 0,
+                "srcID": "player130",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 25,
+                    "name": "Joel Embiid"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player130"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "76ers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team219"
+              }
+            ],
+            "m": "(\"team219\" :team{name: \"76ers\"})",
+            "n": "(\"player130\" :player{age: 25, name: \"Joel Embiid\"})",
+            "r": "[:serve \"player130\"-\u003e\"team219\" @0 {end_year: 2019, start_year: 2014}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team219",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player109",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "Tiago Splitter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player109"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "76ers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team219"
+              }
+            ],
+            "m": "(\"team219\" :team{name: \"76ers\"})",
+            "n": "(\"player109\" :player{age: 34, name: \"Tiago Splitter\"})",
+            "r": "[:serve \"player109\"-\u003e\"team219\" @0 {end_year: 2017, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team219",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2019
+                },
+                "rank": 0,
+                "srcID": "player112",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 29,
+                    "name": "Jonathon Simmons"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player112"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "76ers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team219"
+              }
+            ],
+            "m": "(\"team219\" :team{name: \"76ers\"})",
+            "n": "(\"player112\" :player{age: 29, name: \"Jonathon Simmons\"})",
+            "r": "[:serve \"player112\"-\u003e\"team219\" @0 {end_year: 2019, start_year: 2019}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team219",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player149",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 22,
+                    "name": "Ben Simmons"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player149"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "76ers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team219"
+              }
+            ],
+            "m": "(\"team219\" :team{name: \"76ers\"})",
+            "n": "(\"player149\" :player{age: 22, name: \"Ben Simmons\"})",
+            "r": "[:serve \"player149\"-\u003e\"team219\" @0 {end_year: 2019, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team219",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "76ers"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team219"
+              }
+            ],
+            "m": "(\"team219\" :team{name: \"76ers\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team219\" @0 {end_year: 2018, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team217",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2014,
+                  "start_year": 2006
+                },
+                "rank": 0,
+                "srcID": "player124",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Rajon Rondo"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player124"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Celtics"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team217"
+              }
+            ],
+            "m": "(\"team217\" :team{name: \"Celtics\"})",
+            "n": "(\"player124\" :player{age: 33, name: \"Rajon Rondo\"})",
+            "r": "[:serve \"player124\"-\u003e\"team217\" @0 {end_year: 2014, start_year: 2006}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team217",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player126",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 26,
+                    "name": "Kyrie Irving"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player126"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Celtics"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team217"
+              }
+            ],
+            "m": "(\"team217\" :team{name: \"Celtics\"})",
+            "n": "(\"player126\" :player{age: 26, name: \"Kyrie Irving\"})",
+            "r": "[:serve \"player126\"-\u003e\"team217\" @0 {end_year: 2019, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team217",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2007
+                },
+                "rank": 0,
+                "srcID": "player141",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 43,
+                    "name": "Ray Allen"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player141"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Celtics"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team217"
+              }
+            ],
+            "m": "(\"team217\" :team{name: \"Celtics\"})",
+            "n": "(\"player141\" :player{age: 43, name: \"Ray Allen\"})",
+            "r": "[:serve \"player141\"-\u003e\"team217\" @0 {end_year: 2012, start_year: 2007}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team217",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2011,
+                  "start_year": 2010
+                },
+                "rank": 0,
+                "srcID": "player144",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 47,
+                    "name": "Shaquille O'Neal"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player144"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Celtics"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team217"
+              }
+            ],
+            "m": "(\"team217\" :team{name: \"Celtics\"})",
+            "n": "(\"player144\" :player{age: 47, name: \"Shaquille O'Neal\"})",
+            "r": "[:serve \"player144\"-\u003e\"team217\" @0 {end_year: 2011, start_year: 2010}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team217",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player107",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Aron Baynes"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player107"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Celtics"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team217"
+              }
+            ],
+            "m": "(\"team217\" :team{name: \"Celtics\"})",
+            "n": "(\"player107\" :player{age: 32, name: \"Aron Baynes\"})",
+            "r": "[:serve \"player107\"-\u003e\"team217\" @0 {end_year: 2019, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team208",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Kings"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team208"
+              }
+            ],
+            "m": "(\"team208\" :team{name: \"Kings\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team208\" @0 {end_year: 2018, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team208",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2013
+                },
+                "rank": 0,
+                "srcID": "player103",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Rudy Gay"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player103"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Kings"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team208"
+              }
+            ],
+            "m": "(\"team208\" :team{name: \"Kings\"})",
+            "n": "(\"player103\" :player{age: 32, name: \"Rudy Gay\"})",
+            "r": "[:serve \"player103\"-\u003e\"team208\" @0 {end_year: 2017, start_year: 2013}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team208",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player124",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Rajon Rondo"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player124"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Kings"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team208"
+              }
+            ],
+            "m": "(\"team208\" :team{name: \"Kings\"})",
+            "n": "(\"player124\" :player{age: 33, name: \"Rajon Rondo\"})",
+            "r": "[:serve \"player124\"-\u003e\"team208\" @0 {end_year: 2016, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team208",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Kings"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team208"
+              }
+            ],
+            "m": "(\"team208\" :team{name: \"Kings\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team208\" @0 {end_year: 2016, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team227",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2009,
+                  "start_year": 2004
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Nets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team227"
+              }
+            ],
+            "m": "(\"team227\" :team{name: \"Nets\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team227\" @0 {end_year: 2009, start_year: 2004}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team227",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2008,
+                  "start_year": 2001
+                },
+                "rank": 0,
+                "srcID": "player148",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 45,
+                    "name": "Jason Kidd"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player148"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Nets"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team227"
+              }
+            ],
+            "m": "(\"team227\" :team{name: \"Nets\"})",
+            "n": "(\"player148\" :player{age: 45, name: \"Jason Kidd\"})",
+            "r": "[:serve \"player148\"-\u003e\"team227\" @0 {end_year: 2008, start_year: 2001}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team222",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2018
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hawks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team222"
+              }
+            ],
+            "m": "(\"team222\" :team{name: \"Hawks\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team222\" @0 {end_year: 2019, start_year: 2018}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team222",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2016
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hawks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team222"
+              }
+            ],
+            "m": "(\"team222\" :team{name: \"Hawks\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team222\" @0 {end_year: 2017, start_year: 2016}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team222",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2005,
+                  "start_year": 2003
+                },
+                "rank": 0,
+                "srcID": "player108",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Boris Diaw"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player108"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hawks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team222"
+              }
+            ],
+            "m": "(\"team222\" :team{name: \"Hawks\"})",
+            "n": "(\"player108\" :player{age: 36, name: \"Boris Diaw\"})",
+            "r": "[:serve \"player108\"-\u003e\"team222\" @0 {end_year: 2005, start_year: 2003}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team222",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2017,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player109",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 34,
+                    "name": "Tiago Splitter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player109"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hawks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team222"
+              }
+            ],
+            "m": "(\"team222\" :team{name: \"Hawks\"})",
+            "n": "(\"player109\" :player{age: 34, name: \"Tiago Splitter\"})",
+            "r": "[:serve \"player109\"-\u003e\"team222\" @0 {end_year: 2017, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team222",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2018,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player104",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 32,
+                    "name": "Marco Belinelli"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player104"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Hawks"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team222"
+              }
+            ],
+            "m": "(\"team222\" :team{name: \"Hawks\"})",
+            "n": "(\"player104\" :player{age: 32, name: \"Marco Belinelli\"})",
+            "r": "[:serve \"player104\"-\u003e\"team222\" @0 {end_year: 2018, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2010,
+                  "start_year": 2009
+                },
+                "rank": 0,
+                "srcID": "player127",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 42,
+                    "name": "Vince Carter"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player127"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player127\" :player{age: 42, name: \"Vince Carter\"})",
+            "r": "[:serve \"player127\"-\u003e\"team226\" @0 {end_year: 2010, start_year: 2009}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2012,
+                  "start_year": 2004
+                },
+                "rank": 0,
+                "srcID": "player146",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 33,
+                    "name": "Dwight Howard"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player146"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player146\" :player{age: 33, name: \"Dwight Howard\"})",
+            "r": "[:serve \"player146\"-\u003e\"team226\" @0 {end_year: 2012, start_year: 2004}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2007,
+                  "start_year": 2000
+                },
+                "rank": 0,
+                "srcID": "player140",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 46,
+                    "name": "Grant Hill"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player140"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player140\" :player{age: 46, name: \"Grant Hill\"})",
+            "r": "[:serve \"player140\"-\u003e\"team226\" @0 {end_year: 2007, start_year: 2000}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2019,
+                  "start_year": 2017
+                },
+                "rank": 0,
+                "srcID": "player112",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 29,
+                    "name": "Jonathon Simmons"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player112"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player112\" :player{age: 29, name: \"Jonathon Simmons\"})",
+            "r": "[:serve \"player112\"-\u003e\"team226\" @0 {end_year: 2019, start_year: 2017}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 1996,
+                  "start_year": 1992
+                },
+                "rank": 0,
+                "srcID": "player144",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 47,
+                    "name": "Shaquille O'Neal"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player144"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player144\" :player{age: 47, name: \"Shaquille O'Neal\"})",
+            "r": "[:serve \"player144\"-\u003e\"team226\" @0 {end_year: 1996, start_year: 1992}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team226",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2004,
+                  "start_year": 2000
+                },
+                "rank": 0,
+                "srcID": "player114",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 39,
+                    "name": "Tracy McGrady"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player114"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Magic"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team226"
+              }
+            ],
+            "m": "(\"team226\" :team{name: \"Magic\"})",
+            "n": "(\"player114\" :player{age: 39, name: \"Tracy McGrady\"})",
+            "r": "[:serve \"player114\"-\u003e\"team226\" @0 {end_year: 2004, start_year: 2000}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team229",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2016,
+                  "start_year": 2015
+                },
+                "rank": 0,
+                "srcID": "player147",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 36,
+                    "name": "Amar'e Stoudemire"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player147"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Heat"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team229"
+              }
+            ],
+            "m": "(\"team229\" :team{name: \"Heat\"})",
+            "n": "(\"player147\" :player{age: 36, name: \"Amar'e Stoudemire\"})",
+            "r": "[:serve \"player147\"-\u003e\"team229\" @0 {end_year: 2016, start_year: 2015}]"
+          },
+          {
+            "_edgesParsedList": [
+              {
+                "dstID": "team229",
+                "edgeName": "serve",
+                "properties": {
+                  "end_year": 2014,
+                  "start_year": 2012
+                },
+                "rank": 0,
+                "srcID": "player141",
+                "type": "edge"
+              }
+            ],
+            "_verticesParsedList": [
+              {
+                "properties": {
+                  "player": {
+                    "age": 43,
+                    "name": "Ray Allen"
+                  }
+                },
+                "tags": [
+                  "player"
+                ],
+                "type": "vertex",
+                "vid": "player141"
+              },
+              {
+                "properties": {
+                  "team": {
+                    "name": "Heat"
+                  }
+                },
+                "tags": [
+                  "team"
+                ],
+                "type": "vertex",
+                "vid": "team229"
+              }
+            ],
+            "m": "(\"team229\" :team{name: \"Heat\"})",
+            "n": "(\"player141\" :player{age: 43, name: \"Ray Allen\"})",
+            "r": "[:serve \"player141\"-\u003e\"team229\" @0 {end_year: 2014, start_year: 2012}]"
+          }
+        ],
+        "timeCost": 11028,
+        "localParams": null
+      },
+      "gql": "match (n:player)-[r]-(m:team) return n,r,m limit 100"
+    }
+  ],
+  "message": "Success"
+}
+
