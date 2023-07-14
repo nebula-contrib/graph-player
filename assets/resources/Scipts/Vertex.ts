@@ -110,10 +110,7 @@ export class Vertex extends Component {
           if (typeof obj[key] === 'object' && obj[key] !== null) {
             this.printNestedJSON(obj[key], newKey);
           } else {
-            
                 Manager.Instance().UIManager.addRichInfo(key+": "+obj[key]);
-            
-           
           }
         }
    }
