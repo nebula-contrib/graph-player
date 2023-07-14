@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "edge_white",
+    "_name": "edge",
     "_objFlags": 0,
     "_native": "",
     "data": {
@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "edge_white",
+    "_name": "edge",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -24,6 +24,9 @@
       },
       {
         "__id__": 5
+      },
+      {
+        "__id__": 7
       },
       {
         "__id__": 9
@@ -82,6 +85,14 @@
       {
         "__uuid__": "620b6bf3-0369-4560-837f-2a2c00b73c26",
         "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "224880fe-a88f-4448-b95a-71a5f0e20579",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "f547272f-765e-499b-8c51-bdff2b809056",
+        "__expectedType__": "cc.Material"
       }
     ],
     "_visFlags": 0,
@@ -136,66 +147,17 @@
     "__prefab": {
       "__id__": 6
     },
-    "edgeId": -1,
-    "startVertexID": 0,
-    "endVertexID": 0,
-    "startJoint": {
-      "__id__": 7
-    },
-    "endJoint": {
-      "__id__": 8
-    },
+    "edgeName": "",
+    "srcID": "",
+    "dstID": "",
+    "properties": {},
+    "rank": 0,
+    "type": "edge",
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "4e2SQrzbVF4qgZpBuXZyKH"
-  },
-  {
-    "__type__": "cc.PointToPointConstraint",
-    "_name": "",
-    "_objFlags": 0,
-    "node": null,
-    "_enabled": true,
-    "__prefab": null,
-    "_enableCollision": true,
-    "_connectedBody": null,
-    "_pivotA": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_pivotB": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "4e7NNiGwdFj7mKfQ2FMeVl"
-  },
-  {
-    "__type__": "cc.PointToPointConstraint",
-    "_name": "",
-    "_objFlags": 0,
-    "node": null,
-    "_enabled": true,
-    "__prefab": null,
-    "_enableCollision": true,
-    "_connectedBody": null,
-    "_pivotA": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_pivotB": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "28hVDIjPNJ65Y6a++sJgS2"
   },
   {
     "__type__": "cc.RigidBody",
@@ -206,7 +168,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 10
+      "__id__": 8
     },
     "_group": 1,
     "_type": 4,
@@ -242,7 +204,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 12
+      "__id__": 10
     },
     "_enableCollision": true,
     "_connectedBody": null,
@@ -297,7 +259,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 14
+      "__id__": 12
     },
     "_enableCollision": false,
     "_connectedBody": null,
@@ -342,6 +304,34 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "01BQ8fCO9PubcaG4m3cLko"
+  },
+  {
+    "__type__": "cc.CylinderCollider",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 14
+    },
+    "_material": null,
+    "_isTrigger": false,
+    "_center": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_radius": 0.5,
+    "_height": 1.7,
+    "_direction": 1,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "1e5S6o2/1D3apJejbNMdVs"
   },
   {
     "__type__": "cc.PrefabInfo",

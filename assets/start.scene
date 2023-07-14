@@ -255,13 +255,13 @@
         "__id__": 8
       },
       {
-        "__id__": 11
+        "__id__": 10
+      },
+      {
+        "__id__": 13
       },
       {
         "__id__": 15
-      },
-      {
-        "__id__": 14
       },
       {
         "__id__": 17
@@ -362,32 +362,8 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "vertexManager": {
-      "__id__": 10
-    },
-    "cameraController": null,
-    "edgeManager": {
-      "__id__": 13
-    },
     "centralVertex": null,
     "_id": "95xkApapRHDprg0x4Qcdcl"
-  },
-  {
-    "__type__": "d69130bjgRN65AHuDl1ls3I",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 11
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "chosenVertex": null,
-    "vertexPrefab": {
-      "__uuid__": "91e996f1-2f14-49bd-a6f6-3503ae7093b2",
-      "__expectedType__": "cc.Prefab"
-    },
-    "vertexRadius": 0.05,
-    "_id": "14cVuFLYBMJb3zsDGx6zuw"
   },
   {
     "__type__": "cc.Node",
@@ -398,13 +374,13 @@
     },
     "_children": [
       {
-        "__id__": 12
+        "__id__": 11
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 10
+        "__id__": 12
       }
     ],
     "_prefab": null,
@@ -442,7 +418,7 @@
     "_name": "CentralVertexOfCamera",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 11
+      "__id__": 10
     },
     "_children": [],
     "_active": true,
@@ -478,23 +454,25 @@
     "_id": "03KbgWUXJEvYkZog5IRfbO"
   },
   {
-    "__type__": "ef4a0WupzVBIoR6Rk8D+WtT",
+    "__type__": "d69130bjgRN65AHuDl1ls3I",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 10
     },
     "_enabled": true,
     "__prefab": null,
-    "edgePrefab": {
-      "__uuid__": "255a1f1a-4399-46c4-9bf7-4663d4634572",
+    "chosenVertex": null,
+    "vertexPrefab": {
+      "__uuid__": "91e996f1-2f14-49bd-a6f6-3503ae7093b2",
       "__expectedType__": "cc.Prefab"
     },
-    "_id": "f49bqkFP1E2LZVOjz9aCdv"
+    "vertexRadius": 0.05,
+    "_id": "14cVuFLYBMJb3zsDGx6zuw"
   },
   {
     "__type__": "cc.Node",
-    "_name": "EdgeManager",
+    "_name": "CameraController",
     "_objFlags": 0,
     "_parent": {
       "__id__": 7
@@ -503,7 +481,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 14
       }
     ],
     "_prefab": null,
@@ -534,11 +512,22 @@
       "y": 0,
       "z": 0
     },
-    "_id": "e3Vqr49z5NJoIM5wXhYCFS"
+    "_id": "86QQNUPY5KjJsxvuHcQDJw"
+  },
+  {
+    "__type__": "a2affnDSsVM8rMOgHqR48gM",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 13
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "_id": "6708667ABDFZCKSpjFB5XZ"
   },
   {
     "__type__": "cc.Node",
-    "_name": "CameraController",
+    "_name": "EdgeManager",
     "_objFlags": 0,
     "_parent": {
       "__id__": 7
@@ -578,10 +567,10 @@
       "y": 0,
       "z": 0
     },
-    "_id": "86QQNUPY5KjJsxvuHcQDJw"
+    "_id": "e3Vqr49z5NJoIM5wXhYCFS"
   },
   {
-    "__type__": "a2affnDSsVM8rMOgHqR48gM",
+    "__type__": "ef4a0WupzVBIoR6Rk8D+WtT",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -589,7 +578,11 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "_id": "6708667ABDFZCKSpjFB5XZ"
+    "edgePrefab": {
+      "__uuid__": "255a1f1a-4399-46c4-9bf7-4663d4634572",
+      "__expectedType__": "cc.Prefab"
+    },
+    "_id": "f49bqkFP1E2LZVOjz9aCdv"
   },
   {
     "__type__": "cc.Node",
@@ -1745,8 +1738,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 50.4
+      "width": 285,
+      "height": 240
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1766,10 +1759,10 @@
     "__prefab": null,
     "_lineHeight": 40,
     "_string": "",
-    "_horizontalAlign": 0,
-    "_verticalAlign": 0,
+    "_horizontalAlign": 1,
+    "_verticalAlign": 1,
     "_fontSize": 25,
-    "_maxWidth": 0,
+    "_maxWidth": 285,
     "_fontFamily": "Times New Roman",
     "_font": null,
     "_isSystemFontUsed": true,

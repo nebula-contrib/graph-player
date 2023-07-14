@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Vec3,math, HingeConstraint, CCString, CCInteger } from 'cc';
+import { _decorator, Component, Node, Vec3,math, HingeConstraint, CCString, CCInteger,MeshRenderer } from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 
@@ -26,10 +26,10 @@ export class Edge extends Component {
     @property(CCString)
     public type: String = "edge";
 
-    @property(HingeConstraint)
-    public startJoint = new HingeConstraint();
-    @property(HingeConstraint)
-    public endJoint = new HingeConstraint();
+    // @property(HingeConstraint)
+    // public startJoint = new HingeConstraint();
+    // @property(HingeConstraint)
+    // public endJoint = new HingeConstraint();
 
     /**
      * create Edge by the start vertex and end vertex
@@ -40,20 +40,18 @@ export class Edge extends Component {
     public createEdge(startVertex: Node,endVertex: Node){
         let start = startVertex.worldPosition, end = endVertex.worldPosition;
         this.startPosition = start;
-        //start = new Vec3(0,0,0);
         this.endPosition = end;
         const center = (start.clone()).add(end).multiplyScalar(0.5);
         this.node.setWorldPosition(center);
 
-
         // set distance
-        const length = Vec3.distance(start,end);
-        this.node.setScale(0.002, 0.002, length); 
+        const length = Vec3.distance(start,end)/2;
+        this.node.setScale(0.002, length, 0.002 ); 
 
         const dir = Vec3.subtract(new Vec3(), end, start).normalize();
-        const up = new Vec3(0, 0, 1);
+        const right = new Vec3(0, 1, 0);
         const quat = new math.Quat();
-        math.Quat.rotationTo(quat, up, dir);
+        math.Quat.rotationTo(quat, right, dir);
         this.node.setRotation(quat);
         
         // set ID
@@ -89,6 +87,29 @@ export class Edge extends Component {
         return this.edgeName;
     }
 
+    /**
+     * change the material of edge node
+     * material[1] is yellow --  the focused material
+     * material[2] is white -- the original material
+     * @param edgeNode 
+     */
+    public changeEdgeMaterialToFocused(){
+        let focusMaterial = this.getComponent(MeshRenderer).getMaterial(1);
+        this.node.getComponent(MeshRenderer).setMaterial(focusMaterial,0);
+    }
+
+    /**
+     * return this edge node to original white material -- material[2]
+     */
+    public returnToInitialMaterial(){
+        let initialMaterial = this.getComponent(MeshRenderer).getMaterial(2);
+        this.getComponent(MeshRenderer).setMaterial(initialMaterial, 0);
+    }
+
+    /**
+     * set the attribute of Edge by json
+     * @param attribute 
+     */
     public setAttribute(attribute: any) {
         for (let key in attribute) {
             if (this.hasOwnProperty(key)) {
@@ -97,6 +118,37 @@ export class Edge extends Component {
         }
         this.edgeName = this.srcID +" "+this.edgeName+" "+this.dstID;
         Manager.Instance().relationManager.setEdgeName(this.edgeName);
+    }
+
+        /**
+     * present the details of edge
+     */
+        public showEdgeDetails(){
+            // console.log("Edge name:"+this.edgeName);
+            
+            // console.log("src vectex ID:"+this.srcID);
+            Manager.Instance().UIManager.setRichInfo("Edge name:"+this.edgeName);
+            Manager.Instance().UIManager.addRichInfo("src vectex ID:"+this.srcID);
+            Manager.Instance().UIManager.addRichInfo("dst vectex ID:"+this.dstID);
+           
+            // for(let key in this.properties){
+            //     console.log("key:",key);
+            //     console.log(key+": "+this.properties[key]);
+            //     Manager.Instance().UIManager.addRichInfo(key+": "+this.properties[key]);
+            // }
+            this.printNestedJSON(this.properties,"properties");
+            Manager.Instance().UIManager.addRichInfo("rank:"+this.rank);
+        }
+
+    private printNestedJSON(obj, parentKey = '') {
+         for (let key in obj) {
+           let newKey = parentKey ? `${parentKey}.${key}` : key;
+           if (typeof obj[key] === 'object' && obj[key] !== null) {
+             this.printNestedJSON(obj[key], newKey);
+           } else {
+            Manager.Instance().UIManager.addRichInfo(key+": "+this.properties[key]);
+           }
+         }
     }
 
 }

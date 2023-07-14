@@ -38,6 +38,12 @@ export class UIManager extends Component {
         Manager.Instance().JSONReader.putJSONtoModel("");
     }
 
+    protected onLoad(): void {
+            // initiate infomation bar
+            this.nodeInfoBar = this.node.getChildByName('InfoBar');
+            this.nodeInfoText = this.nodeInfoBar.getChildByName('NodeInfoText').getComponent(RichText);
+    }
+
     start () {
         // initiate refresh button
         const refreshClickEventHandler = new EventHandler();
@@ -55,14 +61,13 @@ export class UIManager extends Component {
         createCanvasFromJSONFileEventHandler.component = 'UIManager';
         createCanvasFromJSONFileEventHandler.handler = 'createCanvasFromJSONFile';
 
-        // initiate infomation bar
-        this.nodeInfoBar = this.node.getChildByName('InfoBar');
-        this.nodeInfoText = this.nodeInfoBar.getChildByName('NodeInfoText').getComponent(RichText);
+
 
     }
 
 
     public setRichInfo(info:string){
+        this.nodeInfoBar.active = true;
         if(!this.isNodeInfoEnable) {
             this.isNodeInfoEnable = true;
             this.nodeInfoBar.active = true;
@@ -74,6 +79,16 @@ export class UIManager extends Component {
     public addRichInfo(info:string){
 
         this.nodeInfoText.string += this.nodeInfoPrefix+info+this.nodeInfoSuffix;
+    }
+
+    public cleanRichInfo(){
+        this.nodeInfoText.string = "";
+        
+    }
+
+    public cleanAndDisableInfoBar(){
+        this.nodeInfoText.string = "";
+        this.nodeInfoBar.active = false;
     }
 
 }

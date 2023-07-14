@@ -123,7 +123,7 @@ export class VertexManager extends Component {
         if(!this.chosenVertex) return;
         this.chosenVertex.getComponent(Vertex).returnToInitialMaterial();
         this.chosenVertex = null;
-        
+        Manager.Instance().UIManager.cleanAndDisableInfoBar();
 
     }
 

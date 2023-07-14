@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Prefab, instantiate, Vec3 } from 'cc';
 import { Edge } from './Edge';
-import { Dictionary } from './data/Dictionary';
 import { Vertex } from './Vertex';
 import { Manager } from './Manager';
 
@@ -12,6 +11,9 @@ export class EdgeManager extends Component {
 
     @property({ type: Prefab })
     public edgePrefab: Prefab = null;
+
+    @property(Node)
+    public chosenEdgeNode:Node;
 
     /**
      * like{'0':[0,2]}
@@ -43,6 +45,19 @@ export class EdgeManager extends Component {
         
     }
 
+    chooseNormalEdge(edgeNode:Node){
+        edgeNode.getComponent(Edge).changeEdgeMaterialToFocused();
+    }
+
+    public returnFocusToNormalEdge(){
+        
+        if(!this.chosenEdgeNode) return;
+        this.chosenEdgeNode.getComponent(Edge).returnToInitialMaterial();
+        this.chosenEdgeNode = null;
+        Manager.Instance().UIManager.cleanAndDisableInfoBar();
+        
+
+    }
     /**
      * destroy all edge by remove the etities and node in list
      */

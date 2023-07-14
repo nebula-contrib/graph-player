@@ -34,6 +34,10 @@ export class Vertex extends Component {
     // @property(Boolean)
     // public isFocus:false;
 
+    /**
+     * set the attribute of vertex by JSON Object
+     * @param attribute 
+     */
     public setAttribute(attribute: any) {
         for (let key in attribute) {
             if (this.hasOwnProperty(key)) {
@@ -73,29 +77,46 @@ export class Vertex extends Component {
         return this.materialCode;
     }
 
+    /**
+     * present the details of vertex
+     */
     public showVertexDetails(){
         console.log("show detail Vertex ID:"+this.vid);
         
         console.log("tag:",this.tags);
         Manager.Instance().UIManager.setRichInfo("Vertex vid:"+this.vid);
         Manager.Instance().UIManager.addRichInfo("tag:"+this.tags);
-        for(let key in this.tags){
-            console.log(key+": "+this.tags[key]);
-            Manager.Instance().UIManager.addRichInfo(key+": "+this.tags[key]);
-        }
+        // for(let key in this.tags){
+        //     console.log(key+": "+this.tags[key]);
+        //     Manager.Instance().UIManager.addRichInfo(key+": "+this.tags[key]);
+        // }
 
-        for(let key in this.properties){
-            if (this.properties.hasOwnProperty(key)) {  
-                for(let obj in this.properties[key]){
-                    console.log(obj + ": "+(this.properties[key])[obj]);
-                    Manager.Instance().UIManager.addRichInfo(obj + ": "+(this.properties[key])[obj]);
-                }
+        // for(let key in this.properties){
+        //     if (this.properties.hasOwnProperty(key)) {  
+        //         for(let obj in this.properties[key]){
+        //             console.log(obj + ": "+(this.properties[key])[obj]);
+        //             Manager.Instance().UIManager.addRichInfo(obj + ": "+(this.properties[key])[obj]);
+        //         }
+        //     }
                 
-
-            }
-                
-        }
+        // }
+        this.printNestedJSON(this.properties,"properties");
     }
+
+    
+    private printNestedJSON(obj, parentKey = '') {
+        for (let key in obj) {
+          let newKey = parentKey ? `${parentKey}.${key}` : key;
+          if (typeof obj[key] === 'object' && obj[key] !== null) {
+            this.printNestedJSON(obj[key], newKey);
+          } else {
+            
+                Manager.Instance().UIManager.addRichInfo(key+": "+obj[key]);
+            
+           
+          }
+        }
+   }
 
 }
 

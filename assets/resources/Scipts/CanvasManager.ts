@@ -1,22 +1,14 @@
 import {  _decorator, Component, input,Input,EventMouse,  geometry, Node, director, tween, PhysicsSystem, Vec3,Vec2, Camera,math, find, Quat } from 'cc';
 import { Vertex } from './Vertex';
-import { VertexManager } from './VertexManager';
-import { CameraController } from './CameraController';
 import { Manager } from './Manager';
-import { EdgeManager } from './EdgeManager';
+import { Edge } from './Edge';
+
 
 const { ccclass, property } = _decorator;
 
 @ccclass('CanvasManager')
 export class CanvasManager extends Component {
-    @property({ type: VertexManager })
-    public vertexManager: VertexManager;
 
-    @property({ type: CameraController })
-    public cameraController: CameraController;
-
-    @property({ type: EdgeManager })
-    public edgeManager: EdgeManager;
 
     @property({ type:Node})
     public centralVertex:Node = null;
@@ -48,7 +40,6 @@ export class CanvasManager extends Component {
         //Manager.Instance().cameraController = Manager.Instance().cameraController.getComponent(CameraController);
         //this.vertexManager = this.vertexManager.getComponent(VertexManager);
         //this.vertexManager.createVertexAround(this.node); 
-        this.cameraController = Manager.Instance().cameraController;
         
 
 
@@ -65,7 +56,10 @@ export class CanvasManager extends Component {
 
     onMouseMove(event:EventMouse){
         if(this.cameraMove){
-            //Method 1. start -- camera rotate by itseif
+            /**
+             * Method 1. start -- camera rotate by itseif
+             */
+            
 
             // const currentPosition = event.getLocation();
             // const dx = event.getDeltaX();
@@ -76,11 +70,13 @@ export class CanvasManager extends Component {
             // Quat.multiply(quat, quat, quatX);
             // Quat.multiply(quat, quat, quatY);
             // Manager.Instance().cameraController.camera.node.rotation = quat;
+            /**
+             * Method 1. end -- camera rotate by itself
+             */
 
-            //Method 1. end -- camera rotate by itself
-
-            //Method 2. start -- camera move directly
-
+            /**
+             * Method 2. start -- camera move directly
+             */
             const dx = event.getDeltaX();
             const dy = event.getDeltaY();
             let newPosition = new Vec3(
@@ -91,19 +87,19 @@ export class CanvasManager extends Component {
 
             Manager.Instance().cameraController.camera.node.position = newPosition;
 
-            // const dx = currentPosition.x - this.previousMousePosition.x
-            // const dy = currentPosition.y - this.previousMousePosition.y;
 
 
-            //Method 2. end -- camera move directly
+            /**
+             * Method 2. end -- camera move directly
+             */
 
             
         }
 
         else if(this.cameraRorateAroundVertex){
-
-            
-            //---- start rorate nodes and its children --------
+            /**
+             * ---- start rorate nodes and its children --------
+             */
             // let currentMousePosition = event.getLocation();
             // let dx = (currentMousePosition.x - this.previousMousePosition.x) * this.dragRotateSpeed;
             // let dy = (currentMousePosition.y - this.previousMousePosition.y) * this.dragRotateSpeed;
@@ -118,10 +114,13 @@ export class CanvasManager extends Component {
             // //console.log("rotation focus node:", this.centralVertex.getComponent(Vertex).getVertexID()," position:",this.centralVertex.position)
             
             // this.previousMousePosition = currentMousePosition;
-            //---- end rorate nodes and its children --------
+            /**
+             * ---- end rorate nodes and its children --------
+             */
 
-            //---- start rorate camera ------------
-          
+            /**
+             * ---- start rorate camera ------------
+             */
             let currentMousePosition = event.getLocation();
             let dx = (currentMousePosition.x - this.previousMousePosition.x) * this.dragRotateSpeed;
             let dy = (currentMousePosition.y - this.previousMousePosition.y) * this.dragRotateSpeed;
@@ -141,22 +140,32 @@ export class CanvasManager extends Component {
             // uodate the mouse position
             this.previousMousePosition = currentMousePosition;
 
+            /**
+             * ---- end rorate camera ------------
+             */
             
            
         }
     }
     
+    /**
+     * Event of pressing mouse down 
+     * @param event 
+     */
     onMouseDown(event: EventMouse){
+        /**
+         * press by middle key
+         */
         if(event.getButton() === EventMouse.BUTTON_MIDDLE){
             
             this.cameraMove = true;
             this.previousMousePosition = event.getLocation();
-            
-            
-            
-            
+
         }
 
+        /**
+         * press by left key
+         */
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
             this.cameraRorateAroundVertex = true;
             this.previousMousePositionVec3.set(event.getLocationX(), event.getLocationY(), 0);
@@ -167,31 +176,48 @@ export class CanvasManager extends Component {
         }
     }
 
+    
+    /**
+     * Event of mouse up
+     * @param event 
+     */
     onMouseUp(event: EventMouse) {
+        /**
+         * mouse up by right key
+         */
         if (event.getButton() === EventMouse.BUTTON_RIGHT) {
             
             this.createVertexAtMouse(event);
         } 
+        /**
+         * mouse up by middle key
+         */
         else if (event.getButton() === EventMouse.BUTTON_MIDDLE) {
            
             this.cameraMove = false;
             
         }
+        /**
+         * mouse up by left key
+         */
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
             
             this.cameraRorateAroundVertex = false;
-            this.chooseVertexAtMouse(event);
+            this.chooseVertexOrEdgeAtMouse(event);
+            //this.chooseEdgeAtMouse(event);
         }
     }
 
-    
+    /**
+     * mouse event of wheel, on camera zooming
+     * @param event 
+     */
     onMouseWheel(event: EventMouse) {
         // get the y value of wheel 
         let scrollY = event.getScrollY();
 
         // calculate and update new position of camera
-        let newCameraPos = new Vec3();
-        
+        let newCameraPos = new Vec3();        
         math.Vec3.scaleAndAdd(newCameraPos, Manager.Instance().cameraController.camera.node.position, Manager.Instance().cameraController.camera.node.forward, this._zoomSpeed * scrollY);
         Manager.Instance().cameraController.camera.node.position = newCameraPos;
     }
@@ -209,11 +235,6 @@ export class CanvasManager extends Component {
      * @param event 
      */
     createVertexAtMouse(event: EventMouse) {
-        // const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
-       
-        // const r = new geometry.Ray();
-        // Vec3.copy(r.o, ray.o);
-        // Vec3.copy(r.d, ray.d);
         let ray = new geometry.Ray();
         Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
         if (PhysicsSystem.instance.raycastClosest(ray)) {
@@ -229,14 +250,10 @@ export class CanvasManager extends Component {
     }
 
     /**
-     * 
+     * when click and choose vertex
      * @param event left click(0, 1, 2 times)
      */
-    chooseVertexAtMouse(event:EventMouse){
-        // const ray = Manager.Instance().cameraController.camera.screenPointToRay(event.getUILocation().x, event.getUILocation().y);
-        // const r = new geometry.Ray();
-        // Vec3.copy(r.o, ray.o);
-        // Vec3.copy(r.d, ray.d);
+    chooseVertexOrEdgeAtMouse(event:EventMouse){
         
         let ray = new geometry.Ray();
         Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
@@ -245,7 +262,7 @@ export class CanvasManager extends Component {
             const result = PhysicsSystem.instance.raycastClosestResult;
             
             if (result.collider.node.getComponent(Vertex)) {
-                
+                Manager.Instance().edgeManager.returnFocusToNormalEdge();
                 if(this.leftClickCount == 0){
                     this.leftClickCount ++;
                     this.centralVertex = result.collider.node;
@@ -275,6 +292,60 @@ export class CanvasManager extends Component {
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
                 }
             }
+            else if(result.collider.node.getComponent(Edge)){
+                Manager.Instance().vertexManager.returnFocusToNormalVertex();
+                Manager.Instance().edgeManager.returnFocusToNormalEdge();
+                Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
+                Manager.Instance().edgeManager.chooseNormalEdge(result.collider.node); 
+                Manager.Instance().edgeManager.chosenEdgeNode.getComponent(Edge).showEdgeDetails();
+            }
+        }
+        
+        else{
+            this.leftClickCount = 0;
+            Manager.Instance().edgeManager.returnFocusToNormalEdge();
+            // Manager.Instance().vertexManager.returnFocusToNormalVertex();
+        } 
+    }
+
+    /**
+     * when click and choose edge
+     * @param event 
+     */
+    chooseEdgeAtMouse(event:EventMouse){
+        let ray = new geometry.Ray();
+        Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
+        if (PhysicsSystem.instance.raycastClosest(ray)) {
+            
+            const result = PhysicsSystem.instance.raycastClosestResult;
+            
+            if (result.collider.node.getComponent(Edge)) {
+                console.log("choose edge!")
+                if(this.leftClickCount == 0){
+                    this.leftClickCount ++;
+                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
+                    Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
+                    Manager.Instance().edgeManager.chooseNormalEdge(result.collider.node); // change the chosen edge
+                    
+                    
+                }  
+                else if(this.leftClickCount == 1 && Manager.Instance().edgeManager.chosenEdgeNode == result.collider.node) {
+                    
+                    Manager.Instance().edgeManager.chosenEdgeNode.getComponent(Edge).showEdgeDetails();
+
+                    this.leftClickCount = 0;
+                }
+                else if(this.leftClickCount == 1 && Manager.Instance().edgeManager.chosenEdgeNode != result.collider.node){
+                    // Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
+                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
+                    Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
+                    Manager.Instance().edgeManager.chooseNormalEdge(result.collider.node);
+                }  
+                else{
+                    this.leftClickCount = 0;
+                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
+                }
+            }
         }
         else{
             this.leftClickCount = 0;
@@ -282,12 +353,17 @@ export class CanvasManager extends Component {
         } 
     }
 
+    /**
+     * clean the canvas
+     */
     cleanCanvas(){
-        
+        // clean vertices
         Manager.Instance().vertexManager.destroyAllChildren();
+        // clean edges
         Manager.Instance().edgeManager.destroyAllEdges();
+        //reset camera
         Manager.Instance().cameraController.resetPosition();
-        // reset UI
+        // clean UI
         Manager.Instance().UIManager.isNodeInfoEnable = false;
         Manager.Instance().UIManager.nodeInfoBar.active = false;
     }

@@ -54,17 +54,17 @@
   ],
   "_props": [
     {
-      "mainColor": {
+      "occlusion": 0.56,
+      "roughness": 0.681,
+      "metallic": 0.705,
+      "specularIntensity": 0.626,
+      "emissive": {
         "__type__": "cc.Color",
-        "r": 61,
-        "g": 54,
-        "b": 245,
+        "r": 255,
+        "g": 255,
+        "b": 255,
         "a": 255
-      },
-      "occlusion": 0.323,
-      "roughness": 0.547,
-      "metallic": 0.353,
-      "specularIntensity": 0.626
+      }
     },
     {},
     {},
