@@ -4,11 +4,11 @@ const { ccclass, property } = _decorator;
 @ccclass('RelationManager')
 export class RelationManager extends Component {
 
-    @property({ type:[CCString] })
-    vertexIDBox:[String];
+    @property({ type:Set })
+    vertexIDBox:Set<string> = new Set<string>();
 
-    @property({ type:[CCString]})
-    edgeNameBox:[String];
+    @property({ type:Set})
+    edgeNameBox:Set<string> = new Set<string>();
 
     @property(CCInteger)
     vertexCount:number = 0;
@@ -16,29 +16,59 @@ export class RelationManager extends Component {
     @property(CCInteger)
     edgeCount:number = 0;
 
+    protected onLoad(): void {
+        this.vertexIDBox = new Set<string>();
+        this.edgeNameBox = new Set<string>();
+
+    }
     /**
      * set the vertexID self-defined
      * @param s 
      */
-    public setVertexID(...args: String[]){ 
+    public setVertexID(...args: string[]){ 
+        
         if(args.length == 1){
             let [s] = args;
-            this.vertexIDBox.push(s);
+            this.vertexIDBox.add(s);
             this.vertexCount++;
             return s;
         }
         else{
+            this.vertexCount++;
+            this.vertexIDBox.add( "" + this.vertexCount);
             return "" + this.vertexCount;
         }
+        
+        
         // return this.vertexIDBox;
+        
+    }
+
+    /**
+     * pop the last element from Box
+     */
+    public removeVertex(vid: string){
+
+        if(this.vertexIDBox.has(vid)){
+            this.vertexIDBox.delete(vid);
+            this.vertexCount--;
+        }
+
+    }
+
+    public removeEdge(edgeName){
+        if(this.edgeNameBox.has(edgeName)){
+            this.edgeNameBox.delete(edgeName);
+            this.edgeCount--;
+        }
+
     }
 
 
-
-    public setEdgeName(...args:String[]){
+    public setEdgeName(...args:string[]){
         if(args.length == 1){
             let [s] = args;
-            this.edgeNameBox.push(s);
+            this.edgeNameBox.add(s);
             this.edgeCount++;
             return s;
         }
@@ -48,8 +78,10 @@ export class RelationManager extends Component {
     }
 
     public resetVertexAndEdgeBox(){
-        this.vertexIDBox = [""];
-        this.edgeNameBox = [""];
+        // console.log(this.vertexIDBox)
+        this.vertexIDBox.clear();
+        // this.vertexIDBox = new Set<string>();
+        this.edgeNameBox.clear();
         this.vertexCount = 0;
         this.edgeCount = 0;
     }

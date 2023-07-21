@@ -3,6 +3,9 @@ const { ccclass, property } = _decorator;
 import { Edge } from './Edge';
 import { Vertex } from './Vertex';
 
+/**
+ * data structure contain edges, vertices and thier properties
+ */
 @ccclass('TableData')
 export class TableData extends Component {
     edges: Array<Edge>;

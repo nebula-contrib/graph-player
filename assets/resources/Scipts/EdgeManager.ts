@@ -19,31 +19,28 @@ export class EdgeManager extends Component {
      * like{'0':[0,2]}
      * means 0 is the id of one edge, and 0 is its startVertex id, 2 is its endVeretex id
      */
-    public edgeIdDic: { [key: string]: any } = {};
+    public edgeVertexDic: { [key: string]: any } = {};
 
     /**
      *  create Edge
      * @param startNode 
      * @param endNode 
      */
-    createOneEdge(startNode: Node, endNode: Node):Node {
+    createEdgeWithStartAndEnd(startNode: Node, endNode: Node):Node {
         const edgeNode = instantiate(this.edgePrefab);
         //edgeNode.parent = startNode;
         edgeNode.setParent(Manager.Instance().edgeManager.node);
         let edge = edgeNode.getComponent(Edge);
 
-        edge.createEdge(startNode,endNode);
-        if(!Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""]) 
-        {
-            Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""] = [];
-        }
-        Manager.Instance().vertexManager.vertexIdDic[startNode.getComponent(Vertex).vid+""].push(edge.getEdgeName());
-        this.edgeIdDic[edge.getEdgeName()+''] = [edge.srcID, edge.dstID];
-        // console.log("vertex dic:", Manager.Instance().vertexManager.vertexIdDic);
+        edge.createEdgeWithStartAndEnd(startNode,endNode);
+
+
+        // console.log("vertex dic:", Manager.Instance().vertexManager.vertexEdgeDic);
         return edgeNode;
        
         
     }
+
 
     chooseNormalEdge(edgeNode:Node){
         edgeNode.getComponent(Edge).changeEdgeMaterialToFocused();

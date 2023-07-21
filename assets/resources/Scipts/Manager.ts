@@ -6,6 +6,7 @@ import { EdgeManager } from './EdgeManager';
 import { RelationManager } from './RelationManager';
 import { UIManager } from './UIManager';
 import { JSONReader } from './JSONReader';
+import { LayoutManager } from './LayoutManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('Manager')
@@ -33,6 +34,9 @@ export class Manager extends Component {
     @property(JSONReader)
     public JSONReader:JSONReader;
 
+    @property(LayoutManager)
+    public layoutManager:LayoutManager;
+
     static instance:Manager = new Manager();
 
     protected onLoad(): void {
@@ -44,9 +48,10 @@ export class Manager extends Component {
         Manager.instance.relationManager = this.node.getChildByName('RelationManager').getComponent(RelationManager);
         Manager.instance.UIManager = this.node.getChildByName('Canvas').getChildByName('UIManager').getComponent(UIManager);
         Manager.instance.JSONReader = this.node.getChildByName('JSONReader').getComponent(JSONReader);
+        Manager.instance.layoutManager = this.node.getChildByName('LayoutManager').getComponent(LayoutManager);
         Manager.Instance();
 
-        console.log("find: ", Manager.Instance().JSONReader)
+        console.log("find: ", Manager.instance.layoutManager);
     }
     
     

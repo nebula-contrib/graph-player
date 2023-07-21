@@ -183,7 +183,10 @@
     "__prefab": {
       "__id__": 8
     },
-    "vertexId": -1,
+    "vid": "",
+    "properties": {},
+    "type": "vertex",
+    "edgesSetOfVertex": [],
     "materialCode": 2,
     "_id": ""
   },

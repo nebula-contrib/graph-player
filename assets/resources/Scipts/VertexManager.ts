@@ -21,25 +21,36 @@ export class VertexManager extends Component {
     @property(Node)
     chosenVertex:Node = null;
 
-
     @property({ type: Prefab })
     public vertexPrefab: Prefab = null;
 
     @property
     public vertexRadius;
 
-
-    public vertexIdDic : {[key:string]:any[]} = {}
+    /**
+     * store the {vertex1:[edge1,edge2], vertex2:[edge3,edge4]}
+     */
+    public vertexEdgeDic : {[key:string]:any[]} = {}
 
     private vertexMaterialCount = 5;
 
+    /**
+     * Container of vertex's tags
+     */
+    public vertexTagSet: Set<string> = new Set<string>();
+
+
+
+
     protected onLoad(): void {
         this.rootNode =  this.node.getChildByName("CentralVertexOfCamera");
+        this.vertexRadius = 30;
+        this.vertexTagSet = new Set<string>();
         
     }
 
     protected start(): void {
-        this.vertexRadius = 25;
+       
         
     }
 
@@ -49,24 +60,23 @@ export class VertexManager extends Component {
      */
     public createStartNode():Node{
         const vertex = instantiate(this.vertexPrefab); // initial the prefab
-
-        vertex.getComponent(Vertex).setVertexId();
-        this.vertexIdDic[vertex.getComponent(Vertex).getVertexID+""] = []; // set id
-
+        vertex.getComponent(Vertex).setVertexId(); //set id
         let initialMaterialCode =  Math.floor(Math.random() * (this.vertexMaterialCount)) + 2; // get the random material code
-        
-        vertex.getComponent(Vertex).setInitialMaterialCode(initialMaterialCode);
-        let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
-        vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
+        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
+        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
+        // let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
+        // vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
 
         const randomDirection = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
-        const randomOffset = randomDirection.clone().multiplyScalar(this.vertexRadius);
+        const randomOffset = randomDirection.clone().multiplyScalar(this.vertexRadius); // set the random position of node
         
         // 
         const position = randomOffset.add(Manager.Instance().vertexManager.currentCentralNode.worldPosition); // set the currentCentralNode as center
         vertex.worldPosition = position;
         // vertex.setParent(node);
         vertex.setParent(Manager.Instance().vertexManager.rootNode);
+        this.vertexEdgeDic[vertex.getComponent(Vertex).getVertexID()] = []; // set id
+        //console.log("create vertexEdgeDic of:",vertex.getComponent(Vertex).getVertexID()+"dic:",this.vertexEdgeDic);
 
         return vertex;
     }
@@ -81,13 +91,13 @@ export class VertexManager extends Component {
         const vertex = instantiate(this.vertexPrefab); // initial the prefab
 
         vertex.getComponent(Vertex).setVertexId();
-        this.vertexIdDic[vertex.getComponent(Vertex).getVertexID+""] = []; // set id
-
+        
         let initialMaterialCode =  Math.floor(Math.random() * (this.vertexMaterialCount)) + 2; // get the random material code
         
-        vertex.getComponent(Vertex).setInitialMaterialCode(initialMaterialCode);
-        let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
-        vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
+        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
+        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
+        // let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
+        // vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
 
         // const randomDirection = new Vec3(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
         // const randomOffset = randomDirection.clone().multiplyScalar(this.vertexRadius);
@@ -99,6 +109,8 @@ export class VertexManager extends Component {
         vertex.worldPosition = position;
         // vertex.setParent(node);
         vertex.setParent(Manager.Instance().vertexManager.rootNode);
+        this.vertexEdgeDic[vertex.getComponent(Vertex).getVertexID()] = []; // set id
+        
 
 
         // vertex.getComponent(Vertex).setVertexId();
@@ -137,6 +149,31 @@ export class VertexManager extends Component {
             if(child.getComponent(Vertex).vid == vertexID) return child;
         }
         return null;
+    }
+
+    /**
+     * add type to Set
+     * @param type 
+     */
+    public addTag(type:string){
+        // vertexTypeSet doesn't have this type
+        if(!this.vertexTagSet.has(type)){
+            this.vertexTagSet.add(type); // add this type
+        }
+    }
+
+    public removeLayoutFlags(){
+        let parents = this.rootNode;
+        for(let child of parents.children){
+            if(child.children != null){
+                // console.log("parent:",parents," child:",child);
+                parents = child;
+
+            }
+            else{
+                child.getComponent(Vertex).isLayouted = false;
+            }
+        }
     }
 
     /**

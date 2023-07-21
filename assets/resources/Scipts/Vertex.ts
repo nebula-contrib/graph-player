@@ -1,22 +1,25 @@
 import { _decorator, CCBoolean, CCInteger, CCString, Component, FixedJoint2D, MeshRenderer, Node } from 'cc';
 import { Manager } from './Manager';
+import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
 
 @ccclass('Vertex')
 export class Vertex extends Component {
 
     @property(CCString)
-    public vid: String = "";
+    public vid: string = "";
     @property([CCString])
-    public tags: [String];
+    public tags: [string];
     @property(Object)
     public properties: Object =  new Object;
     @property(CCString)
-    public type:String = "vertex";
+    public type:string = "vertex";
 
+    @property(Boolean)
+    public isLayouted = false;
 
-    @property({type:[CCInteger]})
-    public edgesSetOfVertex:[number]
+    @property({type:[Edge]})
+    public edgesSetOfVertex:Edge[] = [];
 
     @property(CCBoolean)
     public isClicked:false; // if the vertex is clicked once
@@ -39,12 +42,24 @@ export class Vertex extends Component {
      * @param attribute 
      */
     public setAttribute(attribute: any) {
+        //Manager.Instance().relationManager.popLastVertex();
+        if(this.vid != ""){
+            Manager.Instance().relationManager.removeVertex(this.vid);
+            
+        }
+         //Manager.Instance().relationManager.popLastVertex();
+
         for (let key in attribute) {
             if (this.hasOwnProperty(key)) {
                 this[key] = attribute[key];
             }
         }
         Manager.Instance().relationManager.setVertexID(this.vid);
+        for(let tag of this.tags){
+            Manager.Instance().vertexManager.addTag(tag);
+        }
+
+       
     }
 
     public setWorldPosition(entry: Node){
@@ -69,11 +84,20 @@ export class Vertex extends Component {
         this.getComponent(MeshRenderer).setMaterial(initialMaterial, 0);
     }
 
-    public setInitialMaterialCode(code:number){
+    public setMaterialCode(code:number){
         this.materialCode = code;
     }
 
-    public getInitialMaterialCode(){
+    /**
+     * change material 
+     * @param materialIndex: the code of changed material 
+     */
+    public changeMaterial(materialIndex:number){
+        let tmpMaterial = this.getComponent(MeshRenderer).getMaterial(materialIndex);
+        this.getComponent(MeshRenderer).setMaterial(tmpMaterial, 0);
+    }
+
+    public getMaterialCode(){
         return this.materialCode;
     }
 
@@ -103,6 +127,11 @@ export class Vertex extends Component {
         this.printNestedJSON(this.properties,"properties");
     }
 
+    public addEdgeInfoOnVertex(edge:Edge){
+        
+        this.edgesSetOfVertex.push(edge);
+        Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getEdgeName());
+    }
     
     private printNestedJSON(obj, parentKey = '') {
         for (let key in obj) {

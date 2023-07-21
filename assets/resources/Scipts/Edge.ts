@@ -8,17 +8,17 @@ const { ccclass, property } = _decorator;
 @ccclass('Edge')
 export class Edge extends Component {
 
-    @property(Vec3)
-    public startPosition:Vec3;
-    @property(Vec3)
-    public endPosition:Vec3;
+    @property(Vertex)
+    public startVertex:Vertex;
+    @property(Vertex)
+    public endVertex:Vertex;
 
     @property(CCString)
-    public edgeName:String = "";
+    public edgeName:string = "";
     @property(CCString)
-    public srcID:String = "";
+    public srcID:string = "";
     @property(CCString)
-    public dstID:String = "";
+    public dstID:string = "";
     @property(Object)
     public properties: Object = new Object();
     @property(CCInteger)
@@ -33,14 +33,16 @@ export class Edge extends Component {
 
     /**
      * create Edge by the start vertex and end vertex
-     * @param startVertex :Node of start
-     * @param endVertex :Node of start
+     * @param startNode:Node of start
+     * @param endNode :Node of start
      */
 
-    public createEdge(startVertex: Node,endVertex: Node){
-        let start = startVertex.worldPosition, end = endVertex.worldPosition;
-        this.startPosition = start;
-        this.endPosition = end;
+    public createEdgeWithStartAndEnd(startNode: Node,endNode: Node){
+        this.startVertex = startNode.getComponent(Vertex);
+        this.endVertex = endNode.getComponent(Vertex);
+        let start = startNode.worldPosition, end = endNode.worldPosition;
+        // this.startPosition = start;
+        // this.endPosition = end;
         const center = (start.clone()).add(end).multiplyScalar(0.5);
         this.node.setWorldPosition(center);
 
@@ -55,8 +57,8 @@ export class Edge extends Component {
         this.node.setRotation(quat);
         
         // set ID
-        this.srcID = startVertex.getComponent(Vertex).getVertexID();
-        this.dstID = endVertex.getComponent(Vertex).getVertexID();
+        this.srcID = this.startVertex.getVertexID();
+        this.dstID = this.endVertex.getVertexID();
         //this.edgeName = Manager.Instance().relationManager.setEdgeName();
 
                 
@@ -77,7 +79,48 @@ export class Edge extends Component {
         // console.log("joint end!")
     }
 
+    /**
+     * change position with startNode and endNode
+     * @param startNode 
+     * @param endNode 
+     */
+    public resetPosition(startNode: Node,endNode: Node){
+        let start = startNode.worldPosition, end = endNode.worldPosition;
+        const center = (start.clone()).add(end).multiplyScalar(0.5);
+        this.node.setWorldPosition(center);
 
+        // set distance
+        const length = Vec3.distance(start,end)/2;
+        this.node.setScale(0.002, length, 0.002 ); 
+
+        const dir = Vec3.subtract(new Vec3(), end, start).normalize();
+        const right = new Vec3(0, 1, 0);
+        const quat = new math.Quat();
+        math.Quat.rotationTo(quat, right, dir);
+        this.node.setRotation(quat);
+    }
+
+    /**
+     * In Edge class
+     * add edge info in individual vertex, veretex manager and edge manager
+     * must call after the edge basic info and vertex basic info be given 
+     * better called after setAttribute()
+     */
+    public addAllThisVertexEdgeInfoOnEdge(){
+        if(Manager.Instance().vertexManager.vertexEdgeDic[this.srcID] == null) 
+        {
+            Manager.Instance().vertexManager.vertexEdgeDic[this.srcID] = [];
+        }
+        if(Manager.Instance().vertexManager.vertexEdgeDic[this.dstID] == null) 
+        {
+            Manager.Instance().vertexManager.vertexEdgeDic[this.dstID] = [];
+        }
+        //Manager.Instance().vertexManager.vertexEdgeDic[this.srcID].push(this.edgeName);
+        this.startVertex.addEdgeInfoOnVertex(this);
+        this.endVertex.addEdgeInfoOnVertex(this);
+
+        Manager.Instance().edgeManager.edgeVertexDic[this.edgeName] = [this.srcID, this.dstID];
+    }
 
     /**
      * get the edge ID
@@ -123,22 +166,22 @@ export class Edge extends Component {
         /**
      * present the details of edge
      */
-        public showEdgeDetails(){
-            // console.log("Edge name:"+this.edgeName);
-            
-            // console.log("src vectex ID:"+this.srcID);
-            Manager.Instance().UIManager.setRichInfo("Edge name:"+this.edgeName);
-            Manager.Instance().UIManager.addRichInfo("src vectex ID:"+this.srcID);
-            Manager.Instance().UIManager.addRichInfo("dst vectex ID:"+this.dstID);
-           
-            // for(let key in this.properties){
-            //     console.log("key:",key);
-            //     console.log(key+": "+this.properties[key]);
-            //     Manager.Instance().UIManager.addRichInfo(key+": "+this.properties[key]);
-            // }
-            this.printNestedJSON(this.properties,"properties");
-            Manager.Instance().UIManager.addRichInfo("rank:"+this.rank);
-        }
+    public showEdgeDetails(){
+        // console.log("Edge name:"+this.edgeName);
+        
+        // console.log("src vectex ID:"+this.srcID);
+        Manager.Instance().UIManager.setRichInfo("Edge name:"+this.edgeName);
+        Manager.Instance().UIManager.addRichInfo("src vectex ID:"+this.srcID);
+        Manager.Instance().UIManager.addRichInfo("dst vectex ID:"+this.dstID);
+       
+        // for(let key in this.properties){
+        //     console.log("key:",key);
+        //     console.log(key+": "+this.properties[key]);
+        //     Manager.Instance().UIManager.addRichInfo(key+": "+this.properties[key]);
+        // }
+        this.printNestedJSON(this.properties,"properties");
+        Manager.Instance().UIManager.addRichInfo("rank:"+this.rank);
+    }
 
     private printNestedJSON(obj, parentKey = '') {
          for (let key in obj) {

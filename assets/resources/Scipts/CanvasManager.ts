@@ -154,7 +154,17 @@ export class CanvasManager extends Component {
      */
     onMouseDown(event: EventMouse){
         /**
-         * press by middle key
+         * mouse up by right key -- create vertex
+         */
+        if (event.getButton() === EventMouse.BUTTON_RIGHT) {
+            
+            Manager.Instance().UIManager.dropDownBarLayout.node.setWorldPosition(event.getLocationX(), event.getLocationY(), 0);
+            Manager.Instance().UIManager.dropDownBarLayout.node.active = true;
+            this.chooseVertexOrEdgeAtMouse(event);
+            //this.createVertexAtMouse(event);
+        } 
+        /**
+         * press by middle key 存在bug：当按下中键拖动视角时，再双击鼠标选中某个节点为中心摄像机的角度会偏移
          */
         if(event.getButton() === EventMouse.BUTTON_MIDDLE){
             
@@ -167,9 +177,10 @@ export class CanvasManager extends Component {
          * press by left key
          */
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
-            this.cameraRorateAroundVertex = true;
-            this.previousMousePositionVec3.set(event.getLocationX(), event.getLocationY(), 0);
             
+            this.chooseVertexOrEdgeAtMouse(event);
+            this.cameraRorateAroundVertex = true;
+            this.previousMousePositionVec3.set(event.getLocationX(), event.getLocationY(), 0);  
             this.previousMousePosition = event.getLocation();
             
             
@@ -182,17 +193,12 @@ export class CanvasManager extends Component {
      * @param event 
      */
     onMouseUp(event: EventMouse) {
-        /**
-         * mouse up by right key
-         */
-        if (event.getButton() === EventMouse.BUTTON_RIGHT) {
-            
-            this.createVertexAtMouse(event);
-        } 
+
+
         /**
          * mouse up by middle key
          */
-        else if (event.getButton() === EventMouse.BUTTON_MIDDLE) {
+        if (event.getButton() === EventMouse.BUTTON_MIDDLE) {
            
             this.cameraMove = false;
             
@@ -201,10 +207,11 @@ export class CanvasManager extends Component {
          * mouse up by left key
          */
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
-            
+            if(Manager.Instance().UIManager.dropDownBarLayout.node.active = true) Manager.Instance().UIManager.dropDownBarLayout.node.active = false;
             this.cameraRorateAroundVertex = false;
-            this.chooseVertexOrEdgeAtMouse(event);
-            //this.chooseEdgeAtMouse(event);
+            
+            
+           
         }
     }
 
@@ -243,7 +250,7 @@ export class CanvasManager extends Component {
            
             if (result.collider.node.getComponent(Vertex)) {
                 let childVertex = Manager.Instance().vertexManager.createNodeAround(result.collider.node);
-                Manager.Instance().edgeManager.createOneEdge(result.collider.node, childVertex);
+                Manager.Instance().edgeManager.createEdgeWithStartAndEnd(result.collider.node, childVertex);
                 
             }
         }
@@ -309,58 +316,15 @@ export class CanvasManager extends Component {
     }
 
     /**
-     * when click and choose edge
-     * @param event 
-     */
-    chooseEdgeAtMouse(event:EventMouse){
-        let ray = new geometry.Ray();
-        Manager.Instance().cameraController.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
-        if (PhysicsSystem.instance.raycastClosest(ray)) {
-            
-            const result = PhysicsSystem.instance.raycastClosestResult;
-            
-            if (result.collider.node.getComponent(Edge)) {
-                console.log("choose edge!")
-                if(this.leftClickCount == 0){
-                    this.leftClickCount ++;
-                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
-                    Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
-                    Manager.Instance().edgeManager.chooseNormalEdge(result.collider.node); // change the chosen edge
-                    
-                    
-                }  
-                else if(this.leftClickCount == 1 && Manager.Instance().edgeManager.chosenEdgeNode == result.collider.node) {
-                    
-                    Manager.Instance().edgeManager.chosenEdgeNode.getComponent(Edge).showEdgeDetails();
-
-                    this.leftClickCount = 0;
-                }
-                else if(this.leftClickCount == 1 && Manager.Instance().edgeManager.chosenEdgeNode != result.collider.node){
-                    // Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
-                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
-                    Manager.Instance().edgeManager.chosenEdgeNode = result.collider.node;
-                    Manager.Instance().edgeManager.chooseNormalEdge(result.collider.node);
-                }  
-                else{
-                    this.leftClickCount = 0;
-                    Manager.Instance().edgeManager.returnFocusToNormalEdge();
-                }
-            }
-        }
-        else{
-            this.leftClickCount = 0;
-            // Manager.Instance().vertexManager.returnFocusToNormalVertex();
-        } 
-    }
-
-    /**
      * clean the canvas
      */
     cleanCanvas(){
         // clean vertices
         Manager.Instance().vertexManager.destroyAllChildren();
+        Manager.Instance().vertexManager.returnFocusToNormalVertex();
         // clean edges
         Manager.Instance().edgeManager.destroyAllEdges();
+        Manager.Instance().edgeManager.returnFocusToNormalEdge();
         //reset camera
         Manager.Instance().cameraController.resetPosition();
         // clean UI
@@ -376,8 +340,10 @@ export class CanvasManager extends Component {
         // reset vertices
         Manager.Instance().vertexManager.destroyAllChildren();
         Manager.Instance().vertexManager.initiateOriginalVertex();
+        Manager.Instance().vertexManager.returnFocusToNormalVertex();
         // reset edges
         Manager.Instance().edgeManager.destroyAllEdges();
+        Manager.Instance().edgeManager.returnFocusToNormalEdge();
         // reset camera
         Manager.Instance().cameraController.resetPosition();
         // reset UI

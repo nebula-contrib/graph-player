@@ -4,6 +4,7 @@ import { TableData } from './TableData';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 import { Edge } from './Edge';
+import { EDITOR } from 'cc/env';
 
 @ccclass('JSONReader')
 export class JSONReader extends Component {
@@ -15,6 +16,34 @@ export class JSONReader extends Component {
 
     public putJSONtoModel(path: any){
 
+      // resources.load('Response/nba', (err: any, res: JsonAsset) => {
+      //   if (err) {
+      //       error(err.message || err);
+      //       return;
+      //   }
+      //   // get data of JSON
+      //   let jsonData = res.json;
+
+ 
+      //   // let tables = jsonData.data[0].data.tables.map((tableData: any) => new TableData(tableData));
+      //   let tables = jsonData.data[0].data.tables;
+       
+      //   this.transTabletoVertexAndEdge(tables);
+      //   // console.log("vertex id DIC: ", Manager.Instance().vertexManager.vertexEdgeDic);
+      //   // console.log("edge id dic: ",Manager.Instance().edgeManager.edgeVertexDic);
+      //   // console.log("set this.vertexIDBox args:",Manager.Instance().relationManager.edgeNameBox," edge:",Manager.Instance().relationManager.edgeNameBox);
+      //   //console.log("tags Set:",Manager.Instance().vertexManager.vertexTagSet);
+
+      //   });
+        this.loadJson((tables) => {
+          this.transTabletoVertexAndEdge(tables);
+          
+          // console.log("set this.vertexIDBox args:",Manager.Instance().relationManager.vertexIDBox);
+        });
+    }
+
+
+    private loadJson(callback){
       resources.load('Response/nba', (err: any, res: JsonAsset) => {
         if (err) {
             error(err.message || err);
@@ -22,15 +51,12 @@ export class JSONReader extends Component {
         }
         // get data of JSON
         let jsonData = res.json;
-
- 
-        // let tables = jsonData.data[0].data.tables.map((tableData: any) => new TableData(tableData));
         let tables = jsonData.data[0].data.tables;
-       
-        this.transTabletoVertexAndEdge(tables);
+        callback(tables);
+        
 
 
-        })
+        });
     }
 
     public transTabletoVertexAndEdge(tables:any){
@@ -57,8 +83,9 @@ export class JSONReader extends Component {
               startNode.getComponent(Vertex).setAttribute(startVertex);
               endNode = Manager.Instance().vertexManager.createNodeAround(startNode);
               endNode.getComponent(Vertex).setAttribute(endVertex);
-              edgeNode = Manager.Instance().edgeManager.createOneEdge(startNode, endNode);
+              edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
               edgeNode.getComponent(Edge).setAttribute(edge);
+              edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
           }
 
           // start vertex exsited, create end vertex and edge
@@ -67,9 +94,9 @@ export class JSONReader extends Component {
               startNode = Manager.Instance().vertexManager.getVertexNodeByVID(startVertex.vid);
               endNode = Manager.Instance().vertexManager.createNodeAround(startNode);
               endNode.getComponent(Vertex).setAttribute(endVertex);
-              edgeNode = Manager.Instance().edgeManager.createOneEdge(startNode, endNode);
+              edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
               edgeNode.getComponent(Edge).setAttribute(edge);
-              
+              edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
 
           }
           // end vertex exsited, create start vertex and edge
@@ -78,9 +105,9 @@ export class JSONReader extends Component {
             endNode = Manager.Instance().vertexManager.getVertexNodeByVID(endVertex.vid);
             startNode = Manager.Instance().vertexManager.createNodeAround(endNode);
             startNode.getComponent(Vertex).setAttribute(startVertex);
-            edgeNode = Manager.Instance().edgeManager.createOneEdge(startNode, endNode);
+            edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
             edgeNode.getComponent(Edge).setAttribute(edge);
-           
+            edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
 
           }
           // both start and end vertex exsited, only create edge
@@ -88,11 +115,12 @@ export class JSONReader extends Component {
             
             startNode = Manager.Instance().vertexManager.getVertexNodeByVID(startVertex.vid);
             endNode = Manager.Instance().vertexManager.getVertexNodeByVID(endVertex.vid);
-            edgeNode = Manager.Instance().edgeManager.createOneEdge(startNode, endNode);
+            edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
             edgeNode.getComponent(Edge).setAttribute(edge);
-            
+            edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
 
           }
+          
         }
         /*
         for(let j = 0; j < edges.length; j++) {
