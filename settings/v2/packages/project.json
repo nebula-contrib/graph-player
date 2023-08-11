@@ -1,0 +1,25 @@
+{
+  "__version__": "1.0.4",
+  "physics": {
+    "collisionGroups": [
+      {
+        "index": 1,
+        "name": "MOUSE"
+      },
+      {
+        "index": 2,
+        "name": "EDGE"
+      },
+      {
+        "index": 3,
+        "name": "VERTEX"
+      }
+    ],
+    "collisionMatrix": {
+      "0": 3,
+      "1": 15,
+      "2": 2,
+      "3": 2
+    }
+  }
+}

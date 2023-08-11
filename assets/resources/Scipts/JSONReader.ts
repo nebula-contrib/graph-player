@@ -14,7 +14,7 @@ export class JSONReader extends Component {
 
 
 
-    public putJSONtoModel(path: any){
+    public putJSONtoModel(filename: any){
 
       // resources.load('Response/nba', (err: any, res: JsonAsset) => {
       //   if (err) {
@@ -35,7 +35,8 @@ export class JSONReader extends Component {
       //   //console.log("tags Set:",Manager.Instance().vertexManager.vertexTagSet);
 
       //   });
-        this.loadJson((tables) => {
+        let path = 'Response/' + filename;
+        this.loadJson(path, (tables) => {
           this.transTabletoVertexAndEdge(tables);
           
           // console.log("set this.vertexIDBox args:",Manager.Instance().relationManager.vertexIDBox);
@@ -43,8 +44,10 @@ export class JSONReader extends Component {
     }
 
 
-    private loadJson(callback){
-      resources.load('Response/nba', (err: any, res: JsonAsset) => {
+    // private loadJson(callback){
+      // resources.load('Response/sns', (err: any, res: JsonAsset) => {
+    private loadJson(path: string, callback: (tables: any) => void) {
+        resources.load(path, (err: any, res: JsonAsset) => {
         if (err) {
             error(err.message || err);
             return;

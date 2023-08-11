@@ -8,7 +8,7 @@ export class RelationManager extends Component {
     vertexIDBox:Set<string> = new Set<string>();
 
     @property({ type:Set})
-    edgeNameBox:Set<string> = new Set<string>();
+    edgeIDBox:Set<string> = new Set<string>();
 
     @property(CCInteger)
     vertexCount:number = 0;
@@ -18,7 +18,7 @@ export class RelationManager extends Component {
 
     protected onLoad(): void {
         this.vertexIDBox = new Set<string>();
-        this.edgeNameBox = new Set<string>();
+        this.edgeIDBox = new Set<string>();
 
     }
     /**
@@ -56,19 +56,19 @@ export class RelationManager extends Component {
 
     }
 
-    public removeEdge(edgeName){
-        if(this.edgeNameBox.has(edgeName)){
-            this.edgeNameBox.delete(edgeName);
+    public removeEdge(edgeID){
+        if(this.edgeIDBox.has(edgeID)){
+            this.edgeIDBox.delete(edgeID);
             this.edgeCount--;
         }
 
     }
 
 
-    public setEdgeName(...args:string[]){
+    public setEdgeID(...args:string[]){
         if(args.length == 1){
             let [s] = args;
-            this.edgeNameBox.add(s);
+            this.edgeIDBox.add(s);
             this.edgeCount++;
             return s;
         }
@@ -81,7 +81,7 @@ export class RelationManager extends Component {
         // console.log(this.vertexIDBox)
         this.vertexIDBox.clear();
         // this.vertexIDBox = new Set<string>();
-        this.edgeNameBox.clear();
+        this.edgeIDBox.clear();
         this.vertexCount = 0;
         this.edgeCount = 0;
     }
@@ -93,9 +93,9 @@ export class RelationManager extends Component {
         return false;
     }
 
-    public existEdge(edgeName:String):boolean{
-        for(let entry of this.edgeNameBox){
-            if(edgeName == entry) return true;
+    public existEdge(edgeID:String):boolean{
+        for(let entry of this.edgeIDBox){
+            if(edgeID == entry) return true;
         }
         return false;
     }

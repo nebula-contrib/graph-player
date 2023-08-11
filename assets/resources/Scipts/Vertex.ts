@@ -130,7 +130,7 @@ export class Vertex extends Component {
     public addEdgeInfoOnVertex(edge:Edge){
         
         this.edgesSetOfVertex.push(edge);
-        Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getEdgeName());
+        Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getedgeID());
     }
     
     private printNestedJSON(obj, parentKey = '') {

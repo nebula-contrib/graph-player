@@ -1,6 +1,7 @@
 import { _decorator, Component, Prefab, instantiate, Node, Vec3,Quat, MeshRenderer } from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
+import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
 
 @ccclass('VertexManager')
@@ -163,17 +164,34 @@ export class VertexManager extends Component {
     }
 
     public removeLayoutFlags(){
-        let parents = this.rootNode;
-        for(let child of parents.children){
-            if(child.children != null){
-                // console.log("parent:",parents," child:",child);
-                parents = child;
+        
+        this.traverseNodesChildren(this.rootNode)
+        //let parents = this.rootNode;
+        // for(let child of parents.children){
+        //     if(child.children != null){
+        //         console.log("parent:",parents," child:",child);
+        //         parents = child;
 
-            }
-            else{
-                child.getComponent(Vertex).isLayouted = false;
-            }
+        //     }
+        //     else{
+        //         console.log("node name:",child.name);
+        //         child.getComponent(Vertex).isLayouted = false;
+                
+        //     }
+        // }
+    }
+
+    private traverseNodesChildren(node: Node){
+        
+        if(node.getComponent(Vertex) != null){
+            node.getComponent(Vertex).isLayouted = false;
         }
+        if(node.children == null) return;
+        for(let child of node.children){
+            this.traverseNodesChildren(child);
+        }
+
+
     }
 
     /**

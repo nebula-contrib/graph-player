@@ -186,6 +186,7 @@
     "vid": "",
     "properties": {},
     "type": "vertex",
+    "isLayouted": false,
     "edgesSetOfVertex": [],
     "materialCode": 2,
     "_id": ""
@@ -205,7 +206,7 @@
     "__prefab": {
       "__id__": 10
     },
-    "_group": 1,
+    "_group": 8,
     "_type": 1,
     "_mass": 0.0001,
     "_allowSleep": true,

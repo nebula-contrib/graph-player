@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, Vec3,math, HingeConstraint, CCString, CCInteger,MeshRenderer } from 'cc';
+import { _decorator, Component, Node, Vec3,math, HingeConstraint, CCString, CCInteger,MeshRenderer, Collider, PhysicsGroup } from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
+import { PHY_GROUP } from './Constant';
 
 
 const { ccclass, property } = _decorator;
@@ -16,6 +17,8 @@ export class Edge extends Component {
     @property(CCString)
     public edgeName:string = "";
     @property(CCString)
+    public edgeID:string = "";
+    @property(CCString)
     public srcID:string = "";
     @property(CCString)
     public dstID:string = "";
@@ -25,6 +28,8 @@ export class Edge extends Component {
     public rank: number = 0;
     @property(CCString)
     public type: String = "edge";
+    @property(Boolean)
+    public isLayouted:boolean = false;
 
     // @property(HingeConstraint)
     // public startJoint = new HingeConstraint();
@@ -36,7 +41,6 @@ export class Edge extends Component {
      * @param startNode:Node of start
      * @param endNode :Node of start
      */
-
     public createEdgeWithStartAndEnd(startNode: Node,endNode: Node){
         this.startVertex = startNode.getComponent(Vertex);
         this.endVertex = endNode.getComponent(Vertex);
@@ -59,7 +63,7 @@ export class Edge extends Component {
         // set ID
         this.srcID = this.startVertex.getVertexID();
         this.dstID = this.endVertex.getVertexID();
-        //this.edgeName = Manager.Instance().relationManager.setEdgeName();
+        //this.edgeID = Manager.Instance().relationManager.setedgeID();
 
                 
         //set joint
@@ -115,19 +119,19 @@ export class Edge extends Component {
         {
             Manager.Instance().vertexManager.vertexEdgeDic[this.dstID] = [];
         }
-        //Manager.Instance().vertexManager.vertexEdgeDic[this.srcID].push(this.edgeName);
+        //Manager.Instance().vertexManager.vertexEdgeDic[this.srcID].push(this.edgeID);
         this.startVertex.addEdgeInfoOnVertex(this);
         this.endVertex.addEdgeInfoOnVertex(this);
 
-        Manager.Instance().edgeManager.edgeVertexDic[this.edgeName] = [this.srcID, this.dstID];
+        Manager.Instance().edgeManager.edgeVertexDic[this.edgeID] = [this.srcID, this.dstID];
     }
 
     /**
      * get the edge ID
      * @returns:String 
      */
-    public getEdgeName(){
-        return this.edgeName;
+    public getedgeID(){
+        return this.edgeID;
     }
 
     /**
@@ -159,15 +163,15 @@ export class Edge extends Component {
                 this[key] = attribute[key];
             }
         }
-        this.edgeName = this.srcID +" "+this.edgeName+" "+this.dstID;
-        Manager.Instance().relationManager.setEdgeName(this.edgeName);
+        this.edgeID = this.srcID +" "+this.edgeName+" "+this.dstID;
+        Manager.Instance().relationManager.setEdgeID(this.edgeID);
     }
 
         /**
      * present the details of edge
      */
     public showEdgeDetails(){
-        // console.log("Edge name:"+this.edgeName);
+        // console.log("Edge name:"+this.edgeID);
         
         // console.log("src vectex ID:"+this.srcID);
         Manager.Instance().UIManager.setRichInfo("Edge name:"+this.edgeName);

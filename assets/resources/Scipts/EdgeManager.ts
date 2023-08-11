@@ -55,6 +55,16 @@ export class EdgeManager extends Component {
         
 
     }
+
+    public removeLayoutFlags(){
+        
+        for(let child of this.node.children){
+            console.log("node name:",child.name);
+            child.getComponent(Edge).isLayouted = false;
+
+        }
+    }
+
     /**
      * destroy all edge by remove the etities and node in list
      */
