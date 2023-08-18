@@ -1,6 +1,7 @@
-import { _decorator, Component, Node, Vec3, Quat, VERSION} from 'cc';
+import { _decorator, Component, Node, Vec3, Quat, VERSION, instantiate, math} from 'cc';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
+import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
 
 @ccclass('LayoutManager')
@@ -11,7 +12,7 @@ export class LayoutManager extends Component {
 
     public tagsNodeRadius = 1.5; // radius between nodes of different tags, like tag 0 node and tag 1 nodes...
 
-    private nodesLayerRadiusInterval = 0;
+    private nodesLayerRadiusInterval = Math.PI * 1/12;
 
     /**
      * re-classify nodes by tags
@@ -121,15 +122,18 @@ export class LayoutManager extends Component {
        
        // if(startVertex.getComponent(Vertex).edgesSetOfVertex.length <= 1) return;
         let edgeNum = startVertex.getComponent(Vertex).edgesSetOfVertex.length;
+        console.log("in vertex: ",startVertex.getComponent(Vertex).vid)
+        
         
         // if(edgeNum < 2) return;
 
         let areAllEdgesLayouted = true;
         for(let edge of startVertex.getComponent(Vertex).edgesSetOfVertex){
+            
             if(edge.isLayouted == false) areAllEdgesLayouted = false;
-            else{
-                console.log("unlayouted edge:",edge.edgeID)
-            }
+            // else{
+            //     console.log("unlayouted edge:",edge.edgeID)
+            // }
         }
         if(areAllEdgesLayouted) return;
         let center = startVertex.worldPosition;
@@ -143,13 +147,14 @@ export class LayoutManager extends Component {
          * calculate initial vector of plant of tag0, rootNode and up-vector
          */
         let initialVector = new Vec3();
-        Vec3.cross(initialVector, normal, Vec3.subtract(new Vec3(), center, Vec3.ZERO));
+        // Vec3.cross(initialVector, normal, Vec3.subtract(new Vec3(), center, Vec3.ZERO));
+        initialVector = Vec3.subtract(new Vec3(), center, Vec3.ZERO);
         Vec3.normalize(initialVector, initialVector);
         //let selfAngleStep = 2 * Math.PI / edgeNum; // rotate on 2 PI
         let selfAngleStep =  Math.PI / edgeNum;// rotate on PI
-        let selfAngle = Math.PI /6 + Math.PI; // initial angle --- PI/6 and it orient outside
-
-
+        let initialAngle =  Math.PI * 3/2;
+        let selfAngle = 0; // initial angle --- PI/6 and it orient outside
+        let derivedNodeCount = 0;
        
         for(let i = 0; i < startVertex.getComponent(Vertex).edgesSetOfVertex.length; i++){
             let edge = startVertex.getComponent(Vertex).edgesSetOfVertex[i];
@@ -162,6 +167,7 @@ export class LayoutManager extends Component {
             let angleBiasBetweenTags = this.getTagIndex(endVertex.getComponent(Vertex).tags[0]) * this.nodesLayerRadiusInterval; // set the bias of each tag, ranked by first index
             let quat = new Quat();
             let tmp_normal = new Vec3();
+           
             let tmp_initialVector = new Vec3();
             Quat.fromAxisAngle(quat, normal, angleBiasBetweenTags);
             // trans normal
@@ -177,25 +183,33 @@ export class LayoutManager extends Component {
 
                 let position = new Vec3();
                 let vectorWithRadius = new Vec3();
+                selfAngle = initialAngle + selfAngleStep * this.getElementIndex(edge, startVertex.getComponent(Vertex).edgesSetOfVertex);
                 Vec3.multiplyScalar(vectorWithRadius,tmp_initialVector.clone(), this.tagsNodeRadius);
+                //console.log("vectorWithRadius:",vectorWithRadius,"tmp_initialVector.clone():",tmp_initialVector.clone(),"this.tagsNodeRadius:",this.tagsNodeRadius)
                 let quaternion = new Quat();
                 Quat.fromAxisAngle(quaternion, tmp_normal,selfAngle);
+            
+
+
                 Vec3.transformQuat(vectorWithRadius, vectorWithRadius, quaternion);
             
                 Vec3.add(position, center.clone(), vectorWithRadius);
                 endVertex.node.setWorldPosition(position);
                 
                 endVertex.isLayouted = true;
+                derivedNodeCount++;
+                
+                // selfAngle += initialAngle + derivedNodeCount * selfAngleStep; // update angle
+                console.log("start:",startVertex.getComponent(Vertex).vid, " :",endVertex.vid," degree:",selfAngle/Math.PI," adding:",selfAngleStep/Math.PI)
+                
                 
             }
             /** 
              * reLayout the edge
              */
+            console.log(startVertex.getComponent(Vertex).vid+" count:",derivedNodeCount, "len:",startVertex.getComponent(Vertex).edgesSetOfVertex.length)
             edge.resetPosition(startVertex, endVertex.node);
             edge.isLayouted = true;
-            
-            selfAngle += selfAngleStep; // update angle
-            
             this.updateEndVertexAndEdge(endVertex.node);
         }
 
@@ -224,7 +238,14 @@ export class LayoutManager extends Component {
      */
     private getTagIndex(tag:string) {
         for(let index = 0; index < this.tagsNodeList.length; index++){
-            if(this.tagsNodeList[index] == tag) return index;
+            if(this.tagsNodeList[index].name == tag) return index;
+        }
+        return -1;
+    }
+
+    private getElementIndex(element:any, list:any[]){
+        for(let index = 0; index < list.length; index++){
+            if(list[index] == element) return index;
         }
         return -1;
     }
@@ -237,4 +258,3 @@ export class LayoutManager extends Component {
         return tagList; 
     }
 }
-

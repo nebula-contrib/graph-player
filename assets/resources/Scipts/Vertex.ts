@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, CCInteger, CCString, Component, FixedJoint2D, MeshRenderer, Node } from 'cc';
+import { _decorator, CCBoolean, CCInteger, CCString, Component, FixedJoint2D, Label, MeshRenderer, Node } from 'cc';
 import { Manager } from './Manager';
 import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
@@ -15,17 +15,25 @@ export class Vertex extends Component {
     @property(CCString)
     public type:string = "vertex";
 
+    @property(Number)
+    public degree:number = 0;
+
     @property(Boolean)
     public isLayouted = false;
 
     @property({type:[Edge]})
     public edgesSetOfVertex:Edge[] = [];
 
+    private idLabel = null;
+
     @property(CCBoolean)
     public isClicked:false; // if the vertex is clicked once
 
     
-
+    protected onLoad(): void {
+        this.idLabel = this.node.getChildByName("ID").getComponent(Label);
+        console.log("id node:",this.idLabel)
+    }
     /**
      * 0 -- current material
      * 1 -- focus material
@@ -58,7 +66,9 @@ export class Vertex extends Component {
         for(let tag of this.tags){
             Manager.Instance().vertexManager.addTag(tag);
         }
-
+        console.log("vid:",this.vid)
+        console.log("idlabel:",this.idLabel)
+        this.idLabel.string = this.vid;
        
     }
 
@@ -67,9 +77,14 @@ export class Vertex extends Component {
     }
 
 
+    /**
+     * for those create vertex without certain vid
+     * then set vid by random 
+     */
     public setVertexId(){
         // console.log("Manager.Instance().relationManager:",Manager.Instance().relationManager);
         this.vid = Manager.Instance().relationManager.setVertexID();
+        //this.idLabel.string = this.vid;
         //console.log("set vertex id:", this.vertexId);
     }
 
@@ -108,29 +123,18 @@ export class Vertex extends Component {
         console.log("show detail Vertex ID:"+this.vid);
         
         console.log("tag:",this.tags);
+        Manager.Instance().UIManager.nodeInfoBar.active = true;
         Manager.Instance().UIManager.setRichInfo("Vertex vid:"+this.vid);
         Manager.Instance().UIManager.addRichInfo("tag:"+this.tags);
-        // for(let key in this.tags){
-        //     console.log(key+": "+this.tags[key]);
-        //     Manager.Instance().UIManager.addRichInfo(key+": "+this.tags[key]);
-        // }
-
-        // for(let key in this.properties){
-        //     if (this.properties.hasOwnProperty(key)) {  
-        //         for(let obj in this.properties[key]){
-        //             console.log(obj + ": "+(this.properties[key])[obj]);
-        //             Manager.Instance().UIManager.addRichInfo(obj + ": "+(this.properties[key])[obj]);
-        //         }
-        //     }
-                
-        // }
+        
         this.printNestedJSON(this.properties,"properties");
+        
     }
 
     public addEdgeInfoOnVertex(edge:Edge){
         
         this.edgesSetOfVertex.push(edge);
-        Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getedgeID());
+        Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getEdgeID());
     }
     
     private printNestedJSON(obj, parentKey = '') {
@@ -143,6 +147,11 @@ export class Vertex extends Component {
           }
         }
    }
+
+   public increaseVertexDegree(){
+    this.degree++;
+    //console.log("vertex:",vid," number:",this.vertexDegreeDic[vid])
+}
 
 }
 

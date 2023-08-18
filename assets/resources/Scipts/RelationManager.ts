@@ -1,5 +1,6 @@
 import { _decorator, CCInteger, CCString, Component, Node } from 'cc';
 const { ccclass, property } = _decorator;
+import { Vertex } from './Vertex';
 
 @ccclass('RelationManager')
 export class RelationManager extends Component {
@@ -10,11 +11,17 @@ export class RelationManager extends Component {
     @property({ type:Set})
     edgeIDBox:Set<string> = new Set<string>();
 
+
     @property(CCInteger)
     vertexCount:number = 0;
 
     @property(CCInteger)
     edgeCount:number = 0;
+
+    
+    public tagDegreeDic: {[key:number]:any[]} = {}; 
+
+    public tagDegreeDicLength = 0;
 
     protected onLoad(): void {
         this.vertexIDBox = new Set<string>();
@@ -100,6 +107,23 @@ export class RelationManager extends Component {
         return false;
     }
 
+    // public increaseVertexDegree(vertex: Vertex){
+    //     let vid = vertex.vid;
+    //     this.vertexDegreeDic[vid]++;
+    //     //console.log("vertex:",vid," number:",this.vertexDegreeDic[vid])
+    // }
 
+
+    /**
+     * increase the degree of tag which the vertex belongs to
+     * @param vertex 
+     */
+    public increaseTagDegree(vertex: Vertex){
+        if(!(vertex.tags[0] in this.tagDegreeDic)){
+            this.tagDegreeDic[vertex.tags[0]] = "";
+            this.tagDegreeDicLength++;
+        }
+        this.tagDegreeDic[vertex.tags[0]]++;
+    }
 }
 

@@ -76,8 +76,9 @@ export class JSONReader extends Component {
 
         let isStartVertexExists = Manager.Instance().relationManager.existVertex(startVertex.vid);
         let isEndVertexExits = Manager.Instance().relationManager.existVertex(endVertex.vid);
-        let isEdgeExits = Manager.Instance().relationManager.existEdge(edge.edgeName);
+        let isEdgeExits = Manager.Instance().relationManager.existEdge(startVertex.vid+" "+edge.edgeName+" "+endVertex.vid);
         // when edge doesn't exist
+       
         if(!isEdgeExits){
           // create vertices ofstart, end and edge
           if(!isStartVertexExists && !isEndVertexExits){
@@ -89,6 +90,11 @@ export class JSONReader extends Component {
               edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
               edgeNode.getComponent(Edge).setAttribute(edge);
               edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
+              /** increase degree */
+              startNode.getComponent(Vertex).increaseVertexDegree();
+              endNode.getComponent(Vertex).increaseVertexDegree();
+              Manager.Instance().relationManager.increaseTagDegree(startNode.getComponent(Vertex));
+              Manager.Instance().relationManager.increaseTagDegree(endNode.getComponent(Vertex));
           }
 
           // start vertex exsited, create end vertex and edge
@@ -100,6 +106,11 @@ export class JSONReader extends Component {
               edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
               edgeNode.getComponent(Edge).setAttribute(edge);
               edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
+              /** increase degree */
+              startNode.getComponent(Vertex).increaseVertexDegree();
+              endNode.getComponent(Vertex).increaseVertexDegree();
+              Manager.Instance().relationManager.increaseTagDegree(startNode.getComponent(Vertex));
+              Manager.Instance().relationManager.increaseTagDegree(endNode.getComponent(Vertex));
 
           }
           // end vertex exsited, create start vertex and edge
@@ -111,9 +122,32 @@ export class JSONReader extends Component {
             edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
             edgeNode.getComponent(Edge).setAttribute(edge);
             edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
+            /** increase degree */
+            startNode.getComponent(Vertex).increaseVertexDegree();
+            endNode.getComponent(Vertex).increaseVertexDegree();
+            Manager.Instance().relationManager.increaseTagDegree(startNode.getComponent(Vertex));
+            Manager.Instance().relationManager.increaseTagDegree(endNode.getComponent(Vertex));
 
           }
           // both start and end vertex exsited, only create edge
+          else if(isStartVertexExists && isEndVertexExits){
+            
+            startNode = Manager.Instance().vertexManager.getVertexNodeByVID(startVertex.vid);
+            endNode = Manager.Instance().vertexManager.getVertexNodeByVID(endVertex.vid);
+            edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
+            edgeNode.getComponent(Edge).setAttribute(edge);
+            edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
+            /** increase degree */
+            startNode.getComponent(Vertex).increaseVertexDegree();
+            endNode.getComponent(Vertex).increaseVertexDegree();
+            Manager.Instance().relationManager.increaseTagDegree(startNode.getComponent(Vertex));
+            Manager.Instance().relationManager.increaseTagDegree(endNode.getComponent(Vertex));
+
+            
+
+          }
+          // no such situation
+          /*
           else if(isStartVertexExists && isEdgeExits){
             
             startNode = Manager.Instance().vertexManager.getVertexNodeByVID(startVertex.vid);
@@ -121,10 +155,12 @@ export class JSONReader extends Component {
             edgeNode = Manager.Instance().edgeManager.createEdgeWithStartAndEnd(startNode, endNode);
             edgeNode.getComponent(Edge).setAttribute(edge);
             edgeNode.getComponent(Edge).addAllThisVertexEdgeInfoOnEdge();
+            console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-          }
+          }*/
           
         }
+
         /*
         for(let j = 0; j < edges.length; j++) {
             let edge = edges[j];
@@ -137,8 +173,10 @@ export class JSONReader extends Component {
             
         }
         */
+
+
     }
     //console.log("relation vertex:",Manager.Instance().relationManager.vertexIDBox);
-}
+  }
 }
 

@@ -42,7 +42,7 @@ export class Manager extends Component {
     protected onLoad(): void {
         physics.PhysicsSystem.instance.enable = true;
         Manager.instance.cameraController = this.node.getChildByName('CameraController').getComponent(CameraController);
-        Manager.instance.vertexManager = this.node.getChildByName('VertexManager').getComponent(VertexManager);
+        Manager.instance.vertexManager = this.node.getChildByName('Canvas').getChildByName('VertexManager').getComponent(VertexManager);
         Manager.instance.canvasManager = this.node.getChildByName('CanvasManager').getComponent(CanvasManager);
         Manager.instance.edgeManager = this.node.getChildByName('EdgeManager').getComponent(EdgeManager);
         Manager.instance.relationManager = this.node.getChildByName('RelationManager').getComponent(RelationManager);

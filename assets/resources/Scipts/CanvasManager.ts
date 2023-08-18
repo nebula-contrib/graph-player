@@ -27,7 +27,8 @@ export class CanvasManager extends Component {
 
     // private isMouseDragging = false;
     private cameraMove = false;
-    private cameraRorateAroundVertex = false;
+    private cameraRotateAroundVertex = false;
+    public cameraRotateOffset: Vec3 = new Vec3(); // the offset on rotating(tranform from Quat to Vec3)
     private previousMousePosition: Vec2 = null;
     private previousMousePositionVec3: Vec3 = new Vec3();
     private dragMoveSpeed = 0.01;
@@ -96,7 +97,7 @@ export class CanvasManager extends Component {
             
         }
 
-        else if(this.cameraRorateAroundVertex){
+        else if(this.cameraRotateAroundVertex){
             /**
              * ---- start rorate nodes and its children --------
              */
@@ -135,6 +136,7 @@ export class CanvasManager extends Component {
 
             // set the camera
             Manager.Instance().cameraController.camera.node.worldPosition = rotatedPosY;
+            this.cameraRotateOffset = rotatedPosY;
             Manager.Instance().cameraController.camera.node.lookAt(targetPos);
 
             // uodate the mouse position
@@ -153,6 +155,7 @@ export class CanvasManager extends Component {
      * @param event 
      */
     onMouseDown(event: EventMouse){
+        
         /**
          * mouse up by right key -- create vertex
          */
@@ -179,7 +182,7 @@ export class CanvasManager extends Component {
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
             
             this.chooseVertexOrEdgeAtMouse(event);
-            this.cameraRorateAroundVertex = true;
+            this.cameraRotateAroundVertex = true;
             this.previousMousePositionVec3.set(event.getLocationX(), event.getLocationY(), 0);  
             this.previousMousePosition = event.getLocation();
             
@@ -193,8 +196,8 @@ export class CanvasManager extends Component {
      * @param event 
      */
     onMouseUp(event: EventMouse) {
-
-
+        // close the tagOrderList
+        Manager.Instance().UIManager.tagOrderChoiceBar.node.active = false;
         /**
          * mouse up by middle key
          */
@@ -208,7 +211,7 @@ export class CanvasManager extends Component {
          */
         else if(event.getButton() === EventMouse.BUTTON_LEFT){
             if(Manager.Instance().UIManager.dropDownBarLayout.node.active = true) Manager.Instance().UIManager.dropDownBarLayout.node.active = false;
-            this.cameraRorateAroundVertex = false;
+            this.cameraRotateAroundVertex = false;
             
             
            
@@ -267,9 +270,12 @@ export class CanvasManager extends Component {
         if (PhysicsSystem.instance.raycastClosest(ray)) {
             
             const result = PhysicsSystem.instance.raycastClosestResult;
-            
+            /**
+             * if choose one vertex
+             */
             if (result.collider.node.getComponent(Vertex)) {
                 Manager.Instance().edgeManager.returnFocusToNormalEdge();
+                
                 if(this.leftClickCount == 0){
                     this.leftClickCount ++;
                     this.centralVertex = result.collider.node;
@@ -279,12 +285,17 @@ export class CanvasManager extends Component {
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
                     Manager.Instance().vertexManager.chosenVertex = result.collider.node;
                     Manager.Instance().vertexManager.chooseOneNormalVertexToFocus(result.collider.node); // change the chosen vertex
+                    
                 }  
+                /**
+                 * mouse click twice 
+                 * camera focus on one vertex
+                 */
                 else if(this.leftClickCount == 1 && Manager.Instance().vertexManager.chosenVertex == result.collider.node) {
                     
                     Manager.Instance().cameraController.focusOn(result.collider.node);
 
-                    Manager.Instance().vertexManager.currentCentralNode.getComponent(Vertex).showVertexDetails();
+                    //Manager.Instance().vertexManager.currentCentralNode.getComponent(Vertex).showVertexDetails();
 
                     this.leftClickCount = 0;
                 }
@@ -298,6 +309,7 @@ export class CanvasManager extends Component {
                     this.leftClickCount = 0;
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
                 }
+                result.collider.node.getComponent(Vertex).showVertexDetails();
             }
             else if(result.collider.node.getComponent(Edge)){
                 Manager.Instance().vertexManager.returnFocusToNormalVertex();

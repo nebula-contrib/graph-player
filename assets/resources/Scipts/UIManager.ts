@@ -1,6 +1,7 @@
-import { _decorator, Component, Node,EventHandler,Button, RichText, Layout, EventMouse,input, Input, Collider, Collider2D, Prefab, instantiate, Label, UITransform, EditBox } from 'cc';
+import { _decorator, Component, Node,EventHandler,Button, RichText, Layout, EventMouse,resources, Prefab, instantiate, Label, UITransform, EditBox } from 'cc';
 const { ccclass, property } = _decorator;
 import { Manager } from './Manager';
+import { Vertex } from './Vertex';
 
 @ccclass('UIManager')
 export class UIManager extends Component {
@@ -39,13 +40,18 @@ export class UIManager extends Component {
     public dropDownBarLayout:Layout;
 
     @property(Layout)
-    private tagOrderChoiceBar:Layout;
+    public tagOrderChoiceBar:Layout;
 
     @property(Prefab)
     private tagOrderChoiceBtnPrefab:Prefab 
 
     @property({type: [Node]})
     public tagOrderChoiceBtnList:Array<Node>;
+
+    private vertexIDLabelManager: Node;
+
+    private vertexIDLabelPrefab: Prefab;
+
 
 
 
@@ -85,12 +91,12 @@ export class UIManager extends Component {
        
         
         if(Manager.Instance().vertexManager.chosenVertex != null && Manager.Instance().edgeManager.chosenEdgeNode == null){
-            console.log("operate on vertex!");
+            
             let childVertex = Manager.Instance().vertexManager.createNodeAround(Manager.Instance().vertexManager.chosenVertex);
             Manager.Instance().edgeManager.createEdgeWithStartAndEnd(Manager.Instance().vertexManager.chosenVertex, childVertex);
         }
         else if(Manager.Instance().vertexManager.chosenVertex == null && Manager.Instance().edgeManager.chosenEdgeNode != null){
-            console.log("operate on edge!");
+            
             /**
              * To-do create on edge
              */
@@ -99,17 +105,18 @@ export class UIManager extends Component {
         this.dropDownBarLayout.node.active = false;
     }
 
-    public changeLayout(event:Event, finalTagOrder: string[]){
-
+    public changeLayout(event:Event, finalTagOrder: string){
+        let finalTagOrderList = finalTagOrder.split(",");
+        console.log("finalTagOrder:",finalTagOrder+"finalTagOrderList:",finalTagOrderList)
         this.tagOrderChoiceBar.node.active = false;
         this.dropDownBarLayout.node.active = false;
-       console.log("in change layout")
+        
         Manager.Instance().vertexManager.removeLayoutFlags();
-        console.log("1")
+        
         Manager.Instance().edgeManager.removeLayoutFlags();
-        console.log("2")
+        
         Manager.Instance().layoutManager.classifyNodeByTag();
-        Manager.Instance().layoutManager.adjustOrderOfTags(finalTagOrder);
+        Manager.Instance().layoutManager.adjustOrderOfTags(finalTagOrderList);
         // Manager.Instance().layoutManager.adjustOrderOfTags(["team","player"]);
         Manager.Instance().layoutManager.materialReallocated();
         Manager.Instance().layoutManager.reLayoutByTags();
@@ -123,6 +130,16 @@ export class UIManager extends Component {
             // input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this); // set the progation prevented
             // input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
             // this.tagOrderChoiceBtnList = new Array<Node>();
+                    // 使用cc.resources.load来加载预制体
+        resources.load("Prefab/VertexIDLabel" , Prefab, (err, prefab) => {
+            if (err) {
+                console.error("Failed to load prefab:", err);
+                return;
+            }
+            else{
+                this.vertexIDLabelPrefab = prefab;
+            }
+        });
     }
 
     start () {
@@ -162,25 +179,27 @@ export class UIManager extends Component {
         // layoutEventHandler.component = "UIManager";
         // layoutEventHandler.handler = "changeLayout";
         //this.layoutBtn.clickEvents.push(layoutEventHandler);
-        console.log("layout btn",this.layoutBtn)
+        
         this.tagOrderChoiceBar = this.layoutBtn.node.getChildByName("TagOrderChoiceBar").getComponent(Layout);
-        console.log("tag order:",this.tagOrderChoiceBar)
+        
         this.tagOrderChoiceBar.node.active = false;
         /**
          * listen on layout btn
          */
-        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_MOVE, this.onMouseEnterTagOrderChoiceBar, this); // listen on mouse enter in tagOrderChoiceBar 
-        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,(event:EventMouse) => {
-            this.isEnteredTagOrderChoiceBar = false;
-        }, this);
 
 
-        this.layoutBtn.node.on(Node.EventType.MOUSE_ENTER, this.onLayoutBtnMouseEnter.bind(this, layoutEventHandler),this);
+        this.layoutBtn.node.on(Node.EventType.MOUSE_ENTER, this.chooseLayoutBtn.bind(this, layoutEventHandler),this);
         
         this.layoutBtn.node.on(Node.EventType.MOUSE_LEAVE, this.onLayoutBtnMouseLeave,this);
-
   
+        //this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_ENTER, this.onMouseEnterTagOrderChoiceBar, this);
+        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_MOVE, this.onMouseEnterTagOrderChoiceBar, this); // listen on mouse enter in tagOrderChoiceBar 
+        // this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,(event:EventMouse) => {
+        //     this.isEnteredTagOrderChoiceBar = false;
+        // }, this);
 
+        /** close by click mouse on CanvasMAnager.onMouseUp() */
+        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,this.onMouseLeaveTagOrderChoiceBar, this);
 
         /**
          * initial layout choice bar
@@ -210,9 +229,17 @@ export class UIManager extends Component {
 
 
     private onMouseEnterTagOrderChoiceBar(event: EventMouse){
+        console.log("dont leave but in")
         this.isEnteredTagOrderChoiceBar = true;
+       
     }
 
+    private onMouseLeaveTagOrderChoiceBar(event:EventMouse){
+        console.log("leave tag order")
+        this.isEnteredTagOrderChoiceBar = false;
+        
+        this.tagOrderChoiceBar.node.active = false;
+    }
     /**
      * set the info
      * @param info: info of vertex and edge
@@ -252,46 +279,51 @@ export class UIManager extends Component {
     /**
      * show the order of tags
      */
-    private onLayoutBtnMouseEnter(){
+    private chooseLayoutBtn(){
         
-        
-        this.cleanTagOrderChoices();
-        
-        /** 
-         * read the possible layout order 
-         */
-        let tagList = Array.from(Manager.Instance().vertexManager.vertexTagSet);
-        if(tagList.length == 0) return;
-        let tagOrderList = [];
-        this.generatePermutations(tagList,[],tagOrderList);
-        let tagOrderNum = tagOrderList.length;
-        // let this.tagOrderChoiceBtnList = []
-        this.tagOrderChoiceBar.getComponent(UITransform).setContentSize(this.BtnLength, (tagOrderNum) * this.BtnWidth);
-        this.tagOrderChoiceBtnList = new Array<Node>(tagOrderNum);
-        
-        
-        /**
-         * show the layout order choices 
-        */
-       try{
-            for(let i = 0; i < tagOrderList.length; i++){
-                const tagOrderBtn = instantiate(this.tagOrderChoiceBtnPrefab);
-
-                tagOrderBtn.setParent(this.tagOrderChoiceBar.node);
-                tagOrderBtn.setPosition(0, i * this.BtnWidth, 0);
-                tagOrderBtn.getChildByName('Label').getComponent(Label).string = tagOrderList[i]; // set the string of tag order button
-                console.log("tag node list i:",tagOrderList[i]);
-                const tagOrderChoiceHandler = new EventHandler();
-                tagOrderChoiceHandler.target = this.node;
-                tagOrderChoiceHandler.component = "UIManager";
-                tagOrderChoiceHandler.handler = "changeLayout";
-                tagOrderChoiceHandler.customEventData = tagOrderList[i];
-                // this.tagOrderChoiceBtnList.push(tagOrderBtn);
-
-                tagOrderBtn.getComponent(Button).clickEvents.push(tagOrderChoiceHandler);
-
+        try{
+            this.cleanTagOrderChoices();
+            
+            /** 
+             * read the possible layout order 
+             */
+            let tagList = Array.from(Manager.Instance().vertexManager.vertexTagSet);
+            if(tagList.length == 0) return;
+            /**
+             * order of
+             */
+            // let tagOrderList = [];
+            // this.generatePermutations(tagList,[],tagOrderList);
+            let tagOrderList = Object.keys(Manager.Instance().relationManager.tagDegreeDic);
+            let tagOrderNum = tagOrderList.length;
+            // let this.tagOrderChoiceBtnList = []
+            this.tagOrderChoiceBar.getComponent(UITransform).setContentSize(this.BtnLength, (tagOrderNum) * this.BtnWidth);
+            this.tagOrderChoiceBtnList = new Array<Node>(tagOrderNum);
+            
+            
+            /**
+             * show the layout order choices 
+            */
+            
+                for(let i = 0; i < tagOrderList.length; i++){
+                    const tagOrderBtn = instantiate(this.tagOrderChoiceBtnPrefab);
                 
-            }
+                    tagOrderBtn.setParent(this.tagOrderChoiceBar.node);
+                    tagOrderBtn.setPosition(0, i * this.BtnWidth, 0);
+                    tagOrderBtn.getChildByName('Label').getComponent(Label).string = tagOrderList[i]; // set the string of tag order button
+                    
+                    const tagOrderChoiceHandler = new EventHandler();
+                    tagOrderChoiceHandler.target = this.node;
+                    tagOrderChoiceHandler.component = "UIManager";
+                    tagOrderChoiceHandler.handler = "changeLayout";
+                    console.log("chooseLayout btn:",this.getPermutationByTagDegree(tagOrderList[i]).join(","))
+                    tagOrderChoiceHandler.customEventData = this.getPermutationByTagDegree(tagOrderList[i]).join(",");
+                    // this.tagOrderChoiceBtnList.push(tagOrderBtn);
+                
+                    tagOrderBtn.getComponent(Button).clickEvents.push(tagOrderChoiceHandler);
+                
+                    
+                }
 
        }
        catch(error){
@@ -301,9 +333,37 @@ export class UIManager extends Component {
 
     }
 
+    private getPermutationByTagDegree(firstElement: string){
+        let tagOrderList = new Array<string>();
+        let dic = Manager.Instance().relationManager.tagDegreeDic;
+        let arr = Object.keys(Manager.Instance().relationManager.tagDegreeDic);
+        
+        tagOrderList.push(firstElement);
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i] == firstElement) continue;
+             for(let j = 0; j < arr.length - 1; j++)
+             {
+                const key1 = arr[i];
+                const key2 = arr[j];
+                if(dic[key1] > dic[key2]){
+                    [arr[i], arr[j]] = [arr[j],arr[i]];
+                }
+             }
+        }
+        
+        
+        for(let tag of arr){
+            if(tag != firstElement)
+                tagOrderList.push(tag);
+            
+        }
+        console.log("tagOrderList:",tagOrderList)
+        return tagOrderList;
+    }
+
 
     /**
-     * get the permutation of tags
+     * get the all the permutation of tags
      * @param input 
      * @param current 
      * @param result 
@@ -330,7 +390,7 @@ export class UIManager extends Component {
      */
     private onLayoutBtnMouseLeave(event:EventMouse){
         let mouseIn = false;
-        
+        console.log("try to leave")
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -338,12 +398,12 @@ export class UIManager extends Component {
 
         // set new timer to check if mouse enter tagOrderChoiceBar blockB
         this.timer = setTimeout(() => {
-            if (!this.isEnteredTagOrderChoiceBar && !mouseIn) {
+            if (!this.isEnteredTagOrderChoiceBar) {
                 console.log("start leave")
                 this.tagOrderChoiceBar.node.active = false;
             }
         }, 0.3);
-        mouseIn = false;
+        
     }
 
     // private onTagOrderChoiceBtnClick(tagOrderString: string){
@@ -355,6 +415,7 @@ export class UIManager extends Component {
     // }
 
     private cleanTagOrderChoices(){
+        this.isEnteredTagOrderChoiceBar = false;
         if(this.tagOrderChoiceBar.node.children == null) return;
         for(let child of this.tagOrderChoiceBar.node.children){
             this.tagOrderChoiceBtnList = new Array<Node>();
@@ -362,6 +423,16 @@ export class UIManager extends Component {
         }
     }
     
+
+    /**
+     * set vertex ID Label for each vertex
+     * @param vertex: Vertex
+     */
+    public setVeretxIDLabel(vertex: Vertex){
+        // const vertexIDLabel = instantiate(this.vertexIDLabelPrefab);
+        // vertexIDLabel.setWorldPosition(vertex.node.worldPosition.x + 0.5, vertex.node.worldPosition.y + 1.5, 0);
+        // vertexIDLabel.getComponent(Label).string = vertex.vid;
+    }
     
 }
 

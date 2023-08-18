@@ -198,6 +198,7 @@ export class VertexManager extends Component {
      * delete all the children of veretxManager
      */
     public destroyAllChildren(){
+        console.log("root node:",this.rootNode);
         this.rootNode.children.forEach((child) => {
             child.destroy();
         });

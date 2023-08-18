@@ -130,7 +130,7 @@ export class Edge extends Component {
      * get the edge ID
      * @returns:String 
      */
-    public getedgeID(){
+    public getEdgeID(){
         return this.edgeID;
     }
 
@@ -164,6 +164,7 @@ export class Edge extends Component {
             }
         }
         this.edgeID = this.srcID +" "+this.edgeName+" "+this.dstID;
+        console.log("Edge ID:"+this.edgeID)
         Manager.Instance().relationManager.setEdgeID(this.edgeID);
     }
 
@@ -174,7 +175,11 @@ export class Edge extends Component {
         // console.log("Edge name:"+this.edgeID);
         
         // console.log("src vectex ID:"+this.srcID);
+        
+       
+        
         Manager.Instance().UIManager.setRichInfo("Edge name:"+this.edgeName);
+        Manager.Instance().UIManager.setRichInfo("Edge ID:"+this.edgeID);
         Manager.Instance().UIManager.addRichInfo("src vectex ID:"+this.srcID);
         Manager.Instance().UIManager.addRichInfo("dst vectex ID:"+this.dstID);
        
@@ -185,6 +190,7 @@ export class Edge extends Component {
         // }
         this.printNestedJSON(this.properties,"properties");
         Manager.Instance().UIManager.addRichInfo("rank:"+this.rank);
+
     }
 
     private printNestedJSON(obj, parentKey = '') {

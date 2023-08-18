@@ -1,0 +1,114 @@
+{
+    "code": 0,
+    "data": [
+      {
+        "code": 0,
+        "data": {
+          "headers": [
+            "n",
+            "r",
+            "m"
+          ],
+          "tables": [
+            {
+              "_edgesParsedList": [
+                {
+                  "dstID": "team220",
+                  "edgeName": "serve",
+                  "properties": {
+                    "end_year": 2015,
+                    "start_year": 2011
+                  },
+                  "rank": 0,
+                  "srcID": "player111",
+                  "type": "edge"
+                }
+              ],
+              "_verticesParsedList": [
+                {
+                  "properties": {
+                    "player": {
+                      "age": 38,
+                      "name": "David West"
+                    }
+                  },
+                  "tags": [
+                    "player"
+                  ],
+                  "type": "vertex",
+                  "vid": "player111"
+                },
+                {
+                  "properties": {
+                    "team": {
+                      "name": "Pacers"
+                    }
+                  },
+                  "tags": [
+                    "team"
+                  ],
+                  "type": "vertex",
+                  "vid": "team220"
+                }
+              ],
+              "m": "(\"team220\" :team{name: \"Pacers\"})",
+              "n": "(\"player111\" :player{age: 38, name: \"David West\"})",
+              "r": "[:serve \"player111\"-\u003e\"team220\" @0 {end_year: 2015, start_year: 2011}]"
+            },
+
+            {
+              "_edgesParsedList": [
+                {
+                  "dstID": "team229",
+                  "edgeName": "serve",
+                  "properties": {
+                    "end_year": 2014,
+                    "start_year": 2012
+                  },
+                  "rank": 0,
+                  "srcID": "player141",
+                  "type": "edge"
+                }
+              ],
+              "_verticesParsedList": [
+                {
+                  "properties": {
+                    "player": {
+                      "age": 43,
+                      "name": "Ray Allen"
+                    }
+                  },
+                  "tags": [
+                    "player"
+                  ],
+                  "type": "vertex",
+                  "vid": "player141"
+                },
+                {
+                  "properties": {
+                    "team": {
+                      "name": "Heat"
+                    }
+                  },
+                  "tags": [
+                    "team"
+                  ],
+                  "type": "vertex",
+                  "vid": "team229"
+                }
+              ],
+              "m": "(\"team229\" :team{name: \"Heat\"})",
+              "n": "(\"player141\" :player{age: 43, name: \"Ray Allen\"})",
+              "r": "[:serve \"player141\"-\u003e\"team229\" @0 {end_year: 2014, start_year: 2012}]"
+            }
+          ],
+          "timeCost": 11028,
+          "localParams": null
+        },
+        "gql": "match (n:player)-[r]-(m:team) return n,r,m limit 100"
+      }
+    ],
+    "message": "Success"
+  }
+  
+  

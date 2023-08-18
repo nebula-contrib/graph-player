@@ -67,7 +67,8 @@ export class CameraController extends Component {
      * record the offset between tmp central node(current central node)
      */
     public recordCurrentOffset(){
-        this.currentOffset = this.camera.node.getWorldPosition().clone().subtract(Manager.Instance().vertexManager.currentCentralNode.getWorldPosition());
+        // this.currentOffset = this.camera.node.getWorldPosition().clone().subtract(Manager.Instance().vertexManager.currentCentralNode.getWorldPosition());
+        this.currentOffset = Manager.Instance().canvasManager.cameraRotateOffset.clone().subtract(Manager.Instance().vertexManager.currentCentralNode.getWorldPosition());
         Manager.Instance().vertexManager.currentCentralNode = Manager.Instance().vertexManager.chosenVertex;
     }
 
