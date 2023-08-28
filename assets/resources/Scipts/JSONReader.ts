@@ -4,7 +4,7 @@ import { TableData } from './TableData';
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 import { Edge } from './Edge';
-import { EDITOR } from 'cc/env';
+
 
 @ccclass('JSONReader')
 export class JSONReader extends Component {
@@ -14,53 +14,70 @@ export class JSONReader extends Component {
 
 
 
+    /**
+     * get JSON from file
+     * @param filename 
+     */
     public putJSONtoModel(filename: any){
 
-      // resources.load('Response/nba', (err: any, res: JsonAsset) => {
-      //   if (err) {
-      //       error(err.message || err);
-      //       return;
-      //   }
-      //   // get data of JSON
-      //   let jsonData = res.json;
 
- 
-      //   // let tables = jsonData.data[0].data.tables.map((tableData: any) => new TableData(tableData));
-      //   let tables = jsonData.data[0].data.tables;
-       
-      //   this.transTabletoVertexAndEdge(tables);
-      //   // console.log("vertex id DIC: ", Manager.Instance().vertexManager.vertexEdgeDic);
-      //   // console.log("edge id dic: ",Manager.Instance().edgeManager.edgeVertexDic);
-      //   // console.log("set this.vertexIDBox args:",Manager.Instance().relationManager.edgeNameBox," edge:",Manager.Instance().relationManager.edgeNameBox);
-      //   //console.log("tags Set:",Manager.Instance().vertexManager.vertexTagSet);
-
-      //   });
+      /**
+       * load local JSON file in Response/...
+       */
         let path = 'Response/' + filename;
         this.loadJson(path, (tables) => {
           this.transTabletoVertexAndEdge(tables);
           
           // console.log("set this.vertexIDBox args:",Manager.Instance().relationManager.vertexIDBox);
         });
+
+
     }
 
-
-    // private loadJson(callback){
+        // private loadJson(callback){
       // resources.load('Response/sns', (err: any, res: JsonAsset) => {
     private loadJson(path: string, callback: (tables: any) => void) {
-        resources.load(path, (err: any, res: JsonAsset) => {
-        if (err) {
-            error(err.message || err);
-            return;
-        }
-        // get data of JSON
-        let jsonData = res.json;
-        let tables = jsonData.data[0].data.tables;
-        callback(tables);
-        
+          resources.load(path, (err: any, res: JsonAsset) => {
+          if (err) {
+              error(err.message || err);
+              return;
+          }
+          // get data of JSON
+          let jsonData = res.json;
+          let tables = jsonData.data[0].data.tables;
+          callback(tables);
+          
+  
+  
+          });
+      }
+  
 
-
-        });
+    public getCookie(name:string) {
+        const value = "; " + document.cookie;
+        const parts = value.split("; " + name + "=");
+        if (parts.length === 2) return decodeURIComponent(parts.pop().split(";").shift());
     }
+    /**
+     * get json data  
+     * @param url: url of website to get json response
+     */
+    public getJSONResponse(url:string){
+ 
+      //console.log("1.url:",url)
+      
+      fetch(url).then((response: Response) => {
+        //console.log("url:",url)
+        console.log(response)
+        return response.json();
+         }).then((value) => {
+        
+        let tables = value.data[0].data.tables;
+        this.transTabletoVertexAndEdge(tables);
+    }).catch((error) => console.error('Fetch error:', error));
+
+    }
+
 
     public transTabletoVertexAndEdge(tables:any){
       for(let i = 0; i < tables.length; i++) {

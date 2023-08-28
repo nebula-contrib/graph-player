@@ -48,6 +48,8 @@ export class UIManager extends Component {
     @property({type: [Node]})
     public tagOrderChoiceBtnList:Array<Node>;
 
+    public jsonResponseUrl = "http://127.0.0.1:8080";
+
     private vertexIDLabelManager: Node;
 
     private vertexIDLabelPrefab: Prefab;
@@ -80,11 +82,25 @@ export class UIManager extends Component {
         
     }
 
-    public createCanvasFromJSONFile(event:Event){
+    /**
+     * 
+     * @param event 
+     * @param method:"local" or "web" 
+     */
+    public createCanvasFromJSONFile(event:Event, method: string){
         Manager.Instance().canvasManager.cleanCanvas();
-        let jsonFilename = this.createCanvasFromJSONEditBox.string;
-        Manager.Instance().JSONReader.putJSONtoModel(jsonFilename);
+        
+        if(method == "local"){
+            const jsonFilename = this.createCanvasFromJSONEditBox.string;
+            Manager.Instance().JSONReader.putJSONtoModel(jsonFilename);
+        }
+        else if(method == "web"){
+        
+            Manager.Instance().JSONReader.getJSONResponse(this.jsonResponseUrl);
+       }
     }
+
+    
 
     public createVertex(event:Event){
         // if the node is vertex
@@ -107,7 +123,7 @@ export class UIManager extends Component {
 
     public changeLayout(event:Event, finalTagOrder: string){
         let finalTagOrderList = finalTagOrder.split(",");
-        console.log("finalTagOrder:",finalTagOrder+"finalTagOrderList:",finalTagOrderList)
+        //console.log("finalTagOrder:",finalTagOrder+"finalTagOrderList:",finalTagOrderList)
         this.tagOrderChoiceBar.node.active = false;
         this.dropDownBarLayout.node.active = false;
         
@@ -160,7 +176,10 @@ export class UIManager extends Component {
         this.createCanvasFromJSONEditBox = this.createCanvasFromJSONButton.node.getChildByName("EditBox").getComponent(EditBox);
         createCanvasFromJSONFileEventHandler.target = this.node;
         createCanvasFromJSONFileEventHandler.component = 'UIManager';
+        createCanvasFromJSONFileEventHandler.customEventData = 'web';
         createCanvasFromJSONFileEventHandler.handler = 'createCanvasFromJSONFile';
+        this.createCanvasFromJSONButton.clickEvents.push(createCanvasFromJSONFileEventHandler);
+        
 
         /**
          * initial the drop-down bar
@@ -229,13 +248,13 @@ export class UIManager extends Component {
 
 
     private onMouseEnterTagOrderChoiceBar(event: EventMouse){
-        console.log("dont leave but in")
+        
         this.isEnteredTagOrderChoiceBar = true;
        
     }
 
     private onMouseLeaveTagOrderChoiceBar(event:EventMouse){
-        console.log("leave tag order")
+       
         this.isEnteredTagOrderChoiceBar = false;
         
         this.tagOrderChoiceBar.node.active = false;
@@ -316,7 +335,7 @@ export class UIManager extends Component {
                     tagOrderChoiceHandler.target = this.node;
                     tagOrderChoiceHandler.component = "UIManager";
                     tagOrderChoiceHandler.handler = "changeLayout";
-                    console.log("chooseLayout btn:",this.getPermutationByTagDegree(tagOrderList[i]).join(","))
+                   
                     tagOrderChoiceHandler.customEventData = this.getPermutationByTagDegree(tagOrderList[i]).join(",");
                     // this.tagOrderChoiceBtnList.push(tagOrderBtn);
                 
@@ -357,7 +376,7 @@ export class UIManager extends Component {
                 tagOrderList.push(tag);
             
         }
-        console.log("tagOrderList:",tagOrderList)
+        //console.log("tagOrderList:",tagOrderList)
         return tagOrderList;
     }
 
@@ -390,7 +409,7 @@ export class UIManager extends Component {
      */
     private onLayoutBtnMouseLeave(event:EventMouse){
         let mouseIn = false;
-        console.log("try to leave")
+       
         if (this.timer) {
             clearTimeout(this.timer);
         }
@@ -399,7 +418,7 @@ export class UIManager extends Component {
         // set new timer to check if mouse enter tagOrderChoiceBar blockB
         this.timer = setTimeout(() => {
             if (!this.isEnteredTagOrderChoiceBar) {
-                console.log("start leave")
+                
                 this.tagOrderChoiceBar.node.active = false;
             }
         }, 0.3);

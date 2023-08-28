@@ -164,7 +164,7 @@ export class Edge extends Component {
             }
         }
         this.edgeID = this.srcID +" "+this.edgeName+" "+this.dstID;
-        console.log("Edge ID:"+this.edgeID)
+        //console.log("Edge ID:"+this.edgeID)
         Manager.Instance().relationManager.setEdgeID(this.edgeID);
     }
 

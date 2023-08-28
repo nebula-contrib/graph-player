@@ -14,13 +14,14 @@ export class LayoutManager extends Component {
 
     private nodesLayerRadiusInterval = Math.PI * 1/12;
 
+
     /**
      * re-classify nodes by tags
      * the vertex with tag will be the child of corresponding tagNode
      */
     public classifyNodeByTag(){
-        let count = 0;
-        this.tagsNodeList = [];
+        let tagNodeCount = 0;
+        //this.tagsNodeList = [];
         
         /**
          * set the tagNodeList(store Node)
@@ -37,13 +38,18 @@ export class LayoutManager extends Component {
             }
 
           
-            while(Manager.Instance().vertexManager.rootNode.children.length > this.tagsNodeList.length){
-                let childVertex = Manager.Instance().vertexManager.rootNode.children[0];
+            while(Manager.Instance().vertexManager.rootNode.children.length > this.tagsNodeList.length ){
+                // let childVertex = Manager.Instance().vertexManager.rootNode.children[0];
+                let childVertex = Manager.Instance().vertexManager.rootNode.children[tagNodeCount];
                 if(childVertex.getComponent(Vertex) != null) {
                     let vertexTag  = childVertex.getComponent(Vertex).tags[0];
                     childVertex.setParent(Manager.Instance().vertexManager.rootNode.getChildByName(vertexTag));
-                    count++;
+                    
                 }
+                else{
+                    tagNodeCount++;
+                }
+            
             }
             
         }
@@ -122,7 +128,7 @@ export class LayoutManager extends Component {
        
        // if(startVertex.getComponent(Vertex).edgesSetOfVertex.length <= 1) return;
         let edgeNum = startVertex.getComponent(Vertex).edgesSetOfVertex.length;
-        console.log("in vertex: ",startVertex.getComponent(Vertex).vid)
+        
         
         
         // if(edgeNum < 2) return;
@@ -200,14 +206,14 @@ export class LayoutManager extends Component {
                 derivedNodeCount++;
                 
                 // selfAngle += initialAngle + derivedNodeCount * selfAngleStep; // update angle
-                console.log("start:",startVertex.getComponent(Vertex).vid, " :",endVertex.vid," degree:",selfAngle/Math.PI," adding:",selfAngleStep/Math.PI)
+                //console.log("start:",startVertex.getComponent(Vertex).vid, " :",endVertex.vid," degree:",selfAngle/Math.PI," adding:",selfAngleStep/Math.PI)
                 
                 
             }
             /** 
              * reLayout the edge
              */
-            console.log(startVertex.getComponent(Vertex).vid+" count:",derivedNodeCount, "len:",startVertex.getComponent(Vertex).edgesSetOfVertex.length)
+            //console.log(startVertex.getComponent(Vertex).vid+" count:",derivedNodeCount, "len:",startVertex.getComponent(Vertex).edgesSetOfVertex.length)
             edge.resetPosition(startVertex, endVertex.node);
             edge.isLayouted = true;
             this.updateEndVertexAndEdge(endVertex.node);
@@ -234,7 +240,9 @@ export class LayoutManager extends Component {
     }
 
     /**
-     * getTagIndex
+     * getTagIndex in list of tags
+     * @param tag 
+     * @returns 
      */
     private getTagIndex(tag:string) {
         for(let index = 0; index < this.tagsNodeList.length; index++){
@@ -243,6 +251,12 @@ export class LayoutManager extends Component {
         return -1;
     }
 
+    /**
+     * get element index in lists
+     * @param element 
+     * @param list 
+     * @returns 
+     */
     private getElementIndex(element:any, list:any[]){
         for(let index = 0; index < list.length; index++){
             if(list[index] == element) return index;
@@ -250,6 +264,10 @@ export class LayoutManager extends Component {
         return -1;
     }
 
+    /**
+     *  transform taglist(Node) to taglist(string)
+     * @returns 
+     */
     public getTags():string[]{
         let tagList = [];
         for(let tagNode of this.tagsNodeList){

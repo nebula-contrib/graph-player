@@ -32,7 +32,7 @@ export class Vertex extends Component {
     
     protected onLoad(): void {
         this.idLabel = this.node.getChildByName("ID").getComponent(Label);
-        console.log("id node:",this.idLabel)
+        //console.log("id node:",this.idLabel)
     }
     /**
      * 0 -- current material
@@ -66,8 +66,8 @@ export class Vertex extends Component {
         for(let tag of this.tags){
             Manager.Instance().vertexManager.addTag(tag);
         }
-        console.log("vid:",this.vid)
-        console.log("idlabel:",this.idLabel)
+        //console.log("vid:",this.vid)
+        //console.log("idlabel:",this.idLabel)
         this.idLabel.string = this.vid;
        
     }
@@ -120,9 +120,9 @@ export class Vertex extends Component {
      * present the details of vertex
      */
     public showVertexDetails(){
-        console.log("show detail Vertex ID:"+this.vid);
+        //console.log("show detail Vertex ID:"+this.vid);
         
-        console.log("tag:",this.tags);
+        //console.log("tag:",this.tags);
         Manager.Instance().UIManager.nodeInfoBar.active = true;
         Manager.Instance().UIManager.setRichInfo("Vertex vid:"+this.vid);
         Manager.Instance().UIManager.addRichInfo("tag:"+this.tags);

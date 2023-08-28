@@ -24,7 +24,7 @@ export class CameraController extends Component {
         this.originalOffset = new Vec3(0,0,2);
         this.camera.near = 0.01;
         this.originalOffsetFactor = this.originalOffset.length() / this.originalOffset.clone().normalize().length();
-        console.log("offset factor:",this.originalOffsetFactor);
+        //console.log("camera offset factor:",this.originalOffsetFactor);
 
     }
 
@@ -33,6 +33,7 @@ export class CameraController extends Component {
         this.recordCurrentOffset();
         let targetPosition = node.getWorldPosition();
         let targetOffset = this.currentOffset.clone().normalize().multiplyScalar(this.originalOffsetFactor);
+
     
         tween(this.camera.node)
             .to(this.smoothZoomIntervals, { 
@@ -40,6 +41,7 @@ export class CameraController extends Component {
             }
                 , { easing: 'smooth' })
             .start();
+        
 
         
 

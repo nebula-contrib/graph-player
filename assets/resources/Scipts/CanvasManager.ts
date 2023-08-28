@@ -160,10 +160,15 @@ export class CanvasManager extends Component {
          * mouse up by right key -- create vertex
          */
         if (event.getButton() === EventMouse.BUTTON_RIGHT) {
+
+            /**
+             * choose operation by click left button
+             */
+            // Manager.Instance().UIManager.dropDownBarLayout.node.setWorldPosition(event.getLocationX(), event.getLocationY(), 0);
+            // Manager.Instance().UIManager.dropDownBarLayout.node.active = true;
             
-            Manager.Instance().UIManager.dropDownBarLayout.node.setWorldPosition(event.getLocationX(), event.getLocationY(), 0);
-            Manager.Instance().UIManager.dropDownBarLayout.node.active = true;
             this.chooseVertexOrEdgeAtMouse(event);
+            
             //this.createVertexAtMouse(event);
         } 
         /**
@@ -230,6 +235,7 @@ export class CanvasManager extends Component {
         let newCameraPos = new Vec3();        
         math.Vec3.scaleAndAdd(newCameraPos, Manager.Instance().cameraController.camera.node.position, Manager.Instance().cameraController.camera.node.forward, this._zoomSpeed * scrollY);
         Manager.Instance().cameraController.camera.node.position = newCameraPos;
+        
     }
 
 
