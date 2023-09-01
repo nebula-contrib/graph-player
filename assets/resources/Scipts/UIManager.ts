@@ -96,7 +96,7 @@ export class UIManager extends Component {
         }
         else if(method == "web"){
         
-            Manager.Instance().JSONReader.getJSONResponse(this.jsonResponseUrl);
+            Manager.Instance().JSONReader.createByURL(this.jsonResponseUrl);
        }
     }
 

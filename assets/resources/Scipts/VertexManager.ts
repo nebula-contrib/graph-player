@@ -61,10 +61,10 @@ export class VertexManager extends Component {
      */
     public createStartNode():Node{
         const vertex = instantiate(this.vertexPrefab); // initial the prefab
+        vertex.setParent(Manager.Instance().vertexManager.rootNode);
         vertex.getComponent(Vertex).setVertexId(); //set id
         let initialMaterialCode =  Math.floor(Math.random() * (this.vertexMaterialCount)) + 2; // get the random material code
-        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
-        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
+
         // let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
         // vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
 
@@ -75,8 +75,10 @@ export class VertexManager extends Component {
         const position = randomOffset.add(Manager.Instance().vertexManager.currentCentralNode.worldPosition); // set the currentCentralNode as center
         vertex.worldPosition = position;
         // vertex.setParent(node);
-        vertex.setParent(Manager.Instance().vertexManager.rootNode);
+        
         this.vertexEdgeDic[vertex.getComponent(Vertex).getVertexID()] = []; // set id
+        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
+        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
         //console.log("create vertexEdgeDic of:",vertex.getComponent(Vertex).getVertexID()+"dic:",this.vertexEdgeDic);
 
         return vertex;
@@ -95,8 +97,7 @@ export class VertexManager extends Component {
         
         let initialMaterialCode =  Math.floor(Math.random() * (this.vertexMaterialCount)) + 2; // get the random material code
         
-        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
-        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
+
         // let tmpMaterial = vertex.getComponent(Vertex).getComponent(MeshRenderer).getMaterial(initialMaterialCode);
         // vertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(tmpMaterial, 0); // set the random material
 
@@ -112,7 +113,8 @@ export class VertexManager extends Component {
         vertex.setParent(Manager.Instance().vertexManager.rootNode);
         this.vertexEdgeDic[vertex.getComponent(Vertex).getVertexID()] = []; // set id
         
-
+        vertex.getComponent(Vertex).setMaterialCode(initialMaterialCode);
+        vertex.getComponent(Vertex).changeMaterial(initialMaterialCode);
 
         // vertex.getComponent(Vertex).setVertexId();
         // vertex.setParent(this.node);

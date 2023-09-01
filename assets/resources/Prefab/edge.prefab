@@ -83,15 +83,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "f547272f-765e-499b-8c51-bdff2b809056",
-        "__expectedType__": "cc.Material"
-      },
-      {
-        "__uuid__": "224880fe-a88f-4448-b95a-71a5f0e20579",
-        "__expectedType__": "cc.Material"
-      },
-      {
-        "__uuid__": "f547272f-765e-499b-8c51-bdff2b809056",
+        "__uuid__": "1c98607a-38cc-4281-b0f8-950b7c085cef",
         "__expectedType__": "cc.Material"
       }
     ],

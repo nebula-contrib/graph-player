@@ -329,6 +329,7 @@
     "vid": "",
     "properties": {},
     "type": "vertex",
+    "degree": 0,
     "isLayouted": false,
     "edgesSetOfVertex": [],
     "materialCode": 2,

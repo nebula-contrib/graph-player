@@ -34,7 +34,7 @@ export class JSONReader extends Component {
 
     }
 
-        // private loadJson(callback){
+      // private loadJson(callback){
       // resources.load('Response/sns', (err: any, res: JsonAsset) => {
     private loadJson(path: string, callback: (tables: any) => void) {
           resources.load(path, (err: any, res: JsonAsset) => {
@@ -62,7 +62,7 @@ export class JSONReader extends Component {
      * get json data  
      * @param url: url of website to get json response
      */
-    public getJSONResponse(url:string){
+    public createByURL(url:string){
  
       //console.log("1.url:",url)
       
@@ -78,8 +78,14 @@ export class JSONReader extends Component {
 
     }
 
+    public createdByJSON(jsonData:string){
+      let tables = JSON.parse(jsonData).data[0].data.tables;
+      this.transTabletoVertexAndEdge(tables);
 
-    public transTabletoVertexAndEdge(tables:any){
+    }
+
+
+    private transTabletoVertexAndEdge(tables:any){
       for(let i = 0; i < tables.length; i++) {
         let edges = tables[i]._edgesParsedList;
         let vertices = tables[i]._verticesParsedList;

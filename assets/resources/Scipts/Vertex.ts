@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, CCInteger, CCString, Component, FixedJoint2D, Label, MeshRenderer, Node } from 'cc';
+import { _decorator, CCBoolean, CCInteger, CCString, Color, Component, FixedJoint2D, Label, MeshRenderer, Node, Vec4 } from 'cc';
 import { Manager } from './Manager';
 import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
@@ -24,7 +24,8 @@ export class Vertex extends Component {
     @property({type:[Edge]})
     public edgesSetOfVertex:Edge[] = [];
 
-    private idLabel = null;
+    @property(Label)
+    public idLabel = null;
 
     @property(CCBoolean)
     public isClicked:false; // if the vertex is clicked once
@@ -32,7 +33,7 @@ export class Vertex extends Component {
     
     protected onLoad(): void {
         this.idLabel = this.node.getChildByName("ID").getComponent(Label);
-        //console.log("id node:",this.idLabel)
+        console.log("id node:",this.idLabel)
     }
     /**
      * 0 -- current material
@@ -69,6 +70,8 @@ export class Vertex extends Component {
         //console.log("vid:",this.vid)
         //console.log("idlabel:",this.idLabel)
         this.idLabel.string = this.vid;
+
+
        
     }
 
@@ -108,8 +111,17 @@ export class Vertex extends Component {
      * @param materialIndex: the code of changed material 
      */
     public changeMaterial(materialIndex:number){
+        console.log("idlabel:",this.idLabel);
         let tmpMaterial = this.getComponent(MeshRenderer).getMaterial(materialIndex);
         this.getComponent(MeshRenderer).setMaterial(tmpMaterial, 0);
+
+        // set color of idlabel
+        const passes = this.getComponent(MeshRenderer).getMaterial(0).passes[0];
+        const colorUniform = passes.getUniform(passes.getHandle('albedo'),new Vec4(1, 1,0,0));
+       
+        const color = new Color(colorUniform.x * 255, colorUniform.y* 255, colorUniform.z* 255, colorUniform.w * 255);
+        this.idLabel.color = color; 
+        
     }
 
     public getMaterialCode(){

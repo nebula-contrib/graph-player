@@ -660,7 +660,7 @@
     "_priority": 1073741824,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 320,
+    "_orthoHeight": 367.0588235294117,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -1064,7 +1064,7 @@
         "__id__": 38
       }
     ],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 48
@@ -1079,8 +1079,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 240,
-      "y": 600,
+      "x": 411.579,
+      "y": 588.485,
       "z": -15.309
     },
     "_lrot": {
@@ -3137,8 +3137,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 400,
-      "y": 600,
+      "x": 78.665,
+      "y": 589.39,
       "z": -15.309
     },
     "_lrot": {
@@ -3648,7 +3648,7 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 110,
+      "width": 109.8,
       "height": 45
     },
     "_anchorPoint": {
@@ -3848,7 +3848,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -479.99999999999994,
+      "x": -480,
       "y": -320,
       "z": 0
     },
@@ -4246,7 +4246,7 @@
       "x": 0.452588,
       "y": 0.607642,
       "z": 0.755699,
-      "w": 0
+      "w": 0.8
     },
     "_skyIllumLDR": 0.8,
     "_groundAlbedoLDR": {
@@ -4286,11 +4286,11 @@
     "__type__": "cc.SkyboxInfo",
     "_envLightingType": 1,
     "_envmapHDR": {
-      "__uuid__": "39c2991e-9993-4717-8a29-b8ce617103f2",
+      "__uuid__": "0dd38faa-679d-4ecc-9196-19d8164496ff",
       "__expectedType__": "cc.TextureCube"
     },
     "_envmap": {
-      "__uuid__": "39c2991e-9993-4717-8a29-b8ce617103f2",
+      "__uuid__": "0dd38faa-679d-4ecc-9196-19d8164496ff",
       "__expectedType__": "cc.TextureCube"
     },
     "_envmapLDR": {
@@ -4311,9 +4311,9 @@
     "_type": 0,
     "_fogColor": {
       "__type__": "cc.Color",
-      "r": 200,
-      "g": 200,
-      "b": 200,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_enabled": false,
