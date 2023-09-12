@@ -2,6 +2,7 @@ import { _decorator, Component, Node,EventHandler,Button, RichText, Layout, Even
 const { ccclass, property } = _decorator;
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
+import { HttpRequest } from './HttpRequest';
 
 @ccclass('UIManager')
 export class UIManager extends Component {
@@ -39,16 +40,34 @@ export class UIManager extends Component {
     @property(Layout)
     public dropDownBarLayout:Layout;
 
+
+    /** record the list of tags */
     @property(Layout)
     public tagOrderChoiceBar:Layout;
-
+    @property({type: [Node]})
+    public tagOrderChoiceBtnList:Array<Node>;
     @property(Prefab)
     private tagOrderChoiceBtnPrefab:Prefab 
 
-    @property({type: [Node]})
-    public tagOrderChoiceBtnList:Array<Node>;
+    /**for user to input instruction */
+    @property(EditBox)
+    public userInputBar:EditBox;
 
-    public jsonResponseUrl = "http://127.0.0.1:8080";
+    @property(Button)
+    public submitInputButton:Button;
+
+    /** hide UI */
+    @property(Button)
+    public hideUIColumnBtn:Button;
+    /** show the hiden UI */
+    @property(Button)
+    public showUIColumnBtn:Button;
+
+    /**  root node of hide column*/
+    @property(Node)
+    public hideColumnNode:Node;
+
+    public jsonResponseUrl = "http://127.0.0.1:8080"; // get the table-details 
 
     private vertexIDLabelManager: Node;
 
@@ -73,6 +92,178 @@ export class UIManager extends Component {
     private nodeInfoSuffix = "\n</f>";
 
 
+
+    protected onLoad(): void {
+            // initiate infomation bar
+            this.nodeInfoBar = this.node.getChildByName('InfoBar');
+            this.nodeInfoText = this.nodeInfoBar.getChildByName('NodeInfoText').getComponent(RichText);
+            // input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this); // set the progation prevented
+            // input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
+            // this.tagOrderChoiceBtnList = new Array<Node>();
+                    // 使用cc.resources.load来加载预制体
+        resources.load("Prefab/VertexIDLabel" , Prefab, (err, prefab) => {
+            if (err) {
+                console.error("Failed to load prefab:", err);
+                return;
+            }
+            else{
+                this.vertexIDLabelPrefab = prefab;
+            }
+        });
+    }
+
+    start () {
+
+
+        // initiate hide column button
+        this.hideUIColumnBtn = this.node.getChildByName("HideUIColumnBtn").getComponent(Button);
+        const hideUIColumnClickEventHandler = new EventHandler();
+        hideUIColumnClickEventHandler.target = this.node;
+        hideUIColumnClickEventHandler.component = 'UIManager';
+        hideUIColumnClickEventHandler.handler = 'hideUIColumn';
+        this.hideUIColumnBtn.clickEvents.push(hideUIColumnClickEventHandler);
+
+        // initiate show column button
+
+        this.showUIColumnBtn = this.node.getChildByName("ShowUIColumnBtn").getComponent(Button);
+        const showUIColumnClickEventHandler = new EventHandler();
+        showUIColumnClickEventHandler.target = this.node;
+        showUIColumnClickEventHandler.component = 'UIManager';
+        showUIColumnClickEventHandler.handler = 'showUIColumn';
+        this.showUIColumnBtn.clickEvents.push(showUIColumnClickEventHandler);
+        /**
+        * hide cloumn
+        */
+
+         this.hideColumnNode =  this.node.getChildByName('HideColumn');
+        
+        // initiate user input bar
+        this.userInputBar = this.hideColumnNode.getChildByName("UserInputBar").getComponent(EditBox);
+        this.submitInputButton = this.hideColumnNode.getChildByName('SubmitInputBtn').getComponent(Button);
+        const submitInputClickEventHandler = new EventHandler();
+        submitInputClickEventHandler.target = this.node;
+        submitInputClickEventHandler.component = 'UIManager';
+        submitInputClickEventHandler.handler = 'submitUserInput';
+        this.submitInputButton.clickEvents.push(submitInputClickEventHandler);
+  
+       
+        // initiate refresh button
+        const refreshClickEventHandler = new EventHandler();
+        // this.refreshBtn = this.node.getChildByName('RefreshBtn').getComponent(Button);
+        this.refreshBtn = this.hideColumnNode.getChildByName('RefreshBtn').getComponent(Button);
+        refreshClickEventHandler.target = this.node; // node name
+        refreshClickEventHandler.component = 'UIManager';// script name
+        refreshClickEventHandler.handler = 'RefreshCanvas'; // method name
+        // const button = this.node.getComponent(Button);
+        this.refreshBtn.clickEvents.push(refreshClickEventHandler);
+
+        // initiate the JSON button
+        // const createCanvasFromJSONFileEventHandler =  new EventHandler();
+        // this.createCanvasFromJSONButton = this.node.getChildByName('CreateByJSONBtn').getComponent(Button);
+        // this.createCanvasFromJSONEditBox = this.createCanvasFromJSONButton.node.getChildByName("EditBox").getComponent(EditBox);
+        // createCanvasFromJSONFileEventHandler.target = this.node;
+        // createCanvasFromJSONFileEventHandler.component = 'UIManager';
+        // createCanvasFromJSONFileEventHandler.customEventData = 'web';
+        // createCanvasFromJSONFileEventHandler.handler = 'createCanvasFromJSONFile';
+        // this.createCanvasFromJSONButton.clickEvents.push(createCanvasFromJSONFileEventHandler);
+
+        /**
+         * initial the drop-down bar
+         */
+        this.dropDownBarLayout =  this.node.getChildByName("DropDownBar").getComponent(Layout);
+        this.dropDownBarLayout.node.active = false;
+        
+        // initial Layout Btn
+
+        const layoutEventHandler = new EventHandler();
+
+        // this.layoutBtn = this.node.getChildByName("LayoutGreyBtn").getComponent(Button);
+        this.layoutBtn = this.hideColumnNode.getChildByName("LayoutGreyBtn").getComponent(Button);
+        this.tagOrderChoiceBar = this.layoutBtn.node.getChildByName("TagOrderChoiceBar").getComponent(Layout); 
+        this.tagOrderChoiceBar.node.active = false;
+        /**
+         * listen on layout btn
+         */
+
+
+        this.layoutBtn.node.on(Node.EventType.MOUSE_ENTER, this.chooseLayoutBtn.bind(this, layoutEventHandler),this);
+        
+        this.layoutBtn.node.on(Node.EventType.MOUSE_LEAVE, this.onLayoutBtnMouseLeave,this);
+  
+        //this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_ENTER, this.onMouseEnterTagOrderChoiceBar, this);
+        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_MOVE, this.onMouseEnterTagOrderChoiceBar, this); // listen on mouse enter in tagOrderChoiceBar 
+        // this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,(event:EventMouse) => {
+        //     this.isEnteredTagOrderChoiceBar = false;
+        // }, this);
+
+        /** close by click mouse on CanvasMAnager.onMouseUp() */
+        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,this.onMouseLeaveTagOrderChoiceBar, this);
+        // // initial createVertexBtn 
+        // const createVertexEventHandler = new EventHandler();
+        // this.createVertexBtn = this.dropDownBarLayout.node.getChildByName("CreateVertexBtn").getComponent(Button);
+        // createVertexEventHandler.target = this.node;
+        // createVertexEventHandler.component = "UIManager";
+        // createVertexEventHandler.handler = "createVertex";
+        // this.createVertexBtn.clickEvents.push(createVertexEventHandler);
+
+        // // initial deleteVeretxBtn
+        // const deleteVertexEventHandler = new EventHandler();
+        // this.deleteVertexBtn = this.dropDownBarLayout.node.getChildByName("DeleteVertexBtn").getComponent(Button);
+        // deleteVertexEventHandler.target = this.node;
+        // deleteVertexEventHandler.component = "UIManager";
+        // deleteVertexEventHandler.handler = "createVertex";
+       
+
+        // this.deleteVertexBtn.clickEvents.push(createVertexEventHandler);
+
+
+
+    }
+
+    /**
+     * hide UI column
+     * @param event 
+     */
+    private hideUIColumn(event:Event){
+        this.hideColumnNode.active = false;
+        this.showUIColumnBtn.node.active = true;
+        this.hideUIColumnBtn.node.active = false;
+
+    }
+    
+    /**
+     * show UI column 
+     * @param event 
+     */
+    private showUIColumn(event:Event){
+        this.hideColumnNode.active = true;
+        this.hideUIColumnBtn.node.active = true;
+        this.showUIColumnBtn.node.active = false;
+
+    }
+    
+    /**
+     * submit input in userInputBar to server
+     * @param event 
+     */
+    public submitUserInput(event:Event){
+        console.log("press submit")
+        let content = this.userInputBar.string;
+        HttpRequest.send(this.jsonResponseUrl, { nGQL: content }).then((response) => {
+            // 处理响应
+            console.log("res:", response);
+            Manager.Instance().canvasManager.cleanCanvas();
+            Manager.Instance().JSONReader.createdByJSON(response);
+
+        }).catch((error) => {
+            // 处理错误
+            console.error(error);
+        });
+
+
+        
+    }
+
     public RefreshCanvas(event:Event){
         
         Manager.Instance().canvasManager.resetCanvas();
@@ -82,23 +273,24 @@ export class UIManager extends Component {
         
     }
 
+
     /**
      * 
      * @param event 
      * @param method:"local" or "web" 
      */
-    public createCanvasFromJSONFile(event:Event, method: string){
-        Manager.Instance().canvasManager.cleanCanvas();
+    // public createCanvasFromJSONFile(event:Event, method: string){
+    //     Manager.Instance().canvasManager.cleanCanvas();
         
-        if(method == "local"){
-            const jsonFilename = this.createCanvasFromJSONEditBox.string;
-            Manager.Instance().JSONReader.putJSONtoModel(jsonFilename);
-        }
-        else if(method == "web"){
+    //     if(method == "local"){
+    //         const jsonFilename = this.createCanvasFromJSONEditBox.string;
+    //         Manager.Instance().JSONReader.putJSONtoModel(jsonFilename);
+    //     }
+    //     else if(method == "web"){
         
-            Manager.Instance().JSONReader.createByURL(this.jsonResponseUrl);
-       }
-    }
+    //         Manager.Instance().JSONReader.createByURL(this.jsonResponseUrl);
+    //    }
+    // }
 
     
 
@@ -121,6 +313,11 @@ export class UIManager extends Component {
         this.dropDownBarLayout.node.active = false;
     }
 
+    /**
+     * when press layout btn
+     * @param event 
+     * @param finalTagOrder 
+     */
     public changeLayout(event:Event, finalTagOrder: string){
         let finalTagOrderList = finalTagOrder.split(",");
         //console.log("finalTagOrder:",finalTagOrder+"finalTagOrderList:",finalTagOrderList)
@@ -139,120 +336,20 @@ export class UIManager extends Component {
     }
 
 
-    protected onLoad(): void {
-            // initiate infomation bar
-            this.nodeInfoBar = this.node.getChildByName('InfoBar');
-            this.nodeInfoText = this.nodeInfoBar.getChildByName('NodeInfoText').getComponent(RichText);
-            // input.on(Input.EventType.MOUSE_UP, this.onMouseUp, this); // set the progation prevented
-            // input.on(Input.EventType.MOUSE_DOWN, this.onMouseDown, this);
-            // this.tagOrderChoiceBtnList = new Array<Node>();
-                    // 使用cc.resources.load来加载预制体
-        resources.load("Prefab/VertexIDLabel" , Prefab, (err, prefab) => {
-            if (err) {
-                console.error("Failed to load prefab:", err);
-                return;
-            }
-            else{
-                this.vertexIDLabelPrefab = prefab;
-            }
-        });
-    }
-
-    start () {
-        
-       
-        // initiate refresh button
-        const refreshClickEventHandler = new EventHandler();
-        this.refreshBtn = this.node.getChildByName('RefreshBtn').getComponent(Button);
-        refreshClickEventHandler.target = this.node; // node name
-        refreshClickEventHandler.component = 'UIManager';// script name
-        refreshClickEventHandler.handler = 'RefreshCanvas'; // method name
-        // const button = this.node.getComponent(Button);
-        this.refreshBtn.clickEvents.push(refreshClickEventHandler);
-
-        // initiate the JSON button
-        const createCanvasFromJSONFileEventHandler =  new EventHandler();
-        this.createCanvasFromJSONButton = this.node.getChildByName('CreateByJSONBtn').getComponent(Button);
-        this.createCanvasFromJSONEditBox = this.createCanvasFromJSONButton.node.getChildByName("EditBox").getComponent(EditBox);
-        createCanvasFromJSONFileEventHandler.target = this.node;
-        createCanvasFromJSONFileEventHandler.component = 'UIManager';
-        createCanvasFromJSONFileEventHandler.customEventData = 'web';
-        createCanvasFromJSONFileEventHandler.handler = 'createCanvasFromJSONFile';
-        this.createCanvasFromJSONButton.clickEvents.push(createCanvasFromJSONFileEventHandler);
-        
-
-        /**
-         * initial the drop-down bar
-         */
-        this.dropDownBarLayout =  this.node.getChildByName("DropDownBar").getComponent(Layout);
-        this.dropDownBarLayout.node.active = false;
-        
-
-        
-        // initial Layout Btn
-
-        const layoutEventHandler = new EventHandler();
-        // this.layoutBtn = this.dropDownBarLayout.node.getChildByName("LayoutBtn").getComponent(Button);
-        this.layoutBtn = this.node.getChildByName("LayoutGreyBtn").getComponent(Button);
-        // layoutEventHandler.target = this.node;
-        // layoutEventHandler.component = "UIManager";
-        // layoutEventHandler.handler = "changeLayout";
-        //this.layoutBtn.clickEvents.push(layoutEventHandler);
-        
-        this.tagOrderChoiceBar = this.layoutBtn.node.getChildByName("TagOrderChoiceBar").getComponent(Layout);
-        
-        this.tagOrderChoiceBar.node.active = false;
-        /**
-         * listen on layout btn
-         */
-
-
-        this.layoutBtn.node.on(Node.EventType.MOUSE_ENTER, this.chooseLayoutBtn.bind(this, layoutEventHandler),this);
-        
-        this.layoutBtn.node.on(Node.EventType.MOUSE_LEAVE, this.onLayoutBtnMouseLeave,this);
-  
-        //this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_ENTER, this.onMouseEnterTagOrderChoiceBar, this);
-        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_MOVE, this.onMouseEnterTagOrderChoiceBar, this); // listen on mouse enter in tagOrderChoiceBar 
-        // this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,(event:EventMouse) => {
-        //     this.isEnteredTagOrderChoiceBar = false;
-        // }, this);
-
-        /** close by click mouse on CanvasMAnager.onMouseUp() */
-        this.tagOrderChoiceBar.node.on(Node.EventType.MOUSE_LEAVE,this.onMouseLeaveTagOrderChoiceBar, this);
-
-        /**
-         * initial layout choice bar
-         */
-
-        
-
-        // initial createVertexBtn 
-        const createVertexEventHandler = new EventHandler();
-        this.createVertexBtn = this.dropDownBarLayout.node.getChildByName("CreateVertexBtn").getComponent(Button);
-        createVertexEventHandler.target = this.node;
-        createVertexEventHandler.component = "UIManager";
-        createVertexEventHandler.handler = "createVertex";
-        this.createVertexBtn.clickEvents.push(createVertexEventHandler);
-
-        // initial deleteVeretxBtn
-        const deleteVertexEventHandler = new EventHandler();
-        this.deleteVertexBtn = this.dropDownBarLayout.node.getChildByName("DeleteVertexBtn").getComponent(Button);
-        deleteVertexEventHandler.target = this.node;
-        deleteVertexEventHandler.component = "UIManager";
-        deleteVertexEventHandler.handler = "createVertex";
-       
-
-        this.deleteVertexBtn.clickEvents.push(createVertexEventHandler);
-
-    }
-
-
+    /**
+     * when mouse enter drop down bar of tag of layout 
+     * @param event 
+     */
     private onMouseEnterTagOrderChoiceBar(event: EventMouse){
         
         this.isEnteredTagOrderChoiceBar = true;
        
     }
 
+    /**
+     * when mouse leave drop down bar of tag of layout 
+     * @param event 
+     */
     private onMouseLeaveTagOrderChoiceBar(event:EventMouse){
        
         this.isEnteredTagOrderChoiceBar = false;
@@ -290,6 +387,9 @@ export class UIManager extends Component {
         
     }
 
+    /**
+     * clean info of info bar
+     */
     public cleanAndDisableInfoBar(){
         this.nodeInfoText.string = "";
         this.nodeInfoBar.active = false;
@@ -352,6 +452,11 @@ export class UIManager extends Component {
 
     }
 
+    /**
+     * get the permutation of tags by their degree
+     * @param firstElement 
+     * @returns 
+     */
     private getPermutationByTagDegree(firstElement: string){
         let tagOrderList = new Array<string>();
         let dic = Manager.Instance().relationManager.tagDegreeDic;

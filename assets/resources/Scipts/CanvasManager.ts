@@ -348,6 +348,8 @@ export class CanvasManager extends Component {
         // clean UI
         Manager.Instance().UIManager.isNodeInfoEnable = false;
         Manager.Instance().UIManager.nodeInfoBar.active = false;
+        // clear Layout
+        Manager.Instance().layoutManager.clearTags()
     }
 
 
@@ -367,6 +369,8 @@ export class CanvasManager extends Component {
         // reset UI
         Manager.Instance().UIManager.isNodeInfoEnable = false;
         Manager.Instance().UIManager.nodeInfoBar.active = false;
+        // clear Layout
+        Manager.Instance().layoutManager.clearTags()
         
         
     }

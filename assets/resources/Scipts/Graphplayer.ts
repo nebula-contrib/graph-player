@@ -8,8 +8,8 @@ export class Graphplayer extends Component {
     protected start(): void {
         
         // (window as any).globalReceiveJSONByURL = this.buildByURL.bind(this);
-        this.buildByURL("http://127.0.0.1:8000/table-details")
-        // this.startWithTableDetails("http://127.0.0.1:8000");
+        // this.buildByURL("http://127.0.0.1:8000/table-details")
+
     }
 
     /**

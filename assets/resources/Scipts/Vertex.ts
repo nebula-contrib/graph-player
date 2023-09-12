@@ -33,7 +33,7 @@ export class Vertex extends Component {
     
     protected onLoad(): void {
         this.idLabel = this.node.getChildByName("ID").getComponent(Label);
-        console.log("id node:",this.idLabel)
+        // console.log("id node:",this.idLabel)
     }
     /**
      * 0 -- current material
@@ -111,7 +111,7 @@ export class Vertex extends Component {
      * @param materialIndex: the code of changed material 
      */
     public changeMaterial(materialIndex:number){
-        console.log("idlabel:",this.idLabel);
+        // console.log("idlabel:",this.idLabel);
         let tmpMaterial = this.getComponent(MeshRenderer).getMaterial(materialIndex);
         this.getComponent(MeshRenderer).setMaterial(tmpMaterial, 0);
 

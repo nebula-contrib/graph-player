@@ -5,7 +5,9 @@ import { Manager } from './Manager';
 
 
 const { ccclass, property } = _decorator;
-
+/**
+ * Manager of Edges
+ */
 @ccclass('EdgeManager')
 export class EdgeManager extends Component {
 

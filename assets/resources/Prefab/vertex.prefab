@@ -168,7 +168,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "1",
+    "_string": "",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 10,
@@ -332,6 +332,7 @@
     "degree": 0,
     "isLayouted": false,
     "edgesSetOfVertex": [],
+    "idLabel": null,
     "materialCode": 2,
     "_id": ""
   },

@@ -78,8 +78,9 @@ export class JSONReader extends Component {
 
     }
 
-    public createdByJSON(jsonData:string){
-      let tables = JSON.parse(jsonData).data[0].data.tables;
+    public createdByJSON(jsonData:any){
+      // let tables = JSON.parse(jsonData).data[0].data.tables;
+      let tables = jsonData.data[0].data.tables;
       this.transTabletoVertexAndEdge(tables);
 
     }

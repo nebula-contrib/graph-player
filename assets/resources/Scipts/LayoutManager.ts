@@ -275,4 +275,10 @@ export class LayoutManager extends Component {
         }
         return tagList; 
     }
+
+    public clearTags(){
+        this.tagsNodeList = [];
+        Manager.Instance().relationManager.tagDegreeDic = [];
+        Manager.Instance().relationManager.tagDegreeDicLength = 0;
+    }
 }

@@ -51,7 +51,7 @@ export class Manager extends Component {
         Manager.instance.layoutManager = this.node.getChildByName('LayoutManager').getComponent(LayoutManager);
         Manager.Instance();
 
-        console.log("find: ", Manager.instance.layoutManager);
+        console.log("find: ", Manager.instance.edgeManager);
     }
     
     
