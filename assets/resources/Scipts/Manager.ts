@@ -40,6 +40,7 @@ export class Manager extends Component {
     static instance:Manager = new Manager();
 
     protected onLoad(): void {
+        console.log("Manager!")
         physics.PhysicsSystem.instance.enable = true;
         Manager.instance.cameraController = this.node.getChildByName('CameraController').getComponent(CameraController);
         Manager.instance.vertexManager = this.node.getChildByName('Canvas').getChildByName('VertexManager').getComponent(VertexManager);

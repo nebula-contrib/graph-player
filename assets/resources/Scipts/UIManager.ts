@@ -259,6 +259,7 @@ export class UIManager extends Component {
             // 处理错误
             console.error(error);
         });
+        this.userInputBar.string = "";
 
 
         
