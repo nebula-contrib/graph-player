@@ -51,10 +51,15 @@ export class CameraController extends Component {
         let rotateQuat = new Quat();
         let dir = new Vec3();
         let rotated = new Vec3();
+        let rotateVertexManager = new Vec3();
         Vec3.subtract(dir, target, center);
         let rad = misc.degreesToRadians(angle);
         Quat.fromAxisAngle(rotateQuat, axis, rad);
+
+        // rotate name of vertex
+        
         Vec3.transformQuat(rotated, dir, rotateQuat);
+
         Vec3.add(rotated, center, rotated);
         return rotated;
     }

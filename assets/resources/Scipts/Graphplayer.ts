@@ -5,6 +5,8 @@ const { ccclass, property } = _decorator;
 
 @ccclass('Graphplayer')
 export class Graphplayer extends Component {
+
+    private serverAddress:string = "http://127.0.0.1:8080";
     protected start(): void {
         
         // (window as any).globalReceiveJSONByURL = this.buildByURL.bind(this);
@@ -12,17 +14,15 @@ export class Graphplayer extends Component {
 
     }
 
-    /**
-     * receive JSON response
-     * @param url: get json response
-     */
-    public buildByURL(url:string){
-        Manager.Instance().canvasManager.cleanCanvas();
-        Manager.Instance().JSONReader.createByURL(url);
+    public changeServerAddress(address:string):string{
+        this.serverAddress = address;
+        return address;
     }
 
-    public buildByJSONString(jsonString:string){
-        Manager.Instance().JSONReader.createdByJSON(jsonString);
+    public getServerAddress():string{
+        return this.serverAddress;
     }
+
+    
 }
 

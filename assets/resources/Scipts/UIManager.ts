@@ -3,6 +3,7 @@ const { ccclass, property } = _decorator;
 import { Manager } from './Manager';
 import { Vertex } from './Vertex';
 import { HttpRequest } from './HttpRequest';
+import { Graphplayer } from './Graphplayer';
 
 @ccclass('UIManager')
 export class UIManager extends Component {
@@ -110,6 +111,8 @@ export class UIManager extends Component {
                 this.vertexIDLabelPrefab = prefab;
             }
         });
+
+        this.jsonResponseUrl = Manager.Instance().graphPlayer.getServerAddress();
     }
 
     start () {
@@ -247,16 +250,16 @@ export class UIManager extends Component {
      * @param event 
      */
     public submitUserInput(event:Event){
-        console.log("press submit")
+
         let content = this.userInputBar.string;
-        HttpRequest.send(this.jsonResponseUrl, { nGQL: content }).then((response) => {
-            // 处理响应
+        // HttpRequest.send(this.jsonResponseUrl, { nGQL: content }).then((response) => {
+        HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
             console.log("res:", response);
             Manager.Instance().canvasManager.cleanCanvas();
             Manager.Instance().JSONReader.createdByJSON(response);
 
         }).catch((error) => {
-            // 处理错误
+            
             console.error(error);
         });
         this.userInputBar.string = "";
