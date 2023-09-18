@@ -68,7 +68,7 @@ export class UIManager extends Component {
     @property(Node)
     public hideColumnNode:Node;
 
-    public jsonResponseUrl = "http://127.0.0.1:8080"; // get the table-details 
+    // public jsonResponseUrl = "http://127.0.0.1:8050"; // get the table-details 
 
     private vertexIDLabelManager: Node;
 
@@ -112,7 +112,8 @@ export class UIManager extends Component {
             }
         });
 
-        this.jsonResponseUrl = Manager.Instance().graphPlayer.getServerAddress();
+        // this.jsonResponseUrl = Manager.Instance().graphPlayer.getServerAddress();
+        // console.log("address:", Manager.Instance().graphPlayer.getServerAddress())
     }
 
     start () {
@@ -252,17 +253,24 @@ export class UIManager extends Component {
     public submitUserInput(event:Event){
 
         let content = this.userInputBar.string;
+        console.log("graph-player address:",Manager.Instance().graphPlayer.getServerAddress())
         // HttpRequest.send(this.jsonResponseUrl, { nGQL: content }).then((response) => {
-        HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
-            console.log("res:", response);
-            Manager.Instance().canvasManager.cleanCanvas();
-            Manager.Instance().JSONReader.createdByJSON(response);
-
-        }).catch((error) => {
+        try{
+            HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
+                console.log("res:", response);
+                Manager.Instance().canvasManager.cleanCanvas();
+                Manager.Instance().JSONReader.createdByJSON(response);
             
-            console.error(error);
-        });
-        this.userInputBar.string = "";
+            }).catch((error) => {
+
+                console.error(error);
+            });
+            this.userInputBar.string = "";
+        }
+        catch(error){
+            console.log(error)
+        }
+        
 
 
         

@@ -27,7 +27,7 @@ export class CanvasManager extends Component {
 
     // private isMouseDragging = false;
     private cameraMove = false;
-    private cameraRotateAroundVertex = false;
+    public cameraRotateAroundVertex = false;
     public cameraRotateOffset: Vec3 = new Vec3(); // the offset on rotating(tranform from Quat to Vec3)
     private previousMousePosition: Vec2 = null;
     private previousMousePositionVec3: Vec3 = new Vec3();
@@ -133,6 +133,7 @@ export class CanvasManager extends Component {
             // calculate the position after rotation
             const rotatedPosX = Manager.Instance().cameraController.rotateOnVertex(cameraPos, targetPos, angleX, Vec3.UP);
             const rotatedPosY = Manager.Instance().cameraController.rotateOnVertex(rotatedPosX, targetPos, angleY, Vec3.RIGHT);
+            
 
             // set the camera
             Manager.Instance().cameraController.camera.node.worldPosition = rotatedPosY;

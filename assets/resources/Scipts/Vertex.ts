@@ -1,4 +1,4 @@
-import { _decorator, CCBoolean, CCInteger, CCString, Color, Component, FixedJoint2D, Label, MeshRenderer, Node, Vec4 } from 'cc';
+import { _decorator, CCBoolean, CCInteger, CCString, Color, Component, input, Input, Label, MeshRenderer, Node, Vec4 } from 'cc';
 import { Manager } from './Manager';
 import { Edge } from './Edge';
 const { ccclass, property } = _decorator;
@@ -33,6 +33,7 @@ export class Vertex extends Component {
     
     protected onLoad(): void {
         this.idLabel = this.node.getChildByName("ID").getComponent(Label);
+        input.on(Input.EventType.MOUSE_MOVE, this.onMouseMove, this);
         // console.log("id node:",this.idLabel)
     }
     /**
@@ -46,6 +47,32 @@ export class Vertex extends Component {
     // @property(Boolean)
     // public isFocus:false;
 
+    /**
+     * move mouse and keep the label on the same direction with camera
+     * This results in a slight stutter each time the rotation occurs.
+     */
+    private onMouseMove(){
+
+        if(Manager.Instance().canvasManager.cameraRotateAroundVertex&&Manager.Instance().graphPlayer.isVertexIDFollowCamera){
+            try{
+                let positionA = this.idLabel.node.getWorldPosition();
+                console.log("move on vertex id:",positionA);
+                let positionB =Manager.Instance().cameraController.camera.node.worldPosition;
+                let vectorAB = positionB.clone().subtract(positionA);
+                let oppositeVector = positionA.clone().subtract(vectorAB);
+                this.idLabel.node.lookAt(oppositeVector);
+
+            }
+            catch(error){
+                console.log(error);
+            }
+           
+        }
+
+
+    
+
+    }
     /**
      * set the attribute of vertex by JSON Object
      * @param attribute 
@@ -98,7 +125,7 @@ export class Vertex extends Component {
     }
 
     public returnToInitialMaterial(){
-        let initialMaterial = this.getComponent(MeshRenderer).getMaterial(this.materialCode);
+        let initialMaterial = this.getComponent(MeshRenderer).getSharedMaterial(this.materialCode);
         this.getComponent(MeshRenderer).setMaterial(initialMaterial, 0);
     }
 
@@ -112,11 +139,11 @@ export class Vertex extends Component {
      */
     public changeMaterial(materialIndex:number){
         // console.log("idlabel:",this.idLabel);
-        let tmpMaterial = this.getComponent(MeshRenderer).getMaterial(materialIndex);
+        let tmpMaterial = this.getComponent(MeshRenderer).getSharedMaterial(materialIndex);
         this.getComponent(MeshRenderer).setMaterial(tmpMaterial, 0);
 
         // set color of idlabel
-        const passes = this.getComponent(MeshRenderer).getMaterial(0).passes[0];
+        const passes = this.getComponent(MeshRenderer).getSharedMaterial(0).passes[0];
         const colorUniform = passes.getUniform(passes.getHandle('albedo'),new Vec4(1, 1,0,0));
        
         const color = new Color(colorUniform.x * 255, colorUniform.y* 255, colorUniform.z* 255, colorUniform.w * 255);

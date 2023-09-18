@@ -57,7 +57,6 @@ export class CameraController extends Component {
         Quat.fromAxisAngle(rotateQuat, axis, rad);
 
         // rotate name of vertex
-        
         Vec3.transformQuat(rotated, dir, rotateQuat);
 
         Vec3.add(rotated, center, rotated);
