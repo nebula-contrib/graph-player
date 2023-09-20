@@ -55,6 +55,12 @@ export class CanvasManager extends Component {
         this.resetCanvas();
     }
 
+    /**
+     * when mouse move
+     * 1. move camera
+     * 2. rotate camera
+     * @param event 
+     */
     onMouseMove(event:EventMouse){
         if(this.cameraMove){
             /**

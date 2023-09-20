@@ -50,10 +50,6 @@ export class VertexManager extends Component {
         
     }
 
-    protected start(): void {
-       
-        
-    }
 
     /**
      * 
@@ -133,6 +129,10 @@ export class VertexManager extends Component {
         this.chosenVertex.getComponent(Vertex).getComponent(MeshRenderer).setMaterial(focusMaterial, 0);
     }
 
+    /**
+     * restore the matereial of focus vertex to it's original material
+     * @returns 
+     */
     public returnFocusToNormalVertex(){
         
         if(!this.chosenVertex) return;
@@ -165,6 +165,9 @@ export class VertexManager extends Component {
         }
     }
 
+    /**
+     * remove layouted flag
+     */
     public removeLayoutFlags(){
         
         this.traverseNodesChildren(this.rootNode)
@@ -230,12 +233,6 @@ export class VertexManager extends Component {
         
         this.currentCentralNode =  vertex;
     
-        // this.node.position = new Vec3(0, 0, 0);
-        // this.node.rotation =  Quat.identity(new Quat());
-        // vertex.getComponent(Vertex).setVertexId();
-        // vertex.worldPosition = new Vec3(0,0,0);
-        // vertex.setParent(this.node);
-        // this.centralNode = vertex;
     }
 
 

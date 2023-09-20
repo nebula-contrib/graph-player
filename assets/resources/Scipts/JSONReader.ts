@@ -78,6 +78,10 @@ export class JSONReader extends Component {
 
     }
 
+    /**
+     * create vertices and edges in space by jsonData
+     * @param jsonData 
+     */
     public createdByJSON(jsonData:any){
       // let tables = JSON.parse(jsonData).data[0].data.tables;
       let tables = jsonData.data[0].data.tables;
@@ -86,6 +90,10 @@ export class JSONReader extends Component {
     }
 
 
+    /**
+     * transform TableData to vertex and edge in space 
+     * @param tables: tableData of vertices and edges of json string 
+     */
     private transTabletoVertexAndEdge(tables:any){
       for(let i = 0; i < tables.length; i++) {
         let edges = tables[i]._edgesParsedList;

@@ -253,11 +253,8 @@ export class UIManager extends Component {
     public submitUserInput(event:Event){
 
         let content = this.userInputBar.string;
-        console.log("graph-player address:",Manager.Instance().graphPlayer.getServerAddress())
-        // HttpRequest.send(this.jsonResponseUrl, { nGQL: content }).then((response) => {
         try{
             HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
-                console.log("res:", response);
                 Manager.Instance().canvasManager.cleanCanvas();
                 Manager.Instance().JSONReader.createdByJSON(response);
             
@@ -270,10 +267,6 @@ export class UIManager extends Component {
         catch(error){
             console.log(error)
         }
-        
-
-
-        
     }
 
     public RefreshCanvas(event:Event){

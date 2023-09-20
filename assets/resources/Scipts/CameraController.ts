@@ -47,18 +47,22 @@ export class CameraController extends Component {
 
     }
 
+    /**
+     * rotate on central vertes
+     * @param target: which one to rotate(here is camera)
+     * @param center: the center  
+     * @param angle: angle(degree)
+     * @param axis: around which axis to rotate
+     * @returns 
+     */
     rotateOnVertex(target: Vec3, center: Vec3, angle: number, axis: Vec3 = Vec3.UP): Vec3{
         let rotateQuat = new Quat();
         let dir = new Vec3();
         let rotated = new Vec3();
-        let rotateVertexManager = new Vec3();
         Vec3.subtract(dir, target, center);
         let rad = misc.degreesToRadians(angle);
         Quat.fromAxisAngle(rotateQuat, axis, rad);
-
-        // rotate name of vertex
         Vec3.transformQuat(rotated, dir, rotateQuat);
-
         Vec3.add(rotated, center, rotated);
         return rotated;
     }

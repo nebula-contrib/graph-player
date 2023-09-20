@@ -56,7 +56,7 @@ export class Vertex extends Component {
         if(Manager.Instance().canvasManager.cameraRotateAroundVertex&&Manager.Instance().graphPlayer.isVertexIDFollowCamera){
             try{
                 let positionA = this.idLabel.node.getWorldPosition();
-                console.log("move on vertex id:",positionA);
+                // console.log("move on vertex id:",positionA);
                 let positionB =Manager.Instance().cameraController.camera.node.worldPosition;
                 let vectorAB = positionB.clone().subtract(positionA);
                 let oppositeVector = positionA.clone().subtract(vectorAB);
@@ -102,6 +102,10 @@ export class Vertex extends Component {
        
     }
 
+    /**
+     * set the worldposition of entry
+     * @param entry 
+     */
     public setWorldPosition(entry: Node){
         this.node.setWorldPosition(entry.worldPosition);
     }
@@ -119,19 +123,39 @@ export class Vertex extends Component {
     }
 
 
+    /**
+     * get vertex id
+     * @returns: string
+     */
     public getVertexID(){
         //console.log("vertex id:",this.vertexId);
         return this.vid;
     }
 
+    /**
+     * return chosen vertex to original material
+     */
     public returnToInitialMaterial(){
         let initialMaterial = this.getComponent(MeshRenderer).getSharedMaterial(this.materialCode);
         this.getComponent(MeshRenderer).setMaterial(initialMaterial, 0);
     }
 
+    /**
+     * set the material code
+     * @param code: number
+     */
     public setMaterialCode(code:number){
         this.materialCode = code;
     }
+
+    /**
+     * get the material coed
+     * @returns: number 
+     */
+    public getMaterialCode(){
+        return this.materialCode;
+    }
+
 
     /**
      * change material 
@@ -151,10 +175,6 @@ export class Vertex extends Component {
         
     }
 
-    public getMaterialCode(){
-        return this.materialCode;
-    }
-
     /**
      * present the details of vertex
      */
@@ -170,12 +190,21 @@ export class Vertex extends Component {
         
     }
 
+    /**
+     * push edge into edgeSet
+     * @param edge 
+     */
     public addEdgeInfoOnVertex(edge:Edge){
         
         this.edgesSetOfVertex.push(edge);
         Manager.Instance().vertexManager.vertexEdgeDic[this.vid].push(edge.getEdgeID());
     }
     
+    /**
+     * print json of infomation
+     * @param obj 
+     * @param parentKey 
+     */
     private printNestedJSON(obj, parentKey = '') {
         for (let key in obj) {
           let newKey = parentKey ? `${parentKey}.${key}` : key;
@@ -187,6 +216,9 @@ export class Vertex extends Component {
         }
    }
 
+   /**
+    * increase vertex degree
+    */
    public increaseVertexDegree(){
     this.degree++;
     //console.log("vertex:",vid," number:",this.vertexDegreeDic[vid])
