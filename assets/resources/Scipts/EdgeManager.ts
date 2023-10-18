@@ -71,6 +71,7 @@ export class EdgeManager extends Component {
      * destroy all edge by remove the etities and node in list
      */
     destroyAllEdges() {
+        if(this.node.children == null) return;
         this.node.destroyAllChildren();
         this.node.removeAllChildren();
         

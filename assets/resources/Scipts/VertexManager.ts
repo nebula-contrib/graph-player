@@ -204,6 +204,7 @@ export class VertexManager extends Component {
      */
     public destroyAllChildren(){
         //console.log("root node:",this.rootNode);
+        if(this.rootNode.children == null) return;
         this.rootNode.children.forEach((child) => {
             child.destroy();
         });

@@ -364,20 +364,26 @@ export class CanvasManager extends Component {
      * clean the canvas and new a central node in Vec3(0,0,0)
      */
     resetCanvas(){
-        // reset vertices
-        Manager.Instance().vertexManager.destroyAllChildren();
-        Manager.Instance().vertexManager.initiateOriginalVertex();
-        Manager.Instance().vertexManager.returnFocusToNormalVertex();
-        // reset edges
-        Manager.Instance().edgeManager.destroyAllEdges();
-        Manager.Instance().edgeManager.returnFocusToNormalEdge();
-        // reset camera
-        Manager.Instance().cameraController.resetPosition();
-        // reset UI
-        Manager.Instance().UIManager.isNodeInfoEnable = false;
-        Manager.Instance().UIManager.nodeInfoBar.active = false;
-        // clear Layout
-        Manager.Instance().layoutManager.clearTags()
+        try{
+                    // reset vertices
+            Manager.Instance().vertexManager.destroyAllChildren();
+            Manager.Instance().vertexManager.initiateOriginalVertex();
+            Manager.Instance().vertexManager.returnFocusToNormalVertex();
+            // reset edges
+            Manager.Instance().edgeManager.destroyAllEdges();
+            Manager.Instance().edgeManager.returnFocusToNormalEdge();
+            // reset camera
+            Manager.Instance().cameraController.resetPosition();
+            // reset UI
+            Manager.Instance().UIManager.isNodeInfoEnable = false;
+            Manager.Instance().UIManager.nodeInfoBar.active = false;
+            // clear Layout
+            Manager.Instance().layoutManager.clearTags()
+        }
+        catch(error){
+            console.log(error)
+        }
+
         
         
     }

@@ -227,7 +227,7 @@ export class UIManager extends Component {
     /**
      * hide UI column
      * @param event 
-     */
+     */ 
     private hideUIColumn(event:Event){
         this.hideColumnNode.active = false;
         this.showUIColumnBtn.node.active = true;
@@ -254,15 +254,32 @@ export class UIManager extends Component {
 
         let content = this.userInputBar.string;
         try{
-            HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
-                Manager.Instance().canvasManager.cleanCanvas();
-                Manager.Instance().JSONReader.createdByJSON(response);
+            /**
+             * Send query to server by call the function(serverAddress) 
+             */
+            // HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
+            //     Manager.Instance().canvasManager.cleanCanvas();
+            //     Manager.Instance().JSONReader.createdByJSON(response);
             
-            }).catch((error) => {
+            // }).catch((error) => {
 
-                console.error(error);
-            });
+            //     console.error(error);
+            // });
+
+            
+            /**
+            * query by client itself
+            */
+            if(content.includes(";")){
+                content = content.split(";")[0];
+            }
+            let filename = content.split(" ")[1];
+            Manager.Instance().JSONReader.putJSONtoModel(filename);
             this.userInputBar.string = "";
+
+
+
+
         }
         catch(error){
             console.log(error)
@@ -272,6 +289,7 @@ export class UIManager extends Component {
     public RefreshCanvas(event:Event){
         
         Manager.Instance().canvasManager.resetCanvas();
+        console.log("refresh")
         //Manager.Instance().JSONReader.putJSONtoModel("");
 
 
