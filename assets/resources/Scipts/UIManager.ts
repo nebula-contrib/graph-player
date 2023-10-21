@@ -251,7 +251,8 @@ export class UIManager extends Component {
      * @param event 
      */
     public submitUserInput(event:Event){
-
+        Manager.Instance().canvasManager.cleanCanvas();
+        Manager.Instance().canvasManager.isFirstChoose = true;
         let content = this.userInputBar.string;
         try{
             /**
@@ -356,6 +357,9 @@ export class UIManager extends Component {
         // Manager.Instance().layoutManager.adjustOrderOfTags(["team","player"]);
         Manager.Instance().layoutManager.materialReallocated();
         Manager.Instance().layoutManager.reLayoutByTags();
+
+        // reset camera
+        Manager.Instance().cameraController.resetPosition();
     }
 
 

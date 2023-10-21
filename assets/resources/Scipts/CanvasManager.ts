@@ -12,6 +12,8 @@ export class CanvasManager extends Component {
 
     @property({ type:Node})
     public centralVertex:Node = null;
+
+    public isFirstChoose:Boolean = false;
     
     // mouse-left parameter
 
@@ -21,7 +23,7 @@ export class CanvasManager extends Component {
 
 
     // mouse wheel parameter
-    private _zoomSpeed: number = 0.00009; // zoom speed of mouse wheel
+    private _zoomSpeed: number = 0.0005; // zoom speed of mouse wheel
 
     // mouse movement
 
@@ -31,7 +33,7 @@ export class CanvasManager extends Component {
     public cameraRotateOffset: Vec3 = new Vec3(); // the offset on rotating(tranform from Quat to Vec3)
     private previousMousePosition: Vec2 = null;
     private previousMousePositionVec3: Vec3 = new Vec3();
-    private dragMoveSpeed = 0.01;
+    private dragMoveSpeed = 0.05;
     private dragRotateSpeed = 0.2;
     private dragRotationQuat: Quat = new Quat();
     private dragRotateEuler: Vec3 = new Vec3(); 
@@ -143,7 +145,9 @@ export class CanvasManager extends Component {
 
             // set the camera
             Manager.Instance().cameraController.camera.node.worldPosition = rotatedPosY;
-            this.cameraRotateOffset = rotatedPosY;
+            // this.cameraRotateOffset = rotatedPosY;
+            this.cameraRotateOffset = targetPos;
+
             Manager.Instance().cameraController.camera.node.lookAt(targetPos);
 
             // uodate the mouse position
@@ -298,6 +302,8 @@ export class CanvasManager extends Component {
                     Manager.Instance().vertexManager.returnFocusToNormalVertex();
                     Manager.Instance().vertexManager.chosenVertex = result.collider.node;
                     Manager.Instance().vertexManager.chooseOneNormalVertexToFocus(result.collider.node); // change the chosen vertex
+                    console.log("vertex world position:", result.collider.node.getWorldPosition())
+                    console.log("vertex position:", result.collider.node.position)
                     
                 }  
                 /**

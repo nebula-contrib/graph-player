@@ -3,6 +3,7 @@
     "__type__": "cc.Prefab",
     "_name": "edge",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "_native": "",
     "data": {
       "__id__": 1
@@ -32,14 +33,14 @@
         "__id__": 9
       },
       {
-        "__id__": 11
+        "__id__": 13
       },
       {
-        "__id__": 13
+        "__id__": 17
       }
     ],
     "_prefab": {
-      "__id__": 15
+      "__id__": 19
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -74,6 +75,7 @@
     "__type__": "cc.MeshRenderer",
     "_name": "Cylinder<ModelComponent>",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -82,6 +84,14 @@
       "__id__": 3
     },
     "_materials": [
+      {
+        "__uuid__": "1c98607a-38cc-4281-b0f8-950b7c085cef",
+        "__expectedType__": "cc.Material"
+      },
+      {
+        "__uuid__": "f547272f-765e-499b-8c51-bdff2b809056",
+        "__expectedType__": "cc.Material"
+      },
       {
         "__uuid__": "1c98607a-38cc-4281-b0f8-950b7c085cef",
         "__expectedType__": "cc.Material"
@@ -100,6 +110,9 @@
     "_shadowBias": 0,
     "_shadowNormalBias": 0,
     "_reflectionProbeId": -1,
+    "_reflectionProbeBlendId": -1,
+    "_reflectionProbeBlendWeight": 0,
+    "_enabledGlobalStandardSkinObject": false,
     "_enableMorph": true,
     "_id": ""
   },
@@ -125,13 +138,13 @@
     "_useLightProbe": false,
     "_bakeToLightProbe": true,
     "_reflectionProbeType": 0,
-    "_bakeToReflectionProbe": true,
-    "_probeCubemap": null
+    "_bakeToReflectionProbe": true
   },
   {
     "__type__": "8947fvabLNHoKqGTdc7fFIu",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -157,6 +170,7 @@
     "__type__": "cc.RigidBody",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -193,6 +207,7 @@
     "__type__": "cc.HingeConstraint",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
@@ -238,6 +253,18 @@
       "y": 0,
       "z": 0
     },
+    "_limitData": {
+      "__id__": 11
+    },
+    "limitData": {
+      "__id__": 11
+    },
+    "_motorData": {
+      "__id__": 12
+    },
+    "motorData": {
+      "__id__": 12
+    },
     "_id": ""
   },
   {
@@ -245,15 +272,34 @@
     "fileId": "53lRRUcs1OCrgSc7qh0pfx"
   },
   {
+    "__type__": "cc.HingeLimitData",
+    "_enabled": false,
+    "enabled": false,
+    "_upperLimit": 1.7976931348623157e+308,
+    "upperLimit": 1.7976931348623157e+308,
+    "_lowerLimit": -1.7976931348623157e+308,
+    "lowerLimit": -1.7976931348623157e+308
+  },
+  {
+    "__type__": "cc.HingeMotorData",
+    "_enabled": false,
+    "enabled": false,
+    "_motorVelocity": 0,
+    "motorVelocity": 0,
+    "_motorForceLimit": 0,
+    "motorForceLimit": 0
+  },
+  {
     "__type__": "cc.HingeConstraint",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 12
+      "__id__": 14
     },
     "_enableCollision": false,
     "_connectedBody": null,
@@ -293,6 +339,18 @@
       "y": 0,
       "z": 0
     },
+    "_limitData": {
+      "__id__": 15
+    },
+    "limitData": {
+      "__id__": 15
+    },
+    "_motorData": {
+      "__id__": 16
+    },
+    "motorData": {
+      "__id__": 16
+    },
     "_id": ""
   },
   {
@@ -300,15 +358,34 @@
     "fileId": "01BQ8fCO9PubcaG4m3cLko"
   },
   {
+    "__type__": "cc.HingeLimitData",
+    "_enabled": false,
+    "enabled": false,
+    "_upperLimit": 1.7976931348623157e+308,
+    "upperLimit": 1.7976931348623157e+308,
+    "_lowerLimit": -1.7976931348623157e+308,
+    "lowerLimit": -1.7976931348623157e+308
+  },
+  {
+    "__type__": "cc.HingeMotorData",
+    "_enabled": false,
+    "enabled": false,
+    "_motorVelocity": 0,
+    "motorVelocity": 0,
+    "_motorForceLimit": 0,
+    "motorForceLimit": 0
+  },
+  {
     "__type__": "cc.CylinderCollider",
     "_name": "",
     "_objFlags": 0,
+    "__editorExtras__": {},
     "node": {
       "__id__": 1
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 14
+      "__id__": 18
     },
     "_material": null,
     "_isTrigger": false,

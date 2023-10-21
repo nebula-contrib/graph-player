@@ -25,7 +25,9 @@ export class LayoutManager extends Component {
         
         /**
          * set the tagNodeList(store Node)
+         * 
          */
+        console.log("vertex set:",Manager.Instance().vertexManager.vertexTagSet)
         try{
             for(let tag of Manager.Instance().vertexManager.vertexTagSet){
                 if(!Manager.Instance().vertexManager.rootNode.getChildByName(tag))

@@ -141,7 +141,8 @@ export class Edge extends Component {
      * @param edgeNode 
      */
     public changeEdgeMaterialToFocused(){
-        let focusMaterial = this.getComponent(MeshRenderer).getMaterial(1);
+
+        let focusMaterial = this.getComponent(MeshRenderer).getSharedMaterial(1);
         this.node.getComponent(MeshRenderer).setMaterial(focusMaterial,0);
     }
 
@@ -149,7 +150,7 @@ export class Edge extends Component {
      * return this edge node to original white material -- material[2]
      */
     public returnToInitialMaterial(){
-        let initialMaterial = this.getComponent(MeshRenderer).getMaterial(2);
+        let initialMaterial = this.getComponent(MeshRenderer).getSharedMaterial(2);
         this.getComponent(MeshRenderer).setMaterial(initialMaterial, 0);
     }
 

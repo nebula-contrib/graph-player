@@ -38,6 +38,7 @@ export class VertexManager extends Component {
     /**
      * Container of vertex's tags
      */
+    @property
     public vertexTagSet: Set<string> = new Set<string>();
 
 
