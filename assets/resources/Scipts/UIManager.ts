@@ -255,30 +255,31 @@ export class UIManager extends Component {
         Manager.Instance().canvasManager.isFirstChoose = true;
         let content = this.userInputBar.string;
         try{
+            if(Manager.Instance().graphPlayer.getUseServerFlag()){
             /**
-             * Send query to server by call the function(serverAddress) 
-             */
-            // HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
-            //     Manager.Instance().canvasManager.cleanCanvas();
-            //     Manager.Instance().JSONReader.createdByJSON(response);
-            
-            // }).catch((error) => {
+            * Send query to server by call the function(serverAddress) 
+            */
+                HttpRequest.send(Manager.Instance().graphPlayer.getServerAddress(), { nGQL: content }).then((response) => {
+                    Manager.Instance().canvasManager.cleanCanvas();
+                    Manager.Instance().JSONReader.createdByJSON(response);
+                
+                }).catch((error) => {
 
-            //     console.error(error);
-            // });
+                    console.error(error);
+                });
+            }
 
-            
+            else{
             /**
             * query by client itself
             */
-            if(content.includes(";")){
-                content = content.split(";")[0];
+                if(content.includes(";")){
+                    content = content.split(";")[0];
+                }
+                let filename = content.split(" ")[1];
+                Manager.Instance().JSONReader.putJSONtoModel(filename);
+                this.userInputBar.string = "";
             }
-            let filename = content.split(" ")[1];
-            Manager.Instance().JSONReader.putJSONtoModel(filename);
-            this.userInputBar.string = "";
-
-
 
 
         }
